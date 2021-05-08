@@ -85,6 +85,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { InvoiceReviewDialogComponent } from './pages/home/dialogs/invoice-review-dialog/invoice-review-dialog.component';
 import { PurchaseHistoryGraphComponent } from './pages/home/purchase-history-graph/purchase-history-graph.component';
 import { ChartModule } from 'primeng/chart';
+import { CreateMarketPlaceComponent } from './pages/home/create-market-place/create-market-place.component';
+import { CreationHistoryComponent } from './pages/home/creation-history/creation-history.component';
 
 
 @NgModule({
@@ -132,7 +134,9 @@ import { ChartModule } from 'primeng/chart';
     ChangeSecurityQuestionsComponent,
     UpdateContactDialogComponent,
     InvoiceReviewDialogComponent,
-    PurchaseHistoryGraphComponent
+    PurchaseHistoryGraphComponent,
+    CreateMarketPlaceComponent,
+    CreationHistoryComponent
     ],
   imports: [
     BrowserModule,

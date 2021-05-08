@@ -22,32 +22,35 @@
           </div>
         -->
 
-          <!--Create Order Form-->
+           <!--Graph-->
+
+           <div fxFlex class="childColumnContainers" *ngIf="oderHistoryVisibility != false">
+            <mat-card class="purchaseGraph" style="background-color: black; color: white;">
+              <mat-card-content>
+                <p>Graph of marketplaces by industry here</p>
+                <p>grab all of the marketplaces and display count by industry</p>
+                <!--<app-purchase-history-graph></app-purchase-history-graph>-->
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+          <!--Create Marketplace Form-->
           <div fxFlex class="childColumnContainers">
-            <mat-card class="purchaseGraph" style="background-color: #0d47a1; color: white;">
+            <mat-card class="purchaseGraph" style="background-color: black; color: white;">
               <mat-card-content>
-                <app-createorder></app-createorder>
+                <app-create-market-place></app-create-market-place>
               </mat-card-content>
             </mat-card>
           </div>
 
-          <!--Graph-->
 
-          <div fxFlex class="childColumnContainers" *ngIf="oderHistoryVisibility != false">
-            <mat-card class="purchaseGraph" style="background-color: #0d47a1; color: white;">
-              <mat-card-content>
-                <app-purchase-history-graph></app-purchase-history-graph>
-              </mat-card-content>
-            </mat-card>
-          </div>
-
-          <!--Order History-->
+          <!--Creation History-->
           <div fxFlex class="childColumnContainers" *ngIf="oderHistoryVisibility != false">
             <div fxLayout="row wrap" fxLayoutGap="10px">
               <div fxFlex>
                 <mat-card>
                   <mat-card-content>
-                    <app-orderhistory></app-orderhistory>
+                    <app-creation-history></app-creation-history>
                   </mat-card-content>
                 </mat-card>
               
