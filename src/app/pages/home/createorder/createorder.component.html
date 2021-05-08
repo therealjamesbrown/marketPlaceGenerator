@@ -1,0 +1,46 @@
+<p>Create Order</p> 
+
+<mat-card>
+        <form 
+        #serviceRepairForm="ngForm" 
+        (ngSubmit)="submit(serviceRepairForm.value); serviceRepairForm.reset();">
+            <mat-card-content>
+                <div fxLayout="column">
+                    <h3>Services</h3>
+                    <div fxFlex>
+                            <div fxFlex ngModelGroup="checkGroup">
+                                <ul>
+                            <div fxLayout="row wrap" fxLayoutAlign="space-evenly"
+                            >
+                                <li *ngFor="let service of activeServices">
+                                    <mat-checkbox name="{{service._id}}" ngModel color="accent">
+                                        {{service.title}} ({{service.price | currency}})
+                                    </mat-checkbox>
+                                </li>
+                            </div>
+                        </ul>
+                            </div>
+                    </div>
+                </div>
+                <mat-divider></mat-divider>
+                <br />
+                <!--Parts and Labor-->
+                <div fxLayout="column">
+                    <h4 fxFlex>Standard Fees</h4>
+                    <mat-form-field style="width: 300px !important;">
+                        <input matInput name="parts" ngModel="0" placeholder="Parts" type="number" min="0" required/>
+                    </mat-form-field>
+
+                    <mat-form-field style="width: 300px !important;">
+                        <input matInput name="labor" ngModel="0" placeholder="Labor @ 50.00/hr" type="number" min="0" required/>
+                    </mat-form-field>
+                </div>
+            </mat-card-content>
+            <!--Form actions-->
+            <mat-divider></mat-divider>
+            <mat-card-actions align="end">
+                <button mat-raised-button type="reset" color="warn" (click)="serviceRepairForm.reset();">Reset</button>
+                <button mat-raised-button color="primary" [disabled]="!serviceRepairForm.valid">Submit</button>
+            </mat-card-actions>
+        </form>
+</mat-card>

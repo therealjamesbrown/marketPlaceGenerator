@@ -1,0 +1,64 @@
+<mat-card class="text-center">
+    <mat-card-content>
+        <form (ngSubmit)="updateUser()" [formGroup]="updatedUserForm">
+        <mat-card-title>
+            <h1>Update User</h1>
+        </mat-card-title>
+            <mat-form-field>
+                <mat-label>Username: </mat-label>
+                <br>
+                <input matInput class="text-center" formControlName="username" />
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Password: </mat-label>
+                <br>
+                <input matInput class="text-center" placeholder="Always Encrypted" formControlName="password" />
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>First Name: </mat-label>
+                <br>
+                <input matInput class="text-center" placeholder="Ex. Tom" formControlName="firstName" />
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Last Name: </mat-label>
+                <br>
+                <input matInput class="text-center" placeholder="Ex. Jerry" formControlName="lastName" />
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Address: </mat-label>
+                <br>
+                <input matInput class="text-center" placeholder="Ex. 123 Test Street" formControlName="address" />
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Email: </mat-label>
+                <br>
+                <input matInput class="text-center" placeholder="Ex. hello@google.com" formControlName="email" />
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Phone Number: </mat-label>
+                <br>
+                <input matInput class="text-center" placeholder="Ex. (555) 555-5555" formControlName="phoneNumber" />
+            </mat-form-field>
+            <br>
+            <div>
+                <mat-label>Role</mat-label>
+                <br>
+                <mat-select [formControl]="updatedUserForm.controls['role']">
+                    <mat-option *ngFor="let role of roles" [value]="role.text">{{ role.text }}</mat-option>
+                </mat-select>
+            </div>
+            <mat-dialog-actions>
+                <button mat-button mat-dialog-close>Cancel</button>
+                <button type="submit"mat-button mat-dialog-close>Update User</button>
+            </mat-dialog-actions>
+            <br>
+            <br>
+        </form>
+    </mat-card-content>
+    </mat-card>

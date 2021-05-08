@@ -1,0 +1,20 @@
+table {
+    width: 100%;
+  }
+
+th{
+  background-color: #0d47a1;
+  color: white;
+  border-radius: 1px;
+}
+
+.crudButton{
+  float: right;
+  margin-bottom: 5px;
+}
+
+p{
+  font-weight: 500;
+  font-size: 15px;
+  padding-bottom: 15px;
+}

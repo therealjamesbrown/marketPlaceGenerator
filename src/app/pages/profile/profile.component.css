@@ -1,0 +1,30 @@
+.outerContainer {
+    width: 90%;
+    margin: 0 auto;
+  }
+  
+  .childColumnContainers{
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+  
+  img{
+    width: 5%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+}
+
+  h1{
+    text-align: center;
+    color: white;
+    font-weight: 200;
+    font-size: 60px;
+    margin-bottom: 20px;
+}
+
+.personIcon{
+  text-align: center;
+  color: white;
+}

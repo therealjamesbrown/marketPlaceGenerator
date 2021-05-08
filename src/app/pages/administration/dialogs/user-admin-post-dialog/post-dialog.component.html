@@ -1,0 +1,69 @@
+<div fxLayout="column">
+<mat-card class="mat-elevation-z8">
+    <mat-card-title>Create User</mat-card-title>
+    <br />
+        <form (ngSubmit)="createUser()" [formGroup]="createUserForm">
+        <mat-card-content>
+            <div fxLayout="column" fxLayoutGap="10px">
+
+            <mat-form-field>
+                <mat-label>Username: </mat-label>
+                <br>
+                <input matInput placeholder="Ex. rjackson25" formControlName="username" />
+            </mat-form-field>
+     
+            <mat-form-field>
+                <mat-label>Password: </mat-label>
+            
+                <input matInput placeholder="Always Encrypted" formControlName="password" />
+            </mat-form-field>
+      
+            <mat-form-field>
+                <mat-label>First Name: </mat-label>
+                <br>
+                <input matInput placeholder="Ex. Tom" formControlName="firstName" />
+            </mat-form-field>
+        
+            <mat-form-field>
+                <mat-label>Last Name: </mat-label>
+                <br>
+                <input matInput placeholder="Ex. Jerry" formControlName="lastName" />
+            </mat-form-field>
+       
+            <mat-form-field>
+                <mat-label>Address: </mat-label>
+                <br>
+                <input matInput placeholder="Ex. 123 Test Street" formControlName="address" />
+            </mat-form-field>
+         
+            <mat-form-field>
+                <mat-label>Email: </mat-label>
+                <br>
+                <input matInput placeholder="Ex. hello@google.com" formControlName="email" />
+            </mat-form-field>
+       
+            <mat-form-field>
+                <mat-label>Phone Number: </mat-label>
+                <br>
+                <input matInput placeholder="Ex. (555) 555-5555" formControlName="phoneNumber" />
+            </mat-form-field>
+            <br>
+            <div>
+                <mat-label>Role</mat-label>
+                <br>
+                <mat-select [value]="selected" [formControl]="createUserForm.controls['role']">
+                    <mat-option *ngFor="let role of roles" [value]="role.text">{{ role.text }}</mat-option>
+                </mat-select>
+            </div>
+        </div>
+        </mat-card-content>
+       
+            <mat-dialog-actions align="end">
+                <button mat-raised-button (click)="cancel()" color="primary" mat-dialog-close>Cancel</button>
+                <button type="submit" mat-raised-button color="primary" mat-dialog-close>Create User</button>
+            </mat-dialog-actions>
+            <br />
+        </form>
+    </mat-card>
+
+</div>

@@ -1,0 +1,86 @@
+<div fxLayout="column">
+    <mat-card class="mat-elevation-z8">
+        <mat-card-title>Change Security Questions</mat-card-title>
+        <br />
+        <form [formGroup]="form" 
+                      (ngSubmit)="changeSecurityQuestions(); form.reset()" 
+                      #updateQuestionsform="ngForm">
+                      <mat-card-content>
+                          <div fxLayout="column">
+<!--Question 1-->
+<h3>Question 1</h3>
+                    <mat-form-field>
+                        <mat-label>Available Questions</mat-label>
+                            <mat-select name="question" [formControl]="form.controls['securityQuestionSeletedOne']">
+                                <mat-option *ngFor="let question of filteredSecurityQuestionsDataSource" [value]="question.questionId">
+                                      {{question.questionId}}
+                                    </mat-option>
+                            </mat-select>
+                    </mat-form-field>
+                 
+                    
+<!--Answer 1-->
+                    <mat-form-field>
+                        <mat-label>Enter Answer</mat-label>
+                        <input matInput placeholder="Question Answer" [formControl]="form.controls['securityQuestionOneAnswer']">
+                      </mat-form-field>
+
+                      <br />
+
+
+<!--Question 2-->
+<h3>Question 2</h3>
+                    <mat-form-field>
+                        <mat-label>Available Questions</mat-label>
+                            <mat-select name="question" [formControl]="form.controls['securityQuestionSeletedTwo']">
+                                <mat-option *ngFor="let question of filteredSecurityQuestionsDataSource" [value]="question.questionId">
+                                      {{question.questionId}}
+                                    </mat-option>
+                            </mat-select>
+                    </mat-form-field>
+                 
+                    
+<!--Answer 2-->
+                    <mat-form-field>
+                        <mat-label>Enter Answer</mat-label>
+                        <input matInput placeholder="Question Answer" [formControl]="form.controls['securityQuestionTwoAnswer']">
+                      </mat-form-field>
+
+                      <br />
+
+
+
+
+
+<!--Question 3-->
+<h3>Question 3</h3>
+                    <mat-form-field>
+                        <mat-label>Available Questions</mat-label>
+                            <mat-select name="question" [formControl]="form.controls['securityQuestionSeletedThree']">
+                                <mat-option *ngFor="let question of filteredSecurityQuestionsDataSource" [value]="question.questionId">
+                                      {{question.questionId}}
+                                    </mat-option>
+                            </mat-select>
+                    </mat-form-field>
+                 
+                    
+<!--Answer 3-->
+                    <mat-form-field>
+                        <mat-label>Enter Answer</mat-label>
+                        <input matInput placeholder="Question Answer" [formControl]="form.controls['securityQuestionThreeAnswer']">
+                      </mat-form-field>
+
+                    </div>
+<!--Buttons to submit/cancel the form-->
+                    </mat-card-content>
+                      <mat-card-actions align="end">
+                        <button mat-raised-button matDialogClose="cancel" color="primary">Cancel</button>
+                        <button type="submit" 
+                                mat-raised-button 
+                                matDialogClose="update"
+                                color="primary"
+                                [disabled]="!form.valid">Update Questions</button>
+                      </mat-card-actions>
+        </form>
+    </mat-card>
+</div>

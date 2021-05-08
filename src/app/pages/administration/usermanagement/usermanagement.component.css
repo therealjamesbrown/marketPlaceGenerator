@@ -1,0 +1,16 @@
+table {
+    width: 100%;
+} #post {
+   float: right;
+   margin-bottom: 5px;
+} th {
+    color: white;
+    background: hsl(216, 85%, 34%);
+} button {
+    background: white;
+}p{
+    font-weight: 500;
+    font-size: 15px;
+    padding-bottom: 15px;
+  }
+  

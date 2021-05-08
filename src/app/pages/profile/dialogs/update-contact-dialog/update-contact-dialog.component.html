@@ -1,0 +1,69 @@
+<div fxLayout="column">
+    <mat-card class="mat-elevation-z8">
+        <mat-card-title>Updating Contact Information</mat-card-title>
+        <br />
+        <form [formGroup]="updateContactForm" (ngSubmit)="changeUserContactDetails()">
+                      <mat-card-content>
+                          <div fxLayout="column">
+                    <mat-form-field>
+                        <mat-label>First Name</mat-label>
+                        <input matInput 
+                                formControlName="firstName"
+                               [formControl]="updateContactForm.controls['firstName']" 
+                               placeholder="First Name" >
+                      </mat-form-field>
+                      
+                      <mat-form-field>
+                        <mat-label>Last Name</mat-label>
+                        <input matInput 
+                        formControlName="lastName"
+                               [formControl]="updateContactForm.controls['lastName']" 
+                               placeholder="Last Name" >
+                      </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-label>Phone</mat-label>
+                        <input matInput 
+                        formControlName="phone"
+                               [formControl]="updateContactForm.controls['phone']" 
+                               placeholder="phone" >
+                      </mat-form-field>
+
+                      <mat-form-field>
+                        <mat-label>Address</mat-label>
+                        <input matInput 
+                        formControlName="address"
+                               [formControl]="updateContactForm.controls['address']" 
+                               placeholder="address" >
+                      </mat-form-field>
+
+                      <mat-form-field>
+                        <mat-label>Email</mat-label>
+                        <input matInput 
+                        formControlName="email"
+                               [formControl]="updateContactForm.controls['email']" 
+                               placeholder="email" >
+                      </mat-form-field>
+
+                      <mat-form-field>
+                        <mat-label>Role</mat-label>
+                        <input matInput 
+                        formControlName="role"
+                               [formControl]="updateContactForm.controls['role']" 
+                               placeholder="Role" >
+                      </mat-form-field>
+                    
+
+                    </div>
+                    </mat-card-content>
+                      <mat-card-actions align="end">
+                        <button mat-raised-button matDialogClose="cancel" color="primary">Cancel</button>
+                        <button type="submit" 
+                                mat-raised-button 
+                                matDialogClose="update"
+                                color="primary"
+                                [disabled]="!updateContactForm.valid">Update Details</button>
+                      </mat-card-actions>
+        </form>
+    </mat-card>
+</div>

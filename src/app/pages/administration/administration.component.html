@@ -1,0 +1,80 @@
+
+<img src="./assets/contact.png" class="logo">
+<!--Original royalty free image obtained from https://i.pinimg.com/originals/94/00/17/94001795a3efc6330f4b6b835b68b989.png-->
+<h1>Administration Dashboard</h1>
+<div fxLayout="column" class="outerContainer">
+    <div fxFlex>
+    <mat-card class="mat-elevation-z8">
+        <mat-card-content>
+            <div fxLayout="column">
+
+
+<!--Catalog and purchases graph column-->
+<div fxFlex class="childColumnContainers">
+    <div fxLayout="column wrap" fxLayoutGap="10px">
+        <div fxFlex class="childRowContainers">
+<!--Purchases Graph goes here-->
+               <mat-card style="background-color: #0d47a1; color: white;">
+                   <mat-card-content>
+                    <app-purchasegraph></app-purchasegraph>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        <div fxFlex class="childRowContainers">
+<!--Catalog Goes here-->
+            <mat-card>
+                <mat-card-content>
+                    <app-catalogmanagement></app-catalogmanagement>
+                </mat-card-content>
+            </mat-card>
+            </div>
+        </div>
+    </div>
+
+    
+
+<!--Security questions and Role Management Column-->
+<div fxFlex class="childColumnContainers">
+    <div fxLayout="row wrap" fxLayoutGap="10px">
+        <div fxFlex class="childRowContainers">
+<!--Security questions go here-->
+<mat-card>
+    <mat-card-content>
+               <app-securityquestionmanagement></app-securityquestionmanagement>
+            </mat-card-content>
+            </mat-card>
+            </div>
+
+        <div fxFlex class="childRowContainers">
+<!--Role Management Goes here-->
+<mat-card>
+    <mat-card-content>   
+               <app-rolemanagement></app-rolemanagement>
+            </mat-card-content>
+            </mat-card>
+            </div>
+        </div>
+    </div>
+
+
+
+
+<!--USER management column-->
+<div fxFlex class="childColumnContainers">
+    <div fxFlex><mat-card>
+        <mat-card-content>
+ <app-usermanagement></app-usermanagement>
+</mat-card-content>
+</mat-card>
+    </div>
+</div>
+
+
+
+
+</div>
+</mat-card-content>
+</mat-card>
+</div>
+<br />
+</div>

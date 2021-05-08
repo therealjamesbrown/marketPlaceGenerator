@@ -1,0 +1,49 @@
+
+<mat-card>
+    <mat-card-content>
+<p>All Orders</p>
+<mat-dialog-content>
+<table mat-table [dataSource]="allPurchaseHistoryDataSource" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef>Date</th>
+      <td mat-cell *matCellDef="let element"> {{element.orderDate | date:'medium'}} </td>
+    </ng-container>
+
+    <!-- Status Column-->
+    <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef> Amount </th>
+        <td mat-cell *matCellDef="let element"> {{element.total | currency}} </td>
+      </ng-container>
+
+      <!-- Action Column -->
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element"> 
+          <!--Button For Actions-->
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Actions button">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="viewTransactionDetails(element)">
+              <mat-icon>pageview</mat-icon>
+              <span>View Details</span>
+            </button>
+          </mat-menu>
+    </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-raised-button [mat-dialog-close]="false" color="primary">Close</button>
+  </mat-dialog-actions>
+</mat-card-content>
+</mat-card>

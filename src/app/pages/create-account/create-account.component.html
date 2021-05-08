@@ -1,0 +1,108 @@
+<mat-card>
+    <mat-card-title>
+        <p color="primary" style="text-align: center">Register For An Account</p>
+    </mat-card-title>
+</mat-card>
+<mat-horizontal-stepper #stepper>
+     <!-- Account Registration -->
+    <mat-step [stepControl]="firstFormGroup">
+       <h1 style="text-align: center;">Sign Up</h1>
+        <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>Register Account</ng-template>
+            <mat-form-field>
+                <mat-label>Username</mat-label>
+                <input matInput placeholder="Ex. thespidermonkey25" formControlName="username" required>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Password</mat-label>
+                <input matInput placeholder="Ex. root" formControlName="password" required> 
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>First Name</mat-label>
+                <input matInput placeholder="Ex. Peter" formControlName="firstName" required>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Last Name</mat-label>
+                <input matInput placeholder="Ex. Parker" formControlName="lastName" required>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Phone Number</mat-label>
+                <input matInput placeholder="Ex. 867 5309" formControlName="phoneNumber" required>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Address</mat-label>
+                <input matInput placehodler="Ex. 12 Brooklyn Street" formControlName="address" required>
+            </mat-form-field>
+            <br>
+            <div>
+                <a routerLink="/session/signin">Sign In</a>
+                <button mat-button (click)="registerAccount()" matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <!-- Security Questions -->
+    <mat-step [stepControl]="secondFormGroup" label="Security Questions">
+        <form style="text-align: center;" [formGroup]="secondFormGroup" (ngSubmit)="setSecurityQuestions()">
+            <mat-card-content>
+                <mat-card-title>Set Your Security Questions.</mat-card-title>
+                <mat-card-subtitle>So You Can Reset Your Password.</mat-card-subtitle>
+                <!-- Security Question 1 -->
+                    <mat-label>Security Question 1</mat-label>
+                    <div>
+                        <mat-label>{{ securityQuestion1 }}</mat-label>
+                    </div>
+                <mat-form-field>
+                <input matInput type="text" formControlName="securityQuestion1Answer" required>
+                </mat-form-field>
+                <br>
+                <!-- Security Question 2 -->
+                    <mat-label>Security Question 2</mat-label>
+                    <div>
+                        <mat-label>{{ securityQuestion2 }}</mat-label>
+                    </div>
+                <mat-form-field>
+                <input matInput type="text" formControlName="securityQuestion2Answer" required>
+                 </mat-form-field>
+                <br>
+                <!-- Security Question 3 -->
+                    <mat-label>Security Question 3</mat-label>
+                    <div>
+                        <mat-label>{{ securityQuestion3 }}</mat-label>
+                    </div>
+                <mat-form-field>
+                <input matInput type="text" formControlName="securityQuestion3Answer" required>
+                </mat-form-field>
+            </mat-card-content>
+            <br>
+            <!-- Security Question 3 End -->
+            <div>
+                <button mat-button matStepPrevious>Back</button>
+                <button type="submit" mat-button matStepperNext>Set Questions</button>
+            </div>
+        </form>
+    </mat-step>
+     <!-- Sign In -->
+    <mat-step [stepControl]="thirdFormGroup" label="Sign In">
+        <h1 style="text-align: center;">Sign In</h1>
+        <form [formGroup]="thirdFormGroup">
+        <mat-form-field>
+            <mat-label>Username</mat-label>
+            <input style="text-align: center;" matInput formControlName="username" placeholder="Ex. spidermonkey25" required>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input style="text-align: center;" matInput formControlName="password" placeholder="Ex. Password" required>
+        </mat-form-field>
+        <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="signIn()" matStepperNext>Sign In</button>
+        </div>
+    </form>
+</mat-step>
+</mat-horizontal-stepper>

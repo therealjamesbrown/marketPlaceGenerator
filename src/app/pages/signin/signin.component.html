@@ -1,0 +1,65 @@
+<!--Outer container-->
+<div fxLayout="column" class="singinOuterContainer">
+    <div fxFlex>
+        <mat-card class="mat-elevation-z8">
+            <mat-card-content>
+        <!--inner container-->
+        <div fxLayout="column" class="singinInnerContainer">
+            <!--LOGO-->
+            <div fxFlex>
+                <img src="./assets/logo.png" class="logo">
+                <h1>Marketplace Generator</h1>
+            </div>
+
+            <!--SigninForm-->
+            <div fxFlex class="signInFormStuff">
+                <form [formGroup]="form" 
+                      (ngSubmit)="signin(); form.reset()" 
+                      #loginForm="ngForm">
+                    <mat-form-field>
+                        <mat-label>Username</mat-label>
+                        <input matInput 
+                               [formControl]="form.controls['userName']" 
+                               placeholder="username" >
+                      </mat-form-field><br />
+                      <mat-form-field>
+                        <mat-label>Password</mat-label>
+                        <input matInput 
+                                type="password"
+                               [formControl]="form.controls['password']"
+                               placeholder="password">
+                      </mat-form-field>
+                      <p>
+                        <button type="submit" 
+                                fxFlex 
+                                mat-raised-button 
+                                color="primary"
+                                [disabled]="!form.valid">Sign-in</button>
+                      </p>
+                </form>
+            </div>
+
+            <!--Forgot-->
+            <div fxFlex>
+               <a routerLink="/session/forgot/">Forgot Password?</a>
+            </div>
+            
+
+            <!--Divider-->
+            <div fxFlex>
+                <hr class="divider">
+            </div>
+
+             <!--Signup Password-->
+            <div fxFlex class="signUpSection">
+                    <button type="submit" 
+                                fxFlex 
+                                mat-raised-button 
+                                color="primary"
+                                routerLink="/session/createAccount">Sign-Up</button>
+            </div>
+        </div>
+    </mat-card-content>
+    </mat-card>
+    </div>
+</div>

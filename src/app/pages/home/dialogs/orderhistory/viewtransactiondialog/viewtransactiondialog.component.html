@@ -1,0 +1,46 @@
+<mat-card>
+    <mat-card-content>
+<p><span class="title">Order Details</span><span style="float: right;">Order Date:<br />{{transaction.orderDate | date:'medium'}}</span></p>
+<mat-divider></mat-divider>
+<br />
+      <div fxLayout="column">
+              <div fxFlex>
+                <div fxLayout="row">
+                  <div fxFlex>
+                <strong>Line Items:</strong>
+                <ul *ngFor="let item of transaction.lineItem">
+                    <li>
+                    Title:{{item.title}}<br />Amount:{{item.price | currency}}
+                  
+                  </li>
+                  </ul>
+                  <strong>Line Item Total:</strong><br /> {{transaction.lineItemTotal | currency}}
+                </div>
+                <div fxFlex>
+                  <div fxFlex>
+                    <ul>
+                      <li><strong>Parts Amount:</strong><br /> {{transaction.partsAmount | currency}}</li>
+                      <li><strong>Labor Amount:</strong><br /> {{transaction.laborAmount | currency}}</li>
+                  </ul>
+                  </div>
+                </div>
+                </div>
+            </div>
+    </div><br />
+    <div align="end">
+      <ul>
+        <li><h3>----Summary----</h3></li>
+        <li><strong>Parts & Labor Total:</strong><br /> {{transaction.partsAmount + transaction.laborAmount | currency}}</li>
+        <li><strong>Line Item Total:</strong><br /> {{transaction.lineItemTotal | currency}}</li>
+        <li><strong>Subtotal:</strong><br /> {{transaction.lineItemTotal + transaction.partsAmount + transaction.laborAmount| currency}}</li>
+        <li><strong style="color: green;">Discount:</strong><br />-{{discount | currency}}
+        </li>
+      </ul>
+    </div>
+<h3 align="end" style="font-weight: 600; text-decoration: underline;">Grand Total: {{transaction.total | currency}}</h3>
+
+<mat-dialog-actions align="end">
+  <button mat-raised-button [mat-dialog-close]="false" color="primary">Close</button>
+</mat-dialog-actions>
+</mat-card-content>
+</mat-card>

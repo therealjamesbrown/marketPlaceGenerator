@@ -1,0 +1,60 @@
+<p>User Management
+        <button mat-button id="post" (click)="post()"><mat-icon class="material-icons">library_add</mat-icon></button></p>
+    <!--- Username Column -->
+    <table mat-table [dataSource]="users" class="mat-elevation-z8" >
+        <ng-container matColumnDef="username">
+            <th mat-header-cell *matHeaderCellDef>Username</th>
+            <td mat-cell *matCellDef="let user">
+                {{ user.username }}
+            </td>
+        </ng-container>
+        <!--- First Name Column -->
+        <ng-container matColumnDef="fistName">
+            <th mat-header-cell *matHeaderCellDef>First Name</th>
+            <td mat-cell *matCellDef="let user">
+                {{ user.firstName }}
+            </td>
+        </ng-container>
+        <!--- Last Name Column -->
+        <ng-container matColumnDef="lastName">
+            <th mat-header-cell *matHeaderCellDef>Last Name</th>
+            <td mat-cell *matCellDef="let user">
+                {{ user.lastName }}
+            </td>
+        </ng-container>
+        <!--- Phone Number Column -->
+        <ng-container matColumnDef="phoneNumber">
+            <th mat-header-cell *matHeaderCellDef>Phone Number</th>
+            <td mat-cell *matCellDef="let user">
+                {{ user.phoneNumber }}
+            </td>
+        </ng-container>
+        <!--- Address Column -->
+        <ng-container matColumnDef="address">
+            <th mat-header-cell *matHeaderCellDef>Address</th>
+            <td mat-cell *matCellDef="let user">
+                {{ user.address }}
+            </td>
+        </ng-container>
+        <!--- isDisabled Column -->
+        <ng-container matColumnDef="isDisabled">
+            <th mat-header-cell *matHeaderCellDef>isDisabled?</th>
+            <td mat-cell *matCellDef="let user">
+                {{ user.isDisabled }}
+            </td>
+        </ng-container>
+        <!--- Roles Column -->
+        <ng-container matColumnDef="roles">
+            <th mat-header-cell *matHeaderCellDef>Role</th>
+            <td mat-cell *matCellDef="let user">{{ user.role }}</td>
+        </ng-container>
+        <!--- Actions Column -->
+        <ng-contaoner matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let user">
+                    <button mat-button (click)="options(user)"><mat-icon>more_vert</mat-icon></button>
+                </td>
+        </ng-contaoner>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>

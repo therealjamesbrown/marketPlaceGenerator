@@ -1,0 +1,44 @@
+<div fxLayout="column">
+    <mat-card class="mat-elevation-z8">
+        <mat-card-title>Update Item</mat-card-title>
+        <br />
+        <form [formGroup]="updateCatalogItemForm" (ngSubmit)="updateCatalogItem()">
+            <mat-card-content>
+                <div fxLayout="column" fxLayoutGap="10px">
+                    <mat-form-field>
+                        <input type="text" 
+                               matInput
+                               placeholder="Enter item name"
+                               formControlName="title">
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <input type="number" 
+                               matInput
+                               placeholder="Enter item price"
+                               formControlName="price">
+                    </mat-form-field>
+
+
+                    <mat-form-field>
+                        <mat-label>isDisabled?</mat-label>
+                        <mat-select [(value)]="selected">
+                          <mat-option value="true">True</mat-option>
+                          <mat-option value="false">False</mat-option>
+                        </mat-select>
+    
+                    </mat-form-field>
+                </div>
+            </mat-card-content>
+            <mat-card-actions align="end">
+                <button mat-raised-button matDialogClose="cancel" color="primary">Cancel</button>
+                <button type="submit" 
+                                mat-raised-button 
+                                matDialogClose="update"
+                                color="primary"
+                                [disabled]="!updateCatalogItemForm.valid"
+                                >Update</button>
+            </mat-card-actions>
+        </form>
+    </mat-card>
+</div>

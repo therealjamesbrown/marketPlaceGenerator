@@ -1,0 +1,8 @@
+mat-horizontal-stepper {
+    margin-top: 20px;
+    text-align: center;
+} input, mat-select, mat-option, mat-label {
+    text-align: center;
+} form {
+    margin-top: 40px;
+}

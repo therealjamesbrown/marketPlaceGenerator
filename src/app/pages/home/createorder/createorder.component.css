@@ -1,0 +1,28 @@
+
+.crudButton{
+  float: right;
+  margin-bottom: 5px;
+}
+
+p{
+  font-weight: 500;
+  font-size: 15px;
+  padding-bottom: 15px;
+}
+
+
+ul {
+  list-style-type: none;
+  margin-top: 4px;
+}
+
+li {
+  text-align: left;
+  margin-left: 20px;
+  margin-right: 25px;
+  margin-top:20px;
+}
+
+.mat-checkbox.mat-accent .mat-checkbox-inner-container {
+  margin: 2px 8px auto 0;
+}

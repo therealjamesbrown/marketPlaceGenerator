@@ -1,0 +1,71 @@
+<div fxLayout="column" class="outerContainer">
+  <div fxFlex>
+    <mat-card>
+      <mat-card-content>
+        <div fxLayout="column">
+          <div fxFlex class="childColumnContainers">
+            <h1> Welcome, {{user}}!</h1>
+          </div>
+
+          <!--Ad Section
+          <div fxFlex class="childColumnContainers" *ngIf="ad != false && !adCookie">
+            <mat-card class="ad">
+              <mat-card-content (click)="hideAd()" >
+                Enjoy 10% off! This offer is automatically applied on new orders!
+                <button 
+                mat-raised-button 
+                class="adButton">X</button>
+                <br>
+                <p>Terms and conditions apply.</p>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        -->
+
+          <!--Create Order Form-->
+          <div fxFlex class="childColumnContainers">
+            <mat-card class="purchaseGraph" style="background-color: #0d47a1; color: white;">
+              <mat-card-content>
+                <app-createorder></app-createorder>
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+          <!--Graph-->
+
+          <div fxFlex class="childColumnContainers" *ngIf="oderHistoryVisibility != false">
+            <mat-card class="purchaseGraph" style="background-color: #0d47a1; color: white;">
+              <mat-card-content>
+                <app-purchase-history-graph></app-purchase-history-graph>
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+          <!--Order History-->
+          <div fxFlex class="childColumnContainers" *ngIf="oderHistoryVisibility != false">
+            <div fxLayout="row wrap" fxLayoutGap="10px">
+              <div fxFlex>
+                <mat-card>
+                  <mat-card-content>
+                    <app-orderhistory></app-orderhistory>
+                  </mat-card-content>
+                </mat-card>
+              
+              </div>
+            </div>
+          </div>
+
+          <!--Contact-->
+          <div fxFlex class="childColumnContainers">
+            <mat-card class="contactContainer">
+              <mat-card-content class="questions">
+                <h3>Questions?</h3>
+                <p routerLink="/contact" class="contact">Contact</p>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
