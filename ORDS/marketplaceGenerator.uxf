@@ -1,0 +1,45 @@
+<diagram program="umletino" version="14.3.0"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>190</x><y>32</y><w>210</w><h>220</h></coordinates><panel_attributes>_object: marketPlace
+--
+Username: String
+businessName: String
+Contact First name: String
+Contact Last name: String
+Phone: String
+Address: String
+Email: String
+Role: ENUM
+Password: String
+Date created: String
+Date modified: String
+Sellers : Array
+Status: ENUM</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>180</x><y>382</y><w>210</w><h>220</h></coordinates><panel_attributes>_object: seller
+--
+Username: String
+businessName: String
+Contact First name: String
+Contact Last name: String
+Phone: String
+Address: String
+Password: String
+Email: String
+Role: ENUM
+Date created: String
+Date modified: String
+Items: String
+status: ENUM</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>610</x><y>382</y><w>210</w><h>220</h></coordinates><panel_attributes>_object: item
+--
+Item name: String
+Description: String
+Amount: integer
+condition: String
+available: boolean</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>620</x><y>144</y><w>100</w><h>70</h></coordinates><panel_attributes>NoSQL and ORD
+DocDiagram 5/8/21
+style=wordwrap</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>280</x><y>247</y><w>30</w><h>150</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;130;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>380</x><y>477</y><w>250</w><h>30</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;230;10</additional_attributes></element><element><id>Text</id><coordinates><x>300</x><y>258</y><w>100</w><h>70</h></coordinates><panel_attributes>1</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>390</x><y>458</y><w>100</w><h>70</h></coordinates><panel_attributes>1</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>300</x><y>358</y><w>100</w><h>70</h></coordinates><panel_attributes>*</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>590</x><y>458</y><w>100</w><h>40</h></coordinates><panel_attributes>*</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>190</x><y>659</y><w>140</w><h>70</h></coordinates><panel_attributes>_object: Status ENUM
+--
+Active
+Suspended
+Deactivated</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>370</x><y>659</y><w>140</w><h>70</h></coordinates><panel_attributes>_object: Role ENUM
+--
+Root
+Marketplace
+Seller</panel_attributes><additional_attributes></additional_attributes></element></diagram>

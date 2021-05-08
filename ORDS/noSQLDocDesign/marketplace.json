@@ -1,0 +1,68 @@
+{
+    "marketplaceUsername": "username",
+    "businessName": "test name",
+    "contactFirstName": "firstName",
+    "contactLastName": "lastName",
+    "phone": "402-323-2322",
+    "address": "123 test st",
+    "email": "test@gmail.com",
+    "password": "test",
+    "role": "admin",
+    "dateCreated": "01/01/1999",
+    "dateModified": "01/02/1999",
+    "status": "active",
+    "sellers" : [
+        {
+            "sellerUsername": "username",
+            "sellerBusinessName": "test name",
+            "sellerContactFirstName": "firstName",
+            "sellerContactLastName": "lastName",
+            "sellerPhone": "402-323-2322",
+            "sellerAddress": "123 test st",
+            "sellerEmail": "test@gmail.com",
+            "role": "admin",
+            "dateCreated": "01/01/1999",
+            "dateModified": "01/02/1999",
+            "items": [ 
+                {
+                    "itemName": "test",
+                    "description": "description",
+                    "amount": "amount",
+                    "condition": "used"
+                },
+                {
+                    "itemName": "test",
+                    "description": "description",
+                    "amount": "amount",
+                    "condition": "used"
+                }
+            ] 
+        },
+        {
+            "username": "username",
+            "businessName": "test name",
+            "contactFirstName": "firstName",
+            "contactLastName": "lastName",
+            "phone": "402-323-2322",
+            "address": "123 test st",
+            "email": "test@gmail.com",
+            "role": "admin",
+            "dateCreated": "01/01/1999",
+            "dateModified": "01/02/1999",
+            "items": [ 
+                {
+                    "itemName": "test",
+                    "description": "description",
+                    "amount": "amount",
+                    "condition": "used"
+                },
+                {
+                    "itemName": "test",
+                    "description": "description",
+                    "amount": "amount",
+                    "condition": "used"
+                }
+            ] 
+        }
+    ]
+}

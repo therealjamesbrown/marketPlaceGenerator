@@ -1,0 +1,7 @@
+{
+    "itemName": "test",
+    "description": "description",
+    "amount": "amount",
+    "condition": "used",
+    "available": true
+}
