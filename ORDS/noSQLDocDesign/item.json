@@ -3,5 +3,5 @@
     "description": "description",
     "amount": "amount",
     "condition": "used",
-    "available": true
+    "isDisabled": true
 }

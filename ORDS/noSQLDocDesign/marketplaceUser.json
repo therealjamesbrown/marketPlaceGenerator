@@ -10,7 +10,14 @@
     "role": "admin",
     "dateCreated": "01/01/1999",
     "dateModified": "01/02/1999",
-    "status": "active",
+    "isDisabled": true,
+    "securityQuestions": [
+        {
+            "question": "one",
+            "answer": "answer",
+            "isDisabled": false
+        }
+    ],
     "sellers" : [
         {
             "sellerUsername": "username",
