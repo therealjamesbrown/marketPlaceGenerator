@@ -26,11 +26,11 @@ mat-toolbar{
  
   
   .footer {
-    position: absolute;
     bottom: 0;
     width: 100%;
     font-weight: 100;
-    background-color: rgb(32, 32, 32);;
+    background-color: rgb(32, 32, 32);
+    align-self: flex-end;
   }
 
 
