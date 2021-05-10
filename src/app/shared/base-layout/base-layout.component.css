@@ -1,7 +1,5 @@
-.pageContainer{
-  position: relative;
-}
 
+/*
 .navbar-container {
     padding: 5px;
   }
@@ -21,11 +19,11 @@ mat-toolbar{
     color: white;
     background-color: rgb(32, 32, 32);
   }
-  
+  */ 
   .main-content {
     padding-left: 30px;
   }
-  
+ 
   
   .footer {
     position: absolute;
@@ -34,6 +32,7 @@ mat-toolbar{
     font-weight: 100;
     background-color: rgb(32, 32, 32);;
   }
+
 
 
   .footerStyle{
@@ -47,10 +46,13 @@ mat-toolbar{
   }
 
   
+
   .brandLogo{
-    width: 60px;
+    width: 40px;
     margin-top: 30px;
+    padding-left: 10px;
 }
+
 
 .example-spacer {
   flex: 1 1 auto;
@@ -63,12 +65,18 @@ mat-toolbar{
   bottom: 0;
   left: 0;
   right: 0;
-  background: #eee;
+  background-color: rgb(32, 32, 32);
 }
+
 .tp-section {
   display: flex;
   align-content: center;
   align-items: center;
   height: 60px;
   width:50px;   
+  background-color: black;
+}
+
+.mat-drawer {
+  background-color: black;
 }
