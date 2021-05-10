@@ -47,27 +47,11 @@ export class PurchaseHistoryGraphComponent implements OnInit {
           datasets: [
             //graph object
             {
+              label: 'Number of Marketplaces',
               data: this.itemCount,
-              backgroundColor: [
-                '#ED0A3F',
-                '#FF8833',
-                '#5FA777',
-                '#0066CC',
-                '#6B3FA0',
-                '#AF593E',
-                '#6CDAE7',
-                '#F1B60E'
-              ],
-              hoverBackgroundColor: [
-                '#ED0A3F',
-                '#FF8833',
-                '#5FA777',
-                '#0066CC',
-                '#6B3FA0',
-                '#AF593E',
-                '#6CDAE7',
-                '#F1B60E'
-              ],
+              fill: false,
+    borderColor: '#2e7d32',
+    tension: 0.3
             }
           ]
         };
