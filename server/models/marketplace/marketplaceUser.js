@@ -17,8 +17,9 @@
 
  
  let MarketplaceUserSchema = new Schema({
-     marketplaceUsername: {type: String, required: true, unique: true, dropDups: true},
-     businessName: {type: String, required: true, unique: true, dropDups: true},
+     username: {type: String, required: true, unique: true, dropDups: true},
+     type: {type: String},
+     businessName: {type: String, required: true},
      industry: {type: String},
      password: {type: String, required: true},
      contactFirstName: {type: String},
@@ -27,7 +28,7 @@
      address: {type: String},
      email: {type: String},
      isDisabled: {type: Boolean, default: false},
-     role: {MarketplaceUserRoleSchema}, //need to define default
+     role: { type: String, default: 'marketplace'}, //need to define default
      securityQuestions: [SelectedSecurityQuestions],
      dateCreated: { type: Date, default: new Date() },
      dateModified: { type: Date },

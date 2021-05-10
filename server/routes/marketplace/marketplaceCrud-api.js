@@ -174,12 +174,13 @@
          let hashedPassword = bcrypt.hashSync(req.body.password, saltRounds); //salt that thang
  
          let newUser = {
-             marketplaceUsername:    req.body.marketplaceUsername,
+             username:    req.body.username,
              businessName: req.body.businessName,
-             industry:    req.body.indsutry,
+             industry:    req.body.industry,
+             type: req.body.type,
              password:    hashedPassword,
-             contactFirstName:   req.body.firstName,
-             contactLastName:    req.body.lastName,
+             contactFirstName:   req.body.contactFirstName,
+             contactLastName:    req.body.contactLastName,
              phone: req.body.phone,
              address:     req.body.address,
              email:       req.body.email,
@@ -190,8 +191,8 @@
          User.create(newUser, function(err, user){
              if(err){
                  console.log(err);
-                 const createUserMongoDbErrorResponse = new ErrorResponse('500', 'Internal Server Error!', err);
-                 res.status(500).send(createUserMongoDbErrorResponse.toObject());
+                 const createUserMongoDbErrorResponse = new ErrorResponse('422', 'User already exists!', err);
+                 res.status(422).send(createUserMongoDbErrorResponse.toObject());
              } else {
                  console.log(user);
                  const createUserSuccessResponse = new BaseResponse('200', 'Success!', user);

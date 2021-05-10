@@ -5,13 +5,13 @@
         <span><img src="./assets/logo2.png" class="brandLogo" routerLink="/"></span>
      </section>
        <section class = "tp-section">
-          <span><img src="./assets/contact.png" class="brandLogo" routerLink="/admin"></span>
-       </section>
-       <section class = "tp-section">
-        <span><div class="navbar-link" *ngIf = "this.isVisible">
+        <span><div class="navbar-link">
           <img src="./assets/profile.png" class="brandLogo" routerLink="/profile">
           </div></span>
      </section>
+     <section class = "tp-section"  *ngIf = "this.isVisible">
+      <span><img src="./assets/contact.png" class="brandLogo" routerLink="/admin"></span>
+   </section>
      <section class = "tp-section">
       <span>
         <img src="./assets/exit.png" class="brandLogo" routerLink="/" (click)="singOut()">
