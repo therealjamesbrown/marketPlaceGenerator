@@ -166,7 +166,7 @@
  
  /**
  * 
- * --CREATE User-- 
+ * --CREATE Marketplace User-- 
  * 
  */
  router.post('/', async(req, res) => {
@@ -174,14 +174,17 @@
          let hashedPassword = bcrypt.hashSync(req.body.password, saltRounds); //salt that thang
  
          let newUser = {
-             username:    req.body.username,
+             marketplaceUsername:    req.body.marketplaceUsername,
+             businessName: req.body.businessName,
+             industry:    req.body.indsutry,
              password:    hashedPassword,
-             firstName:   req.body.firstName,
-             lastName:    req.body.lastName,
-             phoneNumber: req.body.phoneNumber,
+             contactFirstName:   req.body.firstName,
+             contactLastName:    req.body.lastName,
+             phone: req.body.phone,
              address:     req.body.address,
              email:       req.body.email,
-             role:        req.body.role
+             role:        req.body.role,
+             securityQuestions: req.body.securityQuestions
          }
          console.log(newUser)
          User.create(newUser, function(err, user){

@@ -191,39 +191,4 @@ router.put('/:id', async(req,res) => { //double check this works /:_id JB //SK c
      }
  })
 
-
-
-/*
-//Sarah Edit
-router.patch('/:id', function(req, res) {
-    try { 
-    SecurityQuestion.findOne({ "_id": req.params.id }, function(err, securityQuestion) {
-         if (err) { 
-             console.log(err);
-            const securityQuestionDeleteMongoDbErrorResponse = new ErrorResponse('500', 'Internal Server Error', err)
-             res.status(500).send(securityQuestionDeleteMongoDbErrorResponse.toObject());
-         } else { 
-             securityQuestion.set({
-                 isDisabled: true
-             })
-             securityQuestion.save(function(err, savedSecurityQuestion) {
-                 if (err) { 
-                     console.log(err);
-                     const securityQuestionSavedMongoDbErrorResponse = new ErrorResponse('500', 'Internal Server Error', err)
-                     res.status(500).send(securityQuestionSavedMongoDbErrorResponse.toObject());
-                 } else {
-                    const securityQuestionSavedResponse = new BaseResponse('200', 'Successful!', savedSecurityQuestion)
-                    res.json(securityQuestionSavedResponse.toObject())
-                    }
-                }) 
-            }
-            })
-        } catch(e) {
-            console.log(d);
-        const securityQuestionDeleteMongoDbErrorResponse = new ErrorResponse('500', 'Internal Server Error', e.message)
-        res.status(500).send(securityQuestionDeleteMongoDbErrorResponse.toObject());
-     }
- })
-*/
-
 module.exports = router; 

@@ -14,8 +14,7 @@
     "securityQuestions": [
         {
             "question": "one",
-            "answer": "answer",
-            "isDisabled": false
+            "answer": "answer"
         }
     ],
     "sellers" : [

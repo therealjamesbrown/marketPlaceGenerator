@@ -14,11 +14,12 @@
  let Schema = mongoose.Schema;
  const SelectedSecurityQuestions = require('../../schemas/selected-security-questions');
  const MarketplaceUserRoleSchema = require('../../schemas/marketplace/marketplace-user-role');
- //console.log(UserRoleSchema);
+
  
  let MarketplaceUserSchema = new Schema({
      marketplaceUsername: {type: String, required: true, unique: true, dropDups: true},
-     businesssName: {type: String, required: true, unique: true, dropDups: true},
+     businessName: {type: String, required: true, unique: true, dropDups: true},
+     industry: {type: String},
      password: {type: String, required: true},
      contactFirstName: {type: String},
      contactLastName: {type: String},
