@@ -48,7 +48,7 @@
  /**
   * 
   * --Find User by ID--
-  * Created by SK
+  * 
   */
  router.get('/:id', async(req, res) => {
      try {
@@ -81,7 +81,7 @@
  /**
   * 
   * --Find User by username--
-  * Created by JB
+  * 
   */
  router.get('/username/:username', async(req, res) => {
      try {
@@ -144,7 +144,7 @@
  /**
   * 
   * --Find Security Questions by ID--
-  * Created by BM
+  * 
   */
  
  router.get('/securityQuestions/findById', function(req, res) {
