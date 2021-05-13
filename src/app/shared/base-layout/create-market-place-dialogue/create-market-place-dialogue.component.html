@@ -1,5 +1,6 @@
+<mat-dialog-content>
 <div fxLayout="column">
-    <mat-card class="mat-elevation-z8">
+    <mat-card>
         <mat-card-title>Register Marketplace</mat-card-title>
         <br />
         <form [formGroup]="createRoleForm" (ngSubmit)="createRole()" #form="ngForm">
@@ -8,8 +9,74 @@
                     <mat-form-field>
                         <input type="text" 
                                matInput
-                               placeholder="enter role name"
-                               formControlName="text">
+                               placeholder="username"
+                               formControlName="username">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input type="text" 
+                               matInput
+                               placeholder="Business Name"
+                               formControlName="businessName">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input type="text" 
+                               matInput
+                               placeholder="Industry"
+                               formControlName="industry">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input type="text" 
+                               matInput
+                               placeholder="type"
+                               formControlName="type">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input type="text" 
+                               matInput
+                               placeholder="Contact First Name"
+                               formControlName="contactFirstName">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input type="text" 
+                               matInput
+                               placeholder="Contact Last Name"
+                               formControlName="contactLastName">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input type="text" 
+                               matInput
+                               placeholder="Contact Last Name"
+                               formControlName="contactLastName">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input type="text" 
+                               matInput
+                               placeholder="Phone"
+                               formControlName="phone">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input type="text" 
+                               matInput
+                               placeholder="Street Address"
+                               formControlName="address">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input type="text" 
+                               matInput
+                               placeholder="Email"
+                               formControlName="email">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input type="text" 
+                               matInput
+                               placeholder="Password"
+                               formControlName="password">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input type="text" 
+                               matInput
+                               placeholder="Security Questions"
+                               formControlName="securityQuestions">
                     </mat-form-field>
                 </div>
             </mat-card-content>
@@ -25,3 +92,4 @@
         </form>
     </mat-card>
 </div>
+</mat-dialog-content>

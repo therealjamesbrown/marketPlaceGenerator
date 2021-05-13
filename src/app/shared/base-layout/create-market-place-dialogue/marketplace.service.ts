@@ -33,6 +33,7 @@ createRole(Marketplace): Observable<any>{
       industry: Marketplace.industry,
       type: Marketplace.type,
       contactFirstName: Marketplace.contactFirstName,
+      contactLastName: Marketplace.contactLastName,
       phone: Marketplace.phone,
       address: Marketplace.address,
       email: Marketplace.email,

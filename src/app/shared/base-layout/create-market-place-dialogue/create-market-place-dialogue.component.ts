@@ -30,13 +30,23 @@ enteredText:any [];
 
   ngOnInit(): void {
     this.createRoleForm = this.fb.group({
-      text: ['', Validators.required]
+      text: ['', Validators.required],
+      username: ['', Validators.required],
+      businessName: ['', Validators.required],
+      industry: ['', Validators.required],
+      type: ['', Validators.required],
+      contactFirstName: ['', Validators.required],
+      contactLastName: ['', Validators.required],
+      phone: ['', Validators.required],
+      address: ['', Validators.required],
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+      securityQuestions: ['', Validators.required]
     })
   }
 
     //create the role and insert it into the db
  createRole(){
-  
   const text = this.createRoleForm.controls.text.value;
   console.log(text);
   this.marketPlaceService.createRole(text).subscribe( res => {
