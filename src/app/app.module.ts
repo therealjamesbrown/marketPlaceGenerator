@@ -88,6 +88,7 @@ import { ChartModule } from 'primeng/chart';
 import { CreateMarketPlaceComponent } from './pages/home/create-market-place/create-market-place.component';
 import { CreationHistoryComponent } from './pages/home/creation-history/creation-history.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { CreateMarketPlaceDialogueComponent } from './shared/base-layout/create-market-place-dialogue/create-market-place-dialogue.component';
 
 
 
@@ -138,7 +139,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     InvoiceReviewDialogComponent,
     PurchaseHistoryGraphComponent,
     CreateMarketPlaceComponent,
-    CreationHistoryComponent
+    CreationHistoryComponent,
+    CreateMarketPlaceDialogueComponent
     ],
   imports: [
     BrowserModule,

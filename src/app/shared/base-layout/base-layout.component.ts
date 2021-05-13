@@ -15,7 +15,10 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { UserprofileService } from '../../pages/services/userprofile.service';
 import {MatSidenavModule} from '@angular/material/sidenav';
-
+import { MatDialog } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
+import { HttpClient } from '@angular/common/http';
+import { CreateMarketPlaceDialogueComponent } from '../base-layout/create-market-place-dialogue/create-market-place-dialogue.component';
 
 @Component({
   selector: 'app-base-layout',
@@ -30,7 +33,15 @@ export class BaseLayoutComponent implements OnInit {
   role: any;
   isVisible: Boolean;
   
-  constructor(private cookieService: CookieService, private router: Router, private userProfileService: UserprofileService) { 
+  constructor(
+    private cookieService: CookieService, 
+    private router: Router, 
+    private userProfileService: UserprofileService,
+    private dialog: MatDialog,
+    private matMenuModule: MatMenuModule,
+    private httpClient: HttpClient,
+   // private createMarketPlaceDialogueComponent: CreateMarketPlaceDialogueComponent
+    ) { 
 
     this.userProfileService.getUserRole(this.username).subscribe(res => {
       this.username = res['data'];
@@ -53,24 +64,36 @@ export class BaseLayoutComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * 
+   * Signout function that deletes cookies and navigates to home page
+   * 
+   */
   singOut(){
     this.cookieService.deleteAll();
     this.router.navigate(['/session/signin']);
   }
 
-  /*
-  hideAdminNav(){
-    if(this.username.role === "admin"){
-      // console.log('i fired first');
-      this.isVisible = true;
-      console.log(this.isVisible);
+
+/**
+ * 
+ * function launch dialog to create the marketplace user
+ * 
+ */
+//createRoleDialog
+createMarketplace(){
+  const dialogRef = this.dialog.open(CreateMarketPlaceDialogueComponent, {
+    data: {
       
-     } else if (this.username.role === "standard"){
-     this.isVisible = false;
-     console.log(this.isVisible);
-     
-     }
-*/
+    },
+    width: "800px"
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+   
+  })
+}
+
 
   }
 

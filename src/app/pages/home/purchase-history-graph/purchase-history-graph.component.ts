@@ -51,7 +51,7 @@ export class PurchaseHistoryGraphComponent implements OnInit {
               data: this.itemCount,
               fill: false,
     borderColor: '#2e7d32',
-    tension: 0.3
+    tension: 0.1
             }
           ]
         };

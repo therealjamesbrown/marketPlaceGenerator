@@ -32,7 +32,7 @@
      securityQuestions: [SelectedSecurityQuestions],
      dateCreated: { type: Date, default: new Date() },
      dateModified: { type: Date },
-     sellers: { type: Array }
+     sellers: { type: Array },
  }, { collection: 'user' })
  
  module.exports = mongoose.model('MarketPlaceUser', MarketplaceUserSchema);

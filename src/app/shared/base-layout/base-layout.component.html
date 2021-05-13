@@ -12,6 +12,11 @@
      <section class = "tp-section"  *ngIf = "this.isVisible">
       <span><img src="./assets/contact.png" class="brandLogo" routerLink="/admin"></span>
    </section>
+   <section class = "tp-section">
+    <span>
+      <img src="./assets/plus.png" class="brandLogo" (click)="createMarketplace()">
+      </span>
+ </section>
      <section class = "tp-section">
       <span>
         <img src="./assets/exit.png" class="brandLogo" routerLink="/" (click)="singOut()">

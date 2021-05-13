@@ -1,0 +1,27 @@
+<div fxLayout="column">
+    <mat-card class="mat-elevation-z8">
+        <mat-card-title>Register Marketplace</mat-card-title>
+        <br />
+        <form [formGroup]="createRoleForm" (ngSubmit)="createRole()" #form="ngForm">
+            <mat-card-content>
+                <div fxLayout="column" fxLayoutGap="10px">
+                    <mat-form-field>
+                        <input type="text" 
+                               matInput
+                               placeholder="enter role name"
+                               formControlName="text">
+                    </mat-form-field>
+                </div>
+            </mat-card-content>
+            <mat-card-actions align="end">
+                <button mat-raised-button matDialogClose="cancel" color="primary">Cancel</button>
+                <button type="submit" 
+                                mat-raised-button 
+                                matDialogClose="create"
+                                color="primary"
+                                [disabled]="!createRoleForm.valid"
+                                >Create</button>
+            </mat-card-actions>
+        </form>
+    </mat-card>
+</div>
