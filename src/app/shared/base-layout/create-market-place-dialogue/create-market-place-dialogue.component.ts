@@ -108,8 +108,6 @@ industryDataSource: any[] = [
     }
   ]
 
-console.log(dangSecurityQuestions);
-
   const marketplace = {
     username: this.createMarketplaceForm.controls.username.value,
     businessName: this.createMarketplaceForm.controls.businessName.value,
