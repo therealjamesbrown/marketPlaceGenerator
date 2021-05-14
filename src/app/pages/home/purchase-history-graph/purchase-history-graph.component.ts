@@ -26,7 +26,7 @@ export class PurchaseHistoryGraphComponent implements OnInit {
     //console.log(this.username);
       this.userProfileService.getUserPurchasesByGraph(this.username).subscribe(res => {
         this.purchases = res['data'];
-        console.log(this.purchases);
+       
         //set a cookie that we'll grab from the parent component to hide the graph if no data is present.
         //this is helpful for new users.
         if(this.purchases.length === 0){

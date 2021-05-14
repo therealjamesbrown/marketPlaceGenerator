@@ -28,7 +28,7 @@ export class CreateMarketPlaceDialogueComponent implements OnInit {
     ) {
 
       this.userProfileService.getAllSecurityQuestions().subscribe(res =>{
-        console.log(res.data);
+    
         //get all the security questions and set it to our initial data array
         this.securityQuestionsDataSource = res.data;
   
@@ -62,6 +62,12 @@ industryDataSource: any[] = [
   },
   {
     value: 'Technology',
+  },
+  {
+    value: 'Education',
+  },
+  {
+    value: 'Government',
   }
 ];
 
@@ -123,7 +129,7 @@ industryDataSource: any[] = [
   }
 
 
-
+//post the form data to the api. 
   this.marketPlaceService.createRole(marketplace).subscribe( res => {
     marketplace
   }, err => {
