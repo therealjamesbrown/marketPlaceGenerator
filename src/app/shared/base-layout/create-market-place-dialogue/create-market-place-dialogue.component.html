@@ -3,7 +3,7 @@
     <mat-card>
         <mat-card-title>Register Marketplace</mat-card-title>
         <br />
-        <form [formGroup]="createRoleForm" (ngSubmit)="createRole()" #form="ngForm">
+        <form [formGroup]="createMarketplaceForm" (ngSubmit)="createMarketplace()" #form="ngForm">
             <mat-card-content>
                 <div fxLayout="column" fxLayoutGap="10px">
                     <mat-form-field>
@@ -19,10 +19,12 @@
                                formControlName="businessName">
                     </mat-form-field>
                     <mat-form-field>
-                        <input type="text" 
-                               matInput
-                               placeholder="Industry"
-                               formControlName="industry">
+                        <mat-label>Industry</mat-label>
+                            <mat-select name="industry" formControlName="industry">
+                                <mat-option *ngFor="let item of industryDataSource" [value]="item.value">
+                                      {{item.value}}
+                                    </mat-option>
+                            </mat-select>
                     </mat-form-field>
                     <mat-form-field>
                         <input type="text" 
@@ -61,10 +63,11 @@
                                formControlName="address">
                     </mat-form-field>
                     <mat-form-field>
-                        <input type="text" 
+                        <input type="email" 
                                matInput
                                placeholder="Email"
-                               formControlName="email">
+                               formControlName="email"
+                               ngModel email>
                     </mat-form-field>
                     <mat-form-field>
                         <input type="text" 
@@ -86,7 +89,7 @@
                                 mat-raised-button 
                                 matDialogClose="create"
                                 color="primary"
-                                [disabled]="!createRoleForm.valid"
+                                [disabled]="!createMarketplaceForm.valid"
                                 >Create</button>
             </mat-card-actions>
         </form>

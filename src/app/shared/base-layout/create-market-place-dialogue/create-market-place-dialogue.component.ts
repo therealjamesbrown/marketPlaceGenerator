@@ -25,16 +25,32 @@ export class CreateMarketPlaceDialogueComponent implements OnInit {
 
 //bring in our interface
 text: any;
-createRoleForm: FormGroup;
+createMarketplaceForm: FormGroup;
 enteredText:any [];
+industryDataSource: any[] = [
+  {
+    value: 'Automotive',
+  },
+  {
+    value: 'Sports',
+  },
+  {
+    value: 'Medicine',
+  },
+  {
+    value: 'Technology',
+  }
+];
+
+
 
   ngOnInit(): void {
-    this.createRoleForm = this.fb.group({
-      text: ['', Validators.required],
+    console.log(this.industryDataSource);
+    this.createMarketplaceForm = this.fb.group({
       username: ['', Validators.required],
       businessName: ['', Validators.required],
       industry: ['', Validators.required],
-      type: ['', Validators.required],
+      type: [{value: 'marketplace', disabled: true}, Validators.required],
       contactFirstName: ['', Validators.required],
       contactLastName: ['', Validators.required],
       phone: ['', Validators.required],
@@ -45,12 +61,28 @@ enteredText:any [];
     })
   }
 
-    //create the role and insert it into the db
- createRole(){
-  const text = this.createRoleForm.controls.text.value;
-  console.log(text);
-  this.marketPlaceService.createRole(text).subscribe( res => {
-    text
+//create the marketplace object by grabbing form values and post it to the api with the marketplace service
+ createMarketplace(){
+
+  const marketplace = {
+    username: this.createMarketplaceForm.controls.username.value,
+    businessName: this.createMarketplaceForm.controls.businessName.value,
+    industry: this.createMarketplaceForm.controls.industry.value,
+    type: this.createMarketplaceForm.controls.type.value,
+    contactFirstName: this.createMarketplaceForm.controls.contactLastName.value,
+    contactLastName: this.createMarketplaceForm.controls.contactLastName.value,
+    phone: this.createMarketplaceForm.controls.phone.value,
+    address: this.createMarketplaceForm.controls.address.value,
+    email: this.createMarketplaceForm.controls.email.value,
+    password: this.createMarketplaceForm.controls.password.value,
+    securityQuestions: this.createMarketplaceForm.controls.securityQuestions.value
+  }
+
+  console.log(marketplace);
+
+
+  this.marketPlaceService.createRole(marketplace).subscribe( res => {
+    marketplace
   }, err => {
     console.log(err)
     alert(`There was an issue creating the role. Please ensure the role doesnt already exist. If this issue is reoccurring, please contact the system admin.`);

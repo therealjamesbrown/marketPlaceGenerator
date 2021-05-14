@@ -52,11 +52,11 @@ userId: string = this.cookieService.get('userId');;
       for (let question of this.securityQuestionsDataSource){
         if(question.isDisabled !== true){
           this.filteredSecurityQuestionsDataSource.push(question);
-        }
+        } 
       }
       //console.log(this.filteredSecurityQuestionsDataSource);
     })
-   }
+   } 
 
   ngOnInit(): void {
     //set the form up so we can get access to the selected questions and entered answers
