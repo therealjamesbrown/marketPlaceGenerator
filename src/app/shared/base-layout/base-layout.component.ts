@@ -45,7 +45,7 @@ export class BaseLayoutComponent implements OnInit {
 
     this.userProfileService.getUserRole(this.username).subscribe(res => {
       this.username = res['data'];
-     // console.log(this.username.role);
+     //console.log(this.username.role);
 
       if(this.username.role === "admin"){
         this.isVisible = true;
@@ -53,7 +53,7 @@ export class BaseLayoutComponent implements OnInit {
         
        } else {
        this.isVisible = false;
-  //     console.log(this.isVisible);
+   //console.log(this.isVisible);
        }
     })
 
@@ -94,8 +94,28 @@ createMarketplace(){
   })
 }
 
+/**
+ * 
+ * function launch dialog to create the marketplace user
+ * 
+ */
+//createRoleDialog
+registerSeller(){
+  const dialogRef = this.dialog.open(CreateMarketPlaceDialogueComponent, {
+    data: {
+      
+    },
+    width: "800px"
+  });
 
-  }
+  dialogRef.afterClosed().subscribe(result => {
+   
+  })
+}
 
 
-//}
+
+}
+
+
+

@@ -29,6 +29,8 @@ const SecurityQuestionsApi = require('./routes/securityQuestion-api');
 const UserApi = require('./routes/user-api');
 const RootCrudApi = require('./routes/root/crud-api');
 const MarketPlaceCrudApi = require('./routes/marketplace/marketplaceCrud-api');
+const SellerCrudApi = require('./routes/marketplace/seller/sellerCrud-api');
+const BuyerCrudApi = require('./routes/marketplace/buyer/buyerCrud-api');
 const SessionApi = require('./routes/session-api');
 
 
@@ -65,6 +67,7 @@ mongoose.connect(conn, {
 }); // end mongoose connection
 
 
+
 /**
  * APIs
  */
@@ -74,8 +77,18 @@ app.use('/api/roles', RoleApi);
 app.use('/api/securityQuestions', SecurityQuestionsApi);
 app.use('/api/users', UserApi);
 app.use('/api/session', SessionApi);
-app.use('/api/root/', RootCrudApi);
-app.use('/api/marketplace', MarketPlaceCrudApi);
+
+//used to curd marketplaces from a root level
+app.use('/api/root', RootCrudApi);
+//used to crud marketplaces
+app.use('/v1/api/marketplace', MarketPlaceCrudApi);
+
+//used to crud sellers on a marketplace
+app.use('/v1/api/marketplaces/seller', SellerCrudApi);
+
+//used to crud buyers on a marketplace
+app.use('/v1/api/marketplaces/buyer', BuyerCrudApi);
+
 
 
 

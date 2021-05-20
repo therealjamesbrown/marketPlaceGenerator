@@ -13,8 +13,8 @@
 
  let Schema = mongoose.Schema;
  const SelectedSecurityQuestions = require('../../schemas/selected-security-questions');
- const MarketplaceUserRoleSchema = require('../../schemas/marketplace/marketplace-user-role');
-
+ const SellerSchema = require('../../schemas/seller/seller-user-role');
+ const BuyerSchema = require('../../schemas/buyer/buyer-user-role');
  
  let MarketplaceUserSchema = new Schema({
      username: {type: String, required: true, unique: true, dropDups: true},
@@ -32,7 +32,8 @@
      securityQuestions: [SelectedSecurityQuestions],
      dateCreated: { type: Date, default: new Date() },
      dateModified: { type: Date },
-     sellers: { type: Array },
+     sellers: [SellerSchema],
+     buyers: [BuyerSchema]
  }, { collection: 'user' })
- 
+  
  module.exports = mongoose.model('MarketPlaceUser', MarketplaceUserSchema);

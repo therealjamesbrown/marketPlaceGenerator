@@ -13,7 +13,7 @@
  //import marketplace user model
  const User = require('../../models/marketplace/marketplaceUser');
  const router = express.Router();
- var bcrypt = require('bcryptjs')
+ var bcrypt = require('bcryptjs');
  //let cors = require('cors')
  let bodyParser = require('body-parser');
  
@@ -25,7 +25,7 @@
  
  /**
   * 
-  * --Find All Users--
+  * --Find All Marketplaces--
   * 
   */
  
@@ -163,6 +163,7 @@
      res.json(ErrorMessage.toObject())
  }
  })
+ 
  
  /**
  * 

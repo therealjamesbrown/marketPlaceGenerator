@@ -16,9 +16,11 @@ import { UserprofileService } from 'src/app/pages/services/userprofile.service';
 })
 export class CreateMarketPlaceDialogueComponent implements OnInit {
 
-  securityQuestionsDataSource: any[];
-  filteredSecurityQuestionsDataSource: any[];
-
+    //init the arryas for our security questions. One that pulls all security questions, then one that filters out disabled ones
+    securityQuestionsDataSource: any[];
+    filteredSecurityQuestionsDataSource: any[];
+  
+  //bring in stuff we need
   constructor(
     private userProfileService: UserprofileService,
     private dialog: MatDialog,
