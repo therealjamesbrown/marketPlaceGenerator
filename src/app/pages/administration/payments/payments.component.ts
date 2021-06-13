@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { PaymentsService } from 'src/app/pages/administration/services/payments.service';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-payments',
@@ -47,19 +48,19 @@ export class PaymentsComponent implements OnInit {
    * 
    */
   //step 3: listen for changes and update the db depending on what is chosen with the slider ex: enabled/Enabled
-  updatePaymentSource(element){
-      console.log(this.isChecked);
+  onChange(value: MatSlideToggleChange, element){
+    const { checked } = value;    
       let paymentMethodID = element._id;
-      let isEnabled = element.isEnabled;
+      let isEnabled = checked;
       console.log(isEnabled);
 
-      /*
+      
       this.paymentService.updatePaymentService(paymentMethodID, isEnabled).subscribe( res => {
         console.log(res);
       }, err => {
         console.log(err);
       })
-      */
+      
 }
 
   /**
