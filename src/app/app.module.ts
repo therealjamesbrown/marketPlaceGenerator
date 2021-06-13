@@ -89,6 +89,7 @@ import { CreateMarketPlaceComponent } from './pages/home/create-market-place/cre
 import { CreationHistoryComponent } from './pages/home/creation-history/creation-history.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { CreateMarketPlaceDialogueComponent } from './shared/base-layout/create-market-place-dialogue/create-market-place-dialogue.component';
+import { PaymentsComponent } from './pages/administration/payments/payments.component';
 
 
 
@@ -140,7 +141,8 @@ import { CreateMarketPlaceDialogueComponent } from './shared/base-layout/create-
     PurchaseHistoryGraphComponent,
     CreateMarketPlaceComponent,
     CreationHistoryComponent,
-    CreateMarketPlaceDialogueComponent
+    CreateMarketPlaceDialogueComponent,
+    PaymentsComponent
     ],
   imports: [
     BrowserModule,

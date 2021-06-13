@@ -21,7 +21,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const mongoose = require('mongoose');
 
-//Import our APIs
+//Import our APIs/Routes
 const CatalogApi = require('./routes/catalog-api');
 const InvoiceApi = require('./routes/invoice-api');
 const RoleApi = require('./routes/role-api');
@@ -32,7 +32,7 @@ const MarketPlaceCrudApi = require('./routes/marketplace/marketplaceCrud-api');
 const SellerCrudApi = require('./routes/marketplace/seller/sellerCrud-api');
 const BuyerCrudApi = require('./routes/marketplace/buyer/buyerCrud-api');
 const SessionApi = require('./routes/session-api');
-
+const PaymentsApi = require('./routes/payments/payments-api');
 
 /**
  * App configurations
@@ -77,6 +77,9 @@ app.use('/api/roles', RoleApi);
 app.use('/api/securityQuestions', SecurityQuestionsApi);
 app.use('/api/users', UserApi);
 app.use('/api/session', SessionApi);
+
+//used to crud payments services such as PayPal/Stripe/Etc
+app.use('/v1/api/payments', PaymentsApi);
 
 //used to curd marketplaces from a root level
 app.use('/api/root', RootCrudApi);
