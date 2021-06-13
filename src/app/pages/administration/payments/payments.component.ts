@@ -52,11 +52,11 @@ export class PaymentsComponent implements OnInit {
     const { checked } = value;    
       let paymentMethodID = element._id;
       let isEnabled = checked;
-      console.log(isEnabled);
+      //console.log(isEnabled);
 
       
       this.paymentService.updatePaymentService(paymentMethodID, isEnabled).subscribe( res => {
-        console.log(res);
+        //console.log(res);
       }, err => {
         console.log(err);
       })

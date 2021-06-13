@@ -29,7 +29,7 @@ export class PurchasegraphComponent implements OnInit {
 
     this.PurchasehistoryService.findPurchasesbyServiceGraph().subscribe(res=> {
       this.purchases = res['data'];
-      console.log(this.purchases);
+      //console.log(this.purchases);
   
   for (const item of this.purchases) {
     this.labels.push(item._id.title);
@@ -65,8 +65,8 @@ export class PurchasegraphComponent implements OnInit {
     ]
   };
 
-  console.log('Data object');
-  console.log(this.data);
+  //console.log('Data object');
+  //console.log(this.data);
   })
 }
 
