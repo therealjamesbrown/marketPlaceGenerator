@@ -12,34 +12,48 @@ import { CookieService } from 'ngx-cookie-service';
 export class PurchaseHistoryGraphComponent implements OnInit {
 
   purchases: any;
+  sellers: Array<any>;
   data: any;
-  itemCount = [];
+  industryCount = [];
   labels = [];
   username: any = this.cookieService.get('sessionuser');
+  marketplaceId: any = this.cookieService.get('userId')
 
   constructor(
     private userProfileService: UserprofileService,
     private cookieService: CookieService) {
 
-    //call the purchaseGraph api
-    //console.log('i fired')
-    //console.log(this.username);
-      this.userProfileService.getUserPurchasesByGraph(this.username).subscribe(res => {
-        this.purchases = res['data'];
-       
-        //set a cookie that we'll grab from the parent component to hide the graph if no data is present.
-        //this is helpful for new users.
-        if(this.purchases.length === 0){
-          this.cookieService.set('hidegraph', 'nodata', 1);
-          //console.log('i fired');
-        } else {
-          this.cookieService.set('showGraph', 'true', 1);
-        }
+    //create a class for the seller
+    
 
-        //loop the purchases
-        for (const item of this.purchases){
-          this.labels.push(item._id.title);
-          this.itemCount.push(item.count);
+    //call the api to retrieve a list of sellers
+      this.userProfileService.getAllSellers(this.marketplaceId).subscribe(res => {
+        this.sellers = res['data'];
+  
+        //loop the sellers array we got back
+        for (const item of this.sellers){
+  
+          //need to check if an industry is already in the array, if it is don't push it since we want to avoid duplicates. 
+          if(!this.labels.includes(item.industry)){
+            this.labels.push(item.industry);
+          } 
+        
+          //need to add number of each industry
+            this.industryCount.push(item.industry);
+            //console.log(this.industryCount);
+        }
+        let fashionCounter= 0;
+        let homeCounter= 0;
+        let medicineCounter= 0;
+         //now we have the who array of all the values, just need to find out how many each appears then map it to the count
+        for (let item of this.industryCount) {
+          if (item === "Fashion"){
+            fashionCounter ++;
+          } else if (item === "Home"){
+            homeCounter++;
+          } else if (item === "Medicine"){
+            medicineCounter++;
+          }
         }
 
         this.data = {
@@ -47,11 +61,11 @@ export class PurchaseHistoryGraphComponent implements OnInit {
           datasets: [
             //graph object
             {
-              label: 'Number of Marketplaces',
-              data: this.itemCount,
+              label: 'Number of Sellers',
+              data: [fashionCounter, homeCounter, medicineCounter],
               fill: false,
     borderColor: '#2e7d32',
-    tension: 0.1
+    tension: 1
             }
           ]
         };

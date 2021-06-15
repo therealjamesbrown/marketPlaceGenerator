@@ -1,0 +1,150 @@
+<mat-dialog-content>
+    <div fxLayout="column">
+        <mat-card>
+            <mat-card-title>Register Seller</mat-card-title>
+            <br />
+            <form [formGroup]="createSellerForm" (ngSubmit)="createSeller()" #form="ngForm">
+                <mat-card-content>
+                    <div fxLayout="column" fxLayoutGap="10px">
+                        <mat-form-field>
+                            <input type="text" 
+                                   matInput
+                                   placeholder="username"
+                                   formControlName="username">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input type="text" 
+                                   matInput
+                                   placeholder="Business Name"
+                                   formControlName="businessName">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Industry</mat-label>
+                                <mat-select name="industry" formControlName="industry">
+                                    <mat-option *ngFor="let item of industryDataSource" [value]="item.value">
+                                          {{item.value}}
+                                        </mat-option>
+                                </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input type="text" 
+                                   matInput
+                                   placeholder="type"
+                                   formControlName="type">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input type="text" 
+                                   matInput
+                                   placeholder="Contact First Name"
+                                   formControlName="contactFirstName">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input type="text" 
+                                   matInput
+                                   placeholder="Contact Last Name"
+                                   formControlName="contactLastName">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input type="text" 
+                                   matInput
+                                   placeholder="Phone"
+                                   formControlName="phone">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input type="text" 
+                                   matInput
+                                   placeholder="Street Address"
+                                   formControlName="address">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input type="email" 
+                                   matInput
+                                   placeholder="Email"
+                                   formControlName="email"
+                                   ngModel email>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input type="text" 
+                                   matInput
+                                   placeholder="Password"
+                                   formControlName="password">
+                        </mat-form-field>
+    
+                        <h3>Select Security Questions</h3>
+                        <!--Question 1-->
+    <h3>Question 1</h3>
+    <mat-form-field>
+        <mat-label>Available Questions</mat-label>
+            <mat-select name="industry" formControlName="securityQuestionSeletedOne">
+                <mat-option *ngFor="let question of filteredSecurityQuestionsDataSource" [value]="question.questionId">
+                      {{question.questionId}}
+                    </mat-option>
+            </mat-select>
+    </mat-form-field>
+    
+    <!--Answer 1-->
+    <mat-form-field>
+        <mat-label>Enter Answer</mat-label>
+        <input matInput placeholder="Question Answer" formControlName="securityQuestionOneAnswer">
+      </mat-form-field>
+    
+      <br />
+    
+      <!--Question 2-->
+    <h3>Question 2</h3>
+    <mat-form-field>
+        <mat-label>Available Questions</mat-label>
+            <mat-select name="question" formControlName="securityQuestionSeletedTwo">
+                <mat-option *ngFor="let question of filteredSecurityQuestionsDataSource" [value]="question.questionId">
+                      {{question.questionId}}
+                    </mat-option>
+            </mat-select>
+    </mat-form-field>
+    
+    
+    <!--Answer 2-->
+    <mat-form-field>
+        <mat-label>Enter Answer</mat-label>
+        <input matInput placeholder="Question Answer" formControlName="securityQuestionTwoAnswer">
+      </mat-form-field>
+    
+      <br />
+    
+    
+    
+    
+    
+    <!--Question 3-->
+    <h3>Question 3</h3>
+    <mat-form-field>
+        <mat-label>Available Questions</mat-label>
+            <mat-select name="question" formControlName="securityQuestionSeletedThree">
+                <mat-option *ngFor="let question of filteredSecurityQuestionsDataSource" [value]="question.questionId">
+                      {{question.questionId}}
+                    </mat-option>
+            </mat-select>
+    </mat-form-field>
+    
+    
+    <!--Answer 3-->
+    <mat-form-field>
+        <mat-label>Enter Answer</mat-label>
+        <input matInput placeholder="Question Answer" formControlName="securityQuestionThreeAnswer">
+      </mat-form-field>
+    
+    
+                    </div>
+                </mat-card-content>
+                <mat-card-actions align="end">
+                    <button mat-raised-button matDialogClose="cancel" color="primary">Cancel</button>
+                    <button type="submit" 
+                                    mat-raised-button 
+                                    matDialogClose="create"
+                                    color="primary"
+                                    [disabled]="!createSellerForm.valid"
+                                    >Create</button>
+                </mat-card-actions>
+            </form>
+        </mat-card>
+    </div>
+    </mat-dialog-content>

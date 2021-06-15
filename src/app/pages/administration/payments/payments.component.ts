@@ -24,12 +24,15 @@ export class PaymentsComponent implements OnInit {
 
 
   constructor(private paymentService: PaymentsService) { 
+
+    //make the server call to retrieve payment methods
     this.paymentService.findAllPaymentServices().subscribe(res => {
      
+      //store the response objects in an array. 
       this.paymentServiceDataSource = res['data'];
       //loop the data to get the current isEnabled value
       for (let status of res.data){
-        //console.log(status.isEnabled);
+        //set the value of the sliders to match its DB persisted value
         this.isChecked = status.isEnabled;
       }
     }, err => {
@@ -44,10 +47,12 @@ export class PaymentsComponent implements OnInit {
 
   /**
    * 
-   * Patch Payment Service
+   * Patch Payment Service when toggled
    * 
    */
-  //step 3: listen for changes and update the db depending on what is chosen with the slider ex: enabled/Enabled
+  //step 3: listen for changes and update the db depending on what is chosen with the slider ex: enabled/disabled
+
+  //function takes two params. one for the current state of the toggle and the element/object that was toggled
   onChange(value: MatSlideToggleChange, element){
     const { checked } = value;    
       let paymentMethodID = element._id;

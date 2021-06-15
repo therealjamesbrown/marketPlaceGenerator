@@ -323,6 +323,38 @@
              const ErrorMessage = new ErrorResponse('500', 'Internal Server Erorr', err)
              res.json(ErrorMessage.toObject())
      }   
- })
+ });
+
+
+ /**
+  * 
+  * Find all sellers by industry
+  * 
+  */
+
+  router.get('/:id/locate-sellers', function(req, res) {
+    try {
+        User.findOne({'_id': req.params.id}, function(err, user) {
+    
+          //console.log(req.params.id)
+    
+          if (err) {
+            console.log(err);
+    
+            const mongoDbErrorResponse = new ErrorResponse ('500', 'Internal server error', err);
+    
+            res.status(500).send(mongoDbErrorResponse.toObject());
+          } else {
+              const findAllSellersSuccess = new BaseResponse('200', "Success!", user.sellers);
+              res.json(findAllSellersSuccess.toObject());
+          }
+        })
+      } catch (e) {
+        console.log(e);
+    
+        const errorCatchResponse = new ErrorResponse('500', 'Internal server error', err)
+        res.status(500).send(errorCatchResponse.toObject());
+      }
+    })
  
   module.exports = router; 

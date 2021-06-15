@@ -30,7 +30,6 @@ const serverSuccess = "Success!"
  * --Find marketplace by ID--
  * 
  */
-
 router.get('/:marketplaceId', function(req, res) {
     try {
     // Finds user
@@ -58,7 +57,6 @@ router.get('/:marketplaceId', function(req, res) {
 */
 router.post('/:marketplaceId/register', async(req, res) => {
     try{
-
          // Finds user
     Marketplace.findOne({ "_id": req.params.marketplaceId }, function(err, marketplace) {
         if (err) { 
@@ -69,7 +67,7 @@ router.post('/:marketplaceId/register', async(req, res) => {
         else { 
             const saltRounds = 10; //set the number of times the password is getting salted
             let hashedPassword = bcrypt.hashSync(req.body.password, saltRounds); //salt that thang
-
+            
             //create the new seller object
             let newSeller = {
                 username: req.body.username,
@@ -85,7 +83,7 @@ router.post('/:marketplaceId/register', async(req, res) => {
                 securityQuestions: req.body.securityQuestions,
                 buyers: req.body.buyers,
             };
-            
+            console.log(newSeller);
 //add the seller to the marketplace
 marketplace.sellers.push(newSeller);
             //try to save the marketplace in the db.

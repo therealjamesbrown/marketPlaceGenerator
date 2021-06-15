@@ -19,6 +19,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { HttpClient } from '@angular/common/http';
 import { CreateMarketPlaceDialogueComponent } from '../base-layout/create-market-place-dialogue/create-market-place-dialogue.component';
+import { CreateSellerComponent } from '../base-layout/create-seller/create-seller.component'
 
 @Component({
   selector: 'app-base-layout',
@@ -101,7 +102,7 @@ createMarketplace(){
  */
 //createRoleDialog
 registerSeller(){
-  const dialogRef = this.dialog.open(CreateMarketPlaceDialogueComponent, {
+  const dialogRef = this.dialog.open(CreateSellerComponent, {
     data: {
       
     },

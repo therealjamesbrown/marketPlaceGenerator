@@ -54,29 +54,19 @@ enteredText:any [];
 //industry. move this to values stored in a db later on....
 industryDataSource: any[] = [
   {
-    value: 'Automotive',
+    value: 'Fashion',
   },
   {
-    value: 'Sports',
+    value: 'Home',
   },
   {
     value: 'Medicine',
-  },
-  {
-    value: 'Technology',
-  },
-  {
-    value: 'Education',
-  },
-  {
-    value: 'Government',
   }
 ];
 
 
 
   ngOnInit(): void {
- 
     this.createMarketplaceForm = this.fb.group({
       username: ['', Validators.required],
       businessName: ['', Validators.required],

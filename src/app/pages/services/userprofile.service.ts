@@ -100,6 +100,16 @@ export class UserprofileService {
   }
 
 
+  /**
+   * 
+   * Get all sellers by industry
+   * 
+   */
+
+  getAllSellers(marketplaceId): Observable<any>{
+    return this.http.get(`/v1/api/marketplace/${marketplaceId}/locate-sellers`)
+  }
+
 
   /**
    * 
