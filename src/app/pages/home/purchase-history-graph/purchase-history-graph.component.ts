@@ -64,6 +64,10 @@ export class PurchaseHistoryGraphComponent implements OnInit {
               label: 'Number of Sellers',
               data: [fashionCounter, homeCounter, medicineCounter],
               fill: false,
+              backgroundColor: [
+                '#14a10d',
+                'black',
+                'white'],
     borderColor: '#2e7d32',
     tension: .04
             }
