@@ -91,6 +91,7 @@ import { CreateMarketPlaceDialogueComponent } from './shared/base-layout/create-
 import { PaymentsComponent } from './pages/administration/payments/payments.component';
 import { CreateSellerComponent } from './shared/base-layout/create-seller/create-seller.component';
 import { SellerListComponent } from './pages/home/seller-list/seller-list.component';
+import { CreateDialogueComponent } from './shared/base-layout/create-dialogue/create-dialogue.component';
 
 
 
@@ -145,7 +146,8 @@ import { SellerListComponent } from './pages/home/seller-list/seller-list.compon
     CreateMarketPlaceDialogueComponent,
     PaymentsComponent,
     CreateSellerComponent,
-    SellerListComponent
+    SellerListComponent,
+    CreateDialogueComponent
     ],
   imports: [
     BrowserModule,

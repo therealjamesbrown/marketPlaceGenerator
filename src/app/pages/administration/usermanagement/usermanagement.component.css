@@ -3,10 +3,11 @@ table {
 } #post {
    float: right;
    margin-bottom: 5px;
-} th {
+} th{
+    background-color: #14a10d;
     color: white;
-    background: hsl(216, 85%, 34%);
-} button {
+    border-radius: 1px;
+  }button {
     background: white;
 }p{
     font-weight: 500;

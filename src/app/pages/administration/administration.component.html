@@ -13,10 +13,10 @@
 <div fxFlex class="childColumnContainers">
     <div fxLayout="column wrap" fxLayoutGap="10px">
         <div fxFlex class="childRowContainers">
-<!--Purchases Graph goes here-->
+<!--Payments config goes here-->
                <mat-card style="background-color: rgb(32, 32, 32); color: white;">
                    <mat-card-content>
-                    <app-purchasegraph></app-purchasegraph>
+                   <!-- <app-purchasegraph></app-purchasegraph>-->
                     </mat-card-content>
                 </mat-card>
             </div>
@@ -24,7 +24,8 @@
 <!--Catalog Goes here-->
             <mat-card>
                 <mat-card-content>
-                    <app-catalogmanagement></app-catalogmanagement>
+                    <app-payments></app-payments>
+                  <!--  <app-catalogmanagement></app-catalogmanagement>-->
                 </mat-card-content>
             </mat-card>
             </div>
@@ -55,17 +56,6 @@
             </div>
         </div>
     </div>
-
-
-<!--Payment Services management column-->
-<div fxFlex class="childColumnContainers">
-    <div fxFlex><mat-card>
-        <mat-card-content>
- <app-payments></app-payments>
-</mat-card-content>
-</mat-card>
-    </div>
-</div>
 
 <!--USER management column-->
 <div fxFlex class="childColumnContainers">

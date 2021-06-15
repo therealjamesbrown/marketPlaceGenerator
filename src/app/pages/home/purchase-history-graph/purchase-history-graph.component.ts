@@ -65,7 +65,7 @@ export class PurchaseHistoryGraphComponent implements OnInit {
               data: [fashionCounter, homeCounter, medicineCounter],
               fill: false,
     borderColor: '#2e7d32',
-    tension: 1
+    tension: .04
             }
           ]
         };

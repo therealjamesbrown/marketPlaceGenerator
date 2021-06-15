@@ -20,6 +20,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { HttpClient } from '@angular/common/http';
 import { CreateMarketPlaceDialogueComponent } from '../base-layout/create-market-place-dialogue/create-market-place-dialogue.component';
 import { CreateSellerComponent } from '../base-layout/create-seller/create-seller.component'
+import { CreateDialogueComponent } from './create-dialogue/create-dialogue.component';
 
 @Component({
   selector: 'app-base-layout',
@@ -78,39 +79,15 @@ export class BaseLayoutComponent implements OnInit {
 
 /**
  * 
- * function launch dialog to create the marketplace user
+ * create parent dialog (opens flow to create marketplace or seller)
  * 
  */
-//createRoleDialog
-createMarketplace(){
-  const dialogRef = this.dialog.open(CreateMarketPlaceDialogueComponent, {
-    data: {
-      
+createParent(){
+  const dialogRef = this.dialog.open(CreateDialogueComponent, {
+    data:{
+
     },
     width: "800px"
-  });
-
-  dialogRef.afterClosed().subscribe(result => {
-   
-  })
-}
-
-/**
- * 
- * function launch dialog to create the marketplace user
- * 
- */
-//createRoleDialog
-registerSeller(){
-  const dialogRef = this.dialog.open(CreateSellerComponent, {
-    data: {
-      
-    },
-    width: "800px"
-  });
-
-  dialogRef.afterClosed().subscribe(result => {
-   
   })
 }
 
