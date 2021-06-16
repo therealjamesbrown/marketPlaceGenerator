@@ -94,6 +94,8 @@ import { SellerListComponent } from './pages/home/seller-list/seller-list.compon
 import { CreateDialogueComponent } from './shared/base-layout/create-dialogue/create-dialogue.component';
 import { SellerHomeComponent } from './pages/seller/seller-home/seller-home.component';
 import { ConfigurationComponent } from './pages/seller/config/configuration/configuration.component';
+import { PaypalCommerceComponent } from './pages/seller/config/payments/paypal-commerce/paypal-commerce.component';
+import { BaseComponent } from './pages/seller/config/payments/base/base.component';
 
 
 
@@ -151,7 +153,9 @@ import { ConfigurationComponent } from './pages/seller/config/configuration/conf
     SellerListComponent,
     CreateDialogueComponent,
     SellerHomeComponent,
-    ConfigurationComponent
+    ConfigurationComponent,
+    PaypalCommerceComponent,
+    BaseComponent
     ],
   imports: [
     BrowserModule,
