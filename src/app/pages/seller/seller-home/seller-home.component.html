@@ -1,1 +1,51 @@
-<p>seller-home works!</p>
+<div fxLayout="column" class="outerContainer">
+    <div fxFlex>
+      <mat-card style="background-color: rgb(32, 32, 32);">
+        <mat-card-content>
+          <div fxLayout="column">
+            <div fxFlex class="childColumnContainers">
+              <h1> Welcome, {{user}}!</h1>
+            </div>
+  
+  
+             <!--Graph-->
+  
+             <div fxFlex class="childColumnContainers" *ngIf="oderHistoryVisibility != false">
+              <mat-card class="purchaseGraph" style="background-color: black; color: white;">
+                <mat-card-content>
+                 
+                </mat-card-content>
+              </mat-card>
+            </div>
+  
+  
+            <!--Creation History-->
+            <div fxFlex class="childColumnContainers" *ngIf="oderHistoryVisibility != false">
+              <div fxLayout="row wrap" fxLayoutGap="10px">
+                <div fxFlex>
+                  <mat-card>
+                    <mat-card-content>
+                    
+                    </mat-card-content>
+                  </mat-card>
+                
+                </div>
+              </div>
+            </div>
+  
+            <!--Contact -->
+            <div fxFlex class="childColumnContainers">
+              <mat-card class="contactContainer">
+                <mat-card-content class="questions">
+                  <h3>Questions?</h3>
+                  <p routerLink="/contact" class="contact">Contact</p>
+                </mat-card-content>
+              </mat-card>
+            </div>
+           
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  

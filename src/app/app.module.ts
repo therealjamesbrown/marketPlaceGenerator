@@ -93,6 +93,7 @@ import { CreateSellerComponent } from './shared/base-layout/create-seller/create
 import { SellerListComponent } from './pages/home/seller-list/seller-list.component';
 import { CreateDialogueComponent } from './shared/base-layout/create-dialogue/create-dialogue.component';
 import { SellerHomeComponent } from './pages/seller/seller-home/seller-home.component';
+import { ConfigurationComponent } from './pages/seller/config/configuration/configuration.component';
 
 
 
@@ -149,7 +150,8 @@ import { SellerHomeComponent } from './pages/seller/seller-home/seller-home.comp
     CreateSellerComponent,
     SellerListComponent,
     CreateDialogueComponent,
-    SellerHomeComponent
+    SellerHomeComponent,
+    ConfigurationComponent
     ],
   imports: [
     BrowserModule,

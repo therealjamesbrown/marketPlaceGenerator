@@ -80,7 +80,7 @@ router.get('/:id', async(req, res) => {
           res.status(500).send(mongoDbErrorResponse.toObject());
         } else {
   
-          console.log(user);
+         // console.log(user);
           res.json(user);
         }
       })
@@ -101,7 +101,7 @@ router.get('/:id', async(req, res) => {
  */
 router.get('/username/:username', async(req, res) => {
     try {
-        console.log(req.params.username)
+      //  console.log(req.params.username)
       User.findOne({'username': req.params.username}, function(err, user) {
   
         //console.log('i fired')
@@ -114,7 +114,7 @@ router.get('/username/:username', async(req, res) => {
           res.status(500).send(mongoDbErrorResponse.toObject());
         } else {
   
-          console.log(user);
+       //   console.log(user);
           const mongoDBFindUserByIDSuccess = new BaseResponse('200', 'Success!', user);
           res.json(mongoDBFindUserByIDSuccess.toObject());
         }
@@ -142,7 +142,7 @@ router.get('/:username/security-questions', async(req, res) => {
                 const findSelectedSecurityQuestionsMongoDbErrorResponse = new ErrorResponse('500', 'Internal Server Error', err);
                 res.status(500).send(findSelectedSecurityQuestionsMongoDbErrorResponse.toObject());
             } else {
-                console.log(user);
+              //  console.log(user);
                 const findSelectedSecurityQuestionsResponse = new BaseResponse('200', 'Query Successful', user);
                 res.json(findSelectedSecurityQuestionsResponse.toObject());
             }

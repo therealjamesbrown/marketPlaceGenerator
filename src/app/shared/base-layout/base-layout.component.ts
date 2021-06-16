@@ -32,7 +32,7 @@ export class BaseLayoutComponent implements OnInit {
   year: number = Date.now();  
 
   username: any = this.cookieService.get('sessionuser');
-  role: any;
+  role: any = this.cookieService.get('role');
   isVisible: Boolean;
   
   constructor(

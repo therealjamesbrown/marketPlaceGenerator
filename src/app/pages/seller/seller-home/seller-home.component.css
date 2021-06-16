@@ -1,0 +1,49 @@
+.outerContainer {
+    width: 90%;
+    margin: 0 auto;
+  }
+  
+  .childColumnContainers{
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+  
+  .ad{
+    text-align: center;
+    background-color: #ede1b98c;
+  }
+  
+  .adButton{
+    float: right;
+    width: 1px;
+    background-color: white;
+    color: black;
+  }
+  
+  .questions{
+    text-align: center;
+  }
+  
+  .purchaseGraph{
+    text-align: center;
+  }
+  
+  
+  h1{
+    font-weight: 200;
+    font-size: 28px;
+    color: white;
+  }
+  
+  
+  .contactContainer{
+    background-color: black;
+    color: white;
+  }
+  
+  h3{
+    margin-top: -5px;
+    margin-bottom: -5px;
+  }
+  
+  

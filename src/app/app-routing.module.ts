@@ -29,6 +29,7 @@ import { ResetPasswordProcessComponent } from './pages/reset-password/reset-pass
 import { PurchasegraphComponent } from './pages/administration/purchasegraph/purchasegraph.component';
 import { RoleGuard } from './shared/role.guard';
 import { SellerHomeComponent } from './pages/seller/seller-home/seller-home.component';
+import { ConfigurationComponent } from './pages/seller/config/configuration/configuration.component';
 
 const routes: Routes = [
   {//path for marketplace in users
@@ -91,8 +92,16 @@ const routes: Routes = [
         component: SellerHomeComponent
       },
       {
+        path: 'profile',
+        component: ProfileComponent
+      },
+      {
         path: 'not-found',
         component: NotfoundComponent
+      },
+      {
+        path: 'admin',
+        component: ConfigurationComponent
       }
     ],
     canActivate: [AuthGuard]
