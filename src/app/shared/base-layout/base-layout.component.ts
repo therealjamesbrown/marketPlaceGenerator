@@ -49,7 +49,7 @@ export class BaseLayoutComponent implements OnInit {
       this.username = res['data'];
      //console.log(this.username.role);
 
-      if(this.username.role === "admin"){
+      if(this.username.role === "marketplace"){
         this.isVisible = true;
       //  console.log(this.isVisible);
         

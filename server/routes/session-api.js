@@ -27,13 +27,12 @@ let BaseResponse = require('../services/error-response')
  //Sign-in route
  router.post('/signin', async (req,res) => {
      try {
+         console.log(req.body)
         User.findOne({ 'username': req.body.username }, function(err, user) {
             if (err) {
                 const singinMongoDbErrorMessage = new ErrorResponse('500', 'Internal Server Error', err) //**this should be 'signin' */
                 res.status(500).json(singinMongoDbErrorMessage.toObject());  //**this should be 'signin' */
             } 
-
-
            
             /**
                  * 
@@ -48,7 +47,70 @@ let BaseResponse = require('../services/error-response')
                 res.status(401).send(invalidUserNameResponse.toObject());
             }
             else {
+
+                //check here to see if the request was from a marketplace login or seller login
+                if(req.body.role === 'Seller'){
+
+                //if seller, compare the seller details and return a result. 
+                //find the seller in the array of sellers
+                let sellersArr = user.sellers;
+                let sellerSessionUser = sellersArr.find(o => o.username === req.body.sellerUsername);
+                  // console.log(sellerSessionUser);
                 
+                let sellerPasswordIsValid = bcrypt.compareSync(req.body.password, sellerSessionUser.password);
+ 
+
+                /**
+                  * 
+                  * If password is valid, return success
+                  */
+                 if(sellerPasswordIsValid) {
+                    if (user.isDisabled == true) {
+                        user.set({
+                            isDisabled: false,
+                        })
+                        user.save()
+                        const signinResponse = new BaseResponse('200', 'Re-enabled and logged in', sellerSessionUser);
+                        res.json(signinResponse.toObject());
+                    } else {
+                        console.log('Login Successful!');
+                        const signinResponse = new BaseResponse('200', 'Login Successful', sellerSessionUser);
+                        res.json(signinResponse.toObject());
+                    }
+            }
+
+            
+            /**
+             * If pass is invalid, return invalid password message
+             */
+            else {
+                console.log(`Username: ${req.body.username} is invalid.`);
+                const invalidUserNameResponse = new BaseResponse('200', 'Invalid username and/or password, please try again.', null);
+                res.status(401).send(invalidUserNameResponse.toObject());
+            } 
+
+
+
+
+
+
+
+
+
+            /**
+             * 
+             * handle session for buyers
+             * TODO
+             */
+                }
+                else if (req.body.role === 'Buyer') {
+                    console.log('i work')
+                }
+    
+                
+                else {
+                //if marketplace, do the normal login we already wrote
+
                  let passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
 
                  /**
@@ -79,7 +141,7 @@ let BaseResponse = require('../services/error-response')
                     res.status(401).send(invalidUserNameResponse.toObject());
                 }
             }
-        })
+        }})
      } catch (e) {
          console.log("this error fired")
         const ErrorMessage = new ErrorResponse('500', 'Internal Server Error', err.message)

@@ -12,7 +12,7 @@
 
 import { HomeComponent } from './pages/home/home.component';
 import { BaseLayoutComponent } from './shared/base-layout/base-layout.component';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthLayoutComponent } from './shared/auth-layout/auth-layout.component';
 import { SigninComponent } from './pages/signin/signin.component';
@@ -28,9 +28,10 @@ import { ResetPasswordComponent } from './pages/reset-password/reset-password/re
 import { ResetPasswordProcessComponent } from './pages/reset-password/reset-password-process/reset-password-process.component';
 import { PurchasegraphComponent } from './pages/administration/purchasegraph/purchasegraph.component';
 import { RoleGuard } from './shared/role.guard';
+import { SellerHomeComponent } from './pages/seller/seller-home/seller-home.component';
 
 const routes: Routes = [
-  {//path for logged in users
+  {//path for marketplace in users
     path: '',
     component: BaseLayoutComponent,
     children: [
@@ -53,6 +54,48 @@ const routes: Routes = [
       }
     ],
         canActivate: [AuthGuard]
+  },
+
+  //path for marketplaces
+  {
+    path: 'marketplace',
+    component: BaseLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: HomeComponent
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent
+      },
+      {
+        path: 'admin',
+        component: AdministrationComponent,
+        canActivate: [RoleGuard]
+      },
+      {
+        path: 'not-found',
+        component: NotfoundComponent
+      }
+    ],
+        canActivate: [AuthGuard]
+  },
+  //path for seller users
+  {
+    path: 'seller',
+    component: BaseLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: SellerHomeComponent
+      },
+      {
+        path: 'not-found',
+        component: NotfoundComponent
+      }
+    ],
+    canActivate: [AuthGuard]
   },
   {//path for not logged in users
     path: 'session',

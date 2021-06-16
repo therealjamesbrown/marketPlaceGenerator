@@ -31,10 +31,9 @@ export class RoleGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot)
     {
-     // return this.roleService.findUserRole(this.cookieService.get('sessionuser')).pipe(map(res =>
      return this.UserprofileService.getUserRole(this.cookieService.get('sessionuser')).pipe(map(res =>
         {
-          if (res['data'].role === 'admin')
+          if (res['data'].role === 'marketplace')
           {
             return true;
           }

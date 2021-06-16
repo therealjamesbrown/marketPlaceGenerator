@@ -29,7 +29,9 @@ let UserSchema = new Schema({
     role: {UserRoleSchema}, //need to define default
     securityQuestions: [SelectedSecurityQuestions],
     date_created: { type: Date, default: new Date() },
-    date_modified: { type: Date }
+    date_modified: { type: Date },
+    sellers: { type: Array },
+    buyers: { type: Array}
 }, { collection: 'user' })
 
 module.exports = mongoose.model('User', UserSchema);

@@ -92,6 +92,7 @@ import { PaymentsComponent } from './pages/administration/payments/payments.comp
 import { CreateSellerComponent } from './shared/base-layout/create-seller/create-seller.component';
 import { SellerListComponent } from './pages/home/seller-list/seller-list.component';
 import { CreateDialogueComponent } from './shared/base-layout/create-dialogue/create-dialogue.component';
+import { SellerHomeComponent } from './pages/seller/seller-home/seller-home.component';
 
 
 
@@ -147,7 +148,8 @@ import { CreateDialogueComponent } from './shared/base-layout/create-dialogue/cr
     PaymentsComponent,
     CreateSellerComponent,
     SellerListComponent,
-    CreateDialogueComponent
+    CreateDialogueComponent,
+    SellerHomeComponent
     ],
   imports: [
     BrowserModule,
