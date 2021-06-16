@@ -7,6 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PaypalCommerceComponent implements OnInit {
 
+  environment: any; //sandbox or live
+  sandboxClientId: any;
+  sandboxSecret: any;
+  productionClientId: any;
+  productionSecret: any;
+
   constructor() { }
 
   ngOnInit(): void {
