@@ -1,9 +1,9 @@
 <p>PPCP Configuration Settings</p>
-<form [formGroup]="paypalCommerceConfigForm" (ngSubmit)="updateConfig()" #form="ngForm">
+<form [formGroup]="paypalCommerceConfigForm" (ngSubmit)="updateConfig()">
     <mat-card-content>
         <div fxLayout="column" fxLayoutGap="10px">
             <mat-form-field>
-                <mat-select placeholder="Environment">
+                <mat-select placeholder="Environment" formControlName="environment">
                     <mat-option value="sandbox">Sandbox</mat-option>
                     <mat-option value="production">Production</mat-option>
                   </mat-select>

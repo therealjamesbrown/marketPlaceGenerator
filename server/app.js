@@ -16,6 +16,9 @@
  */
 const express = require('express');
 const http = require('http');
+let https = require('follow-redirects').https;
+let fs = require('fs');
+let qs = require('querystring');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -33,6 +36,7 @@ const SellerCrudApi = require('./routes/marketplace/seller/sellerCrud-api');
 const BuyerCrudApi = require('./routes/marketplace/buyer/buyerCrud-api');
 const SessionApi = require('./routes/session-api');
 const PaymentsApi = require('./routes/payments/payments-api');
+const PayPalCommerceApi = require('./routes/payments/PayPalCommerce/paypal-commerce-api');
 
 /**
  * App configurations
@@ -91,6 +95,8 @@ app.use('/v1/api/marketplaces/seller', SellerCrudApi);
 
 //used to crud buyers on a marketplace
 app.use('/v1/api/marketplaces/buyer', BuyerCrudApi);
+
+app.use('/v1/api/payments/paypal-commerce', PayPalCommerceApi)
 
 
 

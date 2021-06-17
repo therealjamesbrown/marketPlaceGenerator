@@ -31,7 +31,7 @@ let SellerUserSchema = new Schema({
     securityQuestions: [SelectedSecurityQuestions],
     dateCreated: { type: Date, default: new Date() },
     dateModified: { type: Date },
-    buyers: { type: Array },
+    paymentsConfig: {type: Array}
 }, { collection: 'user' })
 
 module.exports = mongoose.model('SellerUser', SellerUserSchema);

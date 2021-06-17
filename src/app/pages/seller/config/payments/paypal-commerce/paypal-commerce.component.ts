@@ -15,14 +15,18 @@ export class PaypalCommerceComponent implements OnInit {
   productionClientId: any;
   productionSecret: any;
   paypalCommerceConfigForm: FormGroup;
+  capabilities: any;
 
   constructor(
     private fb: FormBuilder
   ) { }
 
+  //get the current values of the config and pass them into the form
+
+
   ngOnInit(): void {
     this.paypalCommerceConfigForm = this.fb.group({
-      environment: [''],
+      environment: ['', Validators.required],
       sandboxClientId: ['', Validators.required],
       sandboxSecret: ['', Validators.required],
       productionClientId: ['', Validators.required],
@@ -31,6 +35,19 @@ export class PaypalCommerceComponent implements OnInit {
   }
 
 updateConfig(){
+
+  //grab our form values
+  const config = {
+    environment: this.paypalCommerceConfigForm.controls.environment.value,
+    sandboxClientId: this.paypalCommerceConfigForm.controls.sandboxClientId.value,
+    sandboxSecret: this.paypalCommerceConfigForm.controls.sandboxSecret.value,
+    productionClientId: this.paypalCommerceConfigForm.controls.productionClientId.value,
+    productionSecret: this.paypalCommerceConfigForm.controls.productionSecret.value
+  }
+
+  console.log(config)
+  //need to write our apis to call our server to save the information in the db. 
+
   
 }
 

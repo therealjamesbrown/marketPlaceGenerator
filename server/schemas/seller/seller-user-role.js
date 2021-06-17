@@ -29,7 +29,8 @@ let sellerSchema = new Schema({
     role: { type: String, default: 'seller'}, 
     securityQuestions: { type: Array },
     dateCreated: { type: Date, default: new Date() },
-    dateModified: { type: Date }
+    dateModified: { type: Date },
+    paymentsConfig: {type: Array}
 }) 
 
 module.exports = sellerSchema;
