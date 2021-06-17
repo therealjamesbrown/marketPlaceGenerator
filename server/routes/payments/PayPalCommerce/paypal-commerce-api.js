@@ -60,14 +60,20 @@ if(environment === 'sandbox'){
 }
 
 
-
-
-
-
-
-
-
-
+/****
+ * 
+ * 
+ * 
+ * 
+ * 
+ * Functions
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
 
 
 
@@ -210,37 +216,67 @@ function captureOrderV2(accessToken, orderId){
 }
 
 
+function partnerReferral(accessToken){
+  return new Promise( resolve => {
+    let options = {
+      'method': 'POST',
+      'hostname': endpoint,
+      'path': paypalRestPaths.partnerReferralsV2,
+      'headers': {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`,
+      },
+      'maxRedirects': 20
+    };
+    
+    let req = https.request(options, function (res) {
+      let chunks = [];
+    
+      res.on("data", function (chunk) {
+        chunks.push(chunk);
+      }); 
+    
+      res.on("end", function (chunk) {
+          //buffer the response
+        let bufferedData = Buffer.concat(chunks);
+        //convert it to json
+        let responseBody = JSON.parse(bufferedData);
+
+        //find the action url from the hateos links returned
+       let actionURL = responseBody.links.find(e => e.rel === 'action_url');
+
+       //pass that action url back in the response
+       resolve(actionURL.href);
+      });
+    
+      res.on("error", function (error) {
+        console.error(error);
+      });
+    });
+     
+    let postData = JSON.stringify({"tracking_id":"id1","operations":[{"operation":"API_INTEGRATION","api_integration_preference":{"rest_api_integration":{"integration_method":"PAYPAL","integration_type":"THIRD_PARTY","third_party_details":{"features":["PAYMENT","REFUND","PAYOUTS"]}}}}],"products":["EXPRESS_CHECKOUT"],"legal_consents":[{"type":"SHARE_DATA_CONSENT","granted":true}]});
+    req.write(postData);
+    req.end();
+})
+}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/****
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * ROUTES
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
 
 
 /**
@@ -263,9 +299,13 @@ router.post('/access-token', async(req, res) => {
     }
 })
  
+
+
+
+
 /**
  * 
- * Create orders call
+ * Orders V2 API calls (entire process ie: create/capture/refund)
  * 
  */
 router.post('/create-order', async(req, res) => {
@@ -310,6 +350,37 @@ router.post('/capture-order', async(req, res) => {
     }
 })
 
+
+
+
+/**
+ * 
+ * 
+ * 
+ * onBoarding - partnerReferrals
+ * 
+ * 
+ */
+
+
+router.post('/onboard', async(req, res) => {
+  try{
+      //make call to PayPal to get access token
+     getAccessToken().then(accessToken => {
+         //pass the access token to the partner referrals api
+      partnerReferral(accessToken).then(responseBody => {
+          const createOrderSuccessResponse = new BaseResponse(200, serverSuccess, responseBody);
+          res.json(createOrderSuccessResponse.toObject());
+          //save order to database
+          }) 
+     })
+  } catch(e){
+      const findPaymentsServicesCatchErrorResponse = new ErrorResponse(500, internalServerError, e.message);
+      res.status(500).send(findPaymentsServicesCatchErrorResponse.toObject());
+  }
+})
  
+
+
 
  module.exports = router; 
