@@ -40,7 +40,7 @@ router.post('/register', async(req, res) => {
                 const createdPaymentServiceErrorResponse = new ErrorResponse('500', internalServerError, err);
                 res.status(500).send(createdPaymentServiceErrorResponse.toObject());
             } else {
-                console.log(createdPaymentService);
+          //      console.log(createdPaymentService);
                 const createdPaymentServiceSuccessResponse = new BaseResponse('200', serverSuccess, createdPaymentService);
                 res.json(createdPaymentServiceSuccessResponse.toObject());
             }
@@ -67,7 +67,7 @@ router.get('/', async(req, res) => {
                 const findAllPaymentsMongoDBErrorResponse = new ErrorResponse(500, internalServerError, err);
                 res.status(500).send(findAllPaymentsMongoDBErrorResponse.toObject());
             } else {
-                console.log(foundPaymentServices);
+             //   console.log(foundPaymentServices);
                 const findAllPaymentsSuccessResponse = new BaseResponse(200, serverSuccess, foundPaymentServices);
                 res.json(findAllPaymentsSuccessResponse.toObject());
             }
@@ -84,7 +84,7 @@ router.get('/', async(req, res) => {
  * 
  */
 router.patch('/update/:id', function(req, res) {
-    console.log(req.body);
+   // console.log(req.body);
     try { 
     // Finds the payment service by id
     PaymentService.findOne({ "_id": req.params.id }, function(err, paymentService) {

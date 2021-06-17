@@ -43,7 +43,7 @@ router.get('/', async(req, res) => {
           const mongoDbFindAllErrorResponse = new ErrorResponse('500', 'Internal Server Error', err)
           res.status(500).send(mongoDbFindAllErrorResponse.toObject());
         } else {
-          console.log(item);
+         // console.log(item);
           const findAllSuccessResponse = new BaseResponse('200', 'Successful!', item);
           res.json(findAllSuccessResponse.toObject());
         }
@@ -106,7 +106,7 @@ router.post('/', async(req, res) => {
               res.status(500).send(createCatalogItemMongodbErrorResponse.toObject());
           }
           else {
-              console.log(catalogItem);
+          //    console.log(catalogItem);
               const createCatalogItemResponse = new BaseResponse('200', 'Success!', catalogItem);
               res.json(createCatalogItemResponse.toObject());
           }
@@ -149,7 +149,7 @@ router.put('/:catalogItemId/update', async(req, res) =>{
                   const saveUpdatedCatalogItemErrorResponse = new ErrorResponse('500', 'Internal Server Error!', err);
                   res.status(500).send(saveUpdatedCatalogItemErrorResponse.toObject());
               } else {
-                  console.log(updatedCatalogItem);
+         //         console.log(updatedCatalogItem);
                   const saveUpdatedCatalogItemSuccess = new BaseResponse('200', 'Success!', updatedCatalogItem);
                   res.json(saveUpdatedCatalogItemSuccess.toObject());
               }
@@ -188,7 +188,7 @@ router.put('/:catalogItemId/update', async(req, res) =>{
               const updateIsDisabledStatusError = new ErrorResponse('500', 'Internal Server Error', err);
               res.status(500).send(updateIsDisabledStatusError.toObject());
             } else {
-              console.log(updatedItem);
+        //      console.log(updatedItem);
               const updateIsDisabledStatusSuccess = new BaseResponse('200', 'Success!', updatedItem);
               res.json(updateIsDisabledStatusSuccess.toObject());
             }

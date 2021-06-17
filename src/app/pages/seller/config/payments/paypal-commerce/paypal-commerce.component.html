@@ -1,19 +1,46 @@
-<p>paypal-commerce works!</p>
-
-<ul>
-    <li>
-        mode: sandbox or live (toggle)
-    </li>
-    <li>
-        Sandbox client id: 
-    </li>
-    <li>
-        Sandbox Secret:
-    </li>
-    <li>
-        Live Client ID:
-    </li>
-    <li>
-        Live Secret:
-    </li>
-</ul>
+<p>PPCP Configuration Settings</p>
+<form [formGroup]="paypalCommerceConfigForm" (ngSubmit)="updateConfig()" #form="ngForm">
+    <mat-card-content>
+        <div fxLayout="column" fxLayoutGap="10px">
+            <mat-form-field>
+                <mat-select placeholder="Environment">
+                    <mat-option value="sandbox">Sandbox</mat-option>
+                    <mat-option value="production">Production</mat-option>
+                  </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <input type="text" 
+                       matInput
+                       placeholder="Sandbox Client ID"
+                       formControlName="sandboxClientId">
+            </mat-form-field>
+            <mat-form-field>
+                <input type="password" 
+                       matInput
+                       placeholder="Sandbox Secret"
+                       formControlName="sandboxSecret">
+            </mat-form-field>
+            <mat-form-field>
+                <input type="text" 
+                       matInput
+                       placeholder="Production Client ID"
+                       formControlName="productionClientId">
+            </mat-form-field>
+            <mat-form-field>
+                <input type="password" 
+                       matInput
+                       placeholder="Production Secret"
+                       formControlName="productionSecret">
+            </mat-form-field>
+        </div>
+    </mat-card-content>
+    <mat-card-actions align="end">
+        <button mat-raised-button matDialogClose="cancel" color="primary">Close</button>
+        <button type="submit" 
+                        mat-raised-button 
+                        matDialogClose="create"
+                        color="accent"
+                        [disabled]="!paypalCommerceConfigForm.valid"
+                        >Save</button>
+    </mat-card-actions>
+</form>

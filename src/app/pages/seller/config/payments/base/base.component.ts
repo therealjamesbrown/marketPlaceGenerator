@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PaymentsService } from 'src/app/pages/administration/services/payments.service';
+import { PaypalCommerceComponent } from '../paypal-commerce/paypal-commerce.component';
 
 @Component({
   selector: 'app-base',
@@ -15,7 +16,8 @@ export class BaseComponent implements OnInit {
     displayedColumns: string[] = ['role', 'action'];
 
   constructor(
-    private paymentService: PaymentsService
+    private paymentService: PaymentsService,
+    private dialog: MatDialog
   ) {
  
    //step 1: get list of available integrations
@@ -39,10 +41,21 @@ export class BaseComponent implements OnInit {
   
    }
 
-  ngOnInit(): void {
+  ngOnInit(): void {  }
 
+  configurePaymentSource(element){
+    //configure paypal commerce platform
+    if(element === 'PayPal Commerce Platform'){
+      const dialogRef = this.dialog.open(PaypalCommerceComponent, {
+        data: {
+  
+        },
+        width: '800px'
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+      
+      })
+    }
   }
-
- 
-
 }
