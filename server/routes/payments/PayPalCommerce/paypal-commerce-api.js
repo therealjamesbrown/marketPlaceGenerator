@@ -255,7 +255,7 @@ function partnerReferral(accessToken){
       });
     });
      
-let postData = JSON.stringify({"tracking_id":"id1","partner_config_override":{"return_url":"https://www.example.com/success"},"operations":[{"operation":"API_INTEGRATION","api_integration_preference":{"rest_api_integration":{"integration_method":"PAYPAL","integration_type":"THIRD_PARTY","third_party_details":{"features":["PAYMENT"]}}}}],"products":["EXPRESS_CHECKOUT"],"legal_consents":[{"type":"SHARE_DATA_CONSENT","granted":true}]});
+let postData = JSON.stringify({"tracking_id":"id1","partner_config_override":{"return_url":"https://mrktgen.herokuapp.com/#/seller/onboarding-complete"},"operations":[{"operation":"API_INTEGRATION","api_integration_preference":{"rest_api_integration":{"integration_method":"PAYPAL","integration_type":"THIRD_PARTY","third_party_details":{"features":["PAYMENT"]}}}}],"products":["EXPRESS_CHECKOUT"],"legal_consents":[{"type":"SHARE_DATA_CONSENT","granted":true}]});
     req.write(postData);
     req.end();
 
@@ -380,8 +380,8 @@ router.post('/onboard', async(req, res) => {
      getAccessToken().then(accessToken => {
          //pass the access token to the partner referrals api
       partnerReferral(accessToken).then(responseBody => {
-          const createOrderSuccessResponse = new BaseResponse(200, serverSuccess, responseBody);
-          res.json(createOrderSuccessResponse.toObject());
+          const createPartnerReferralSuccessResponse = new BaseResponse(200, serverSuccess, responseBody);
+          res.json(createPartnerReferralResponse.toObject());
           //save order to database
           }) 
      })
@@ -395,13 +395,17 @@ router.post('/onboard', async(req, res) => {
  * 
  * 
  * 
- * onBoarding - route for callback once buyer approves permissions
+ * onBoarding - route for callback once buyer approves permissions and is routed to client side.
  * 
  * 
  */
 
-router.get('/onboarding/complete', async(req, res) => {
-  console.log(req.headers);
+router.post('/onboarding/complete', async(req, res) => {
+  console.log(req.body);
+
+  //write the function to call paypal to exchange the paypal provided seller id in order to
+  //get client ID and rest of seller details.
+  res.json('success');
 })
  
 

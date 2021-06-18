@@ -46,4 +46,19 @@ export class SellerServiceService {
       productionSecret: data.productionSecret
     })
   }
+
+
+  /**
+   * 
+   * paypalOnboardingComplete
+   * 
+   */
+
+   finalizePayPalOnboarding(marketplaceUsername, sellerUsername, queryData): Observable<any>{
+     return this.http.post(`/v1/api/payments/paypal-commerce/onboarding/complete`, {
+       marketplaceUsername,
+       sellerUsername,
+       queryData
+     })
+   }
 }
