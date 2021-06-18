@@ -55,7 +55,9 @@ export class SigninComponent implements OnInit {
   }
 
   signin(){
+
     const username = this.form.controls.userName.value;
+    console.log(username)
     const password = this.form.controls.password.value;
     const sellerUsername = this.form.controls.sellerUsername.value;
     const role = this.form.controls.role.value;

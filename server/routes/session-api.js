@@ -55,11 +55,14 @@ let BaseResponse = require('../services/error-response')
                 //find the seller in the array of sellers
                 let sellersArr = user.sellers;
                 let sellerSessionUser = sellersArr.find(o => o.username === req.body.sellerUsername);
-                  // console.log(sellerSessionUser);
-                
-                let sellerPasswordIsValid = bcrypt.compareSync(req.body.password, sellerSessionUser.password);
- 
-
+                // console.log(sellerSessionUser);
+                console.log(sellerSessionUser);
+                if(sellerSessionUser === undefined) {
+                    console.log(`Username: ${req.body.username} is invalid.`);
+                    const invalidUserNameResponse = new BaseResponse('200', 'Invalid username and/or password, please try again.', null);
+                    res.status(401).send(invalidUserNameResponse.toObject());
+                } else {
+                    let sellerPasswordIsValid = bcrypt.compareSync(req.body.password, sellerSessionUser.password);
                 /**
                   * 
                   * If password is valid, return success
@@ -88,13 +91,10 @@ let BaseResponse = require('../services/error-response')
                 const invalidUserNameResponse = new BaseResponse('200', 'Invalid username and/or password, please try again.', null);
                 res.status(401).send(invalidUserNameResponse.toObject());
             } 
+                }
 
-
-
-
-
-
-
+                
+        
 
 
             /**

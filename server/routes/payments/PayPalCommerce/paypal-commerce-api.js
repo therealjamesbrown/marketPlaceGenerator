@@ -391,7 +391,18 @@ router.post('/onboard', async(req, res) => {
   }
 })
  
+/**
+ * 
+ * 
+ * 
+ * onBoarding - route for callback once buyer approves permissions
+ * 
+ * 
+ */
 
+router.get('/onboarding/complete', async(req, res) => {
+  console.log(req.headers);
+})
 
 
  module.exports = router; 

@@ -13,7 +13,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class PaypalCommerceComponent implements OnInit {
 
-  environment: any; //sandbox or live
+  environment: any; 
   sandboxClientId: any;
   sandboxSecret: any;
   productionClientId: any;
@@ -39,6 +39,7 @@ export class PaypalCommerceComponent implements OnInit {
     
     this.sellerUsername = this.cookieService.get('sessionuser');
     this.marketplaceUsername = this.cookieService.get('marketplaceUsername');
+    console.log(this.marketplaceUsername)
 
     this.paypalCommerceConfigForm = this.fb.group({
       environment: [this.environment],
@@ -50,6 +51,7 @@ export class PaypalCommerceComponent implements OnInit {
    
 
     this.SellerService.getConfiguredOptions(this.marketplaceUsername, this.sellerUsername).subscribe( res => {
+     console.log(this.initPayPalData);
       this.initPayPalData = res[0];
      this.environment = this.initPayPalData.environment.toString();
      this.sandboxClientId = this.initPayPalData.sandboxClientId.toString();
@@ -105,5 +107,4 @@ this.SellerService.onboardingCall().subscribe(res => {
   this.router.navigate(['/seller/admin']);
  })
 }
-
 }
