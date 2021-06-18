@@ -378,10 +378,11 @@ router.post('/onboard', async(req, res) => {
   try{
       //make call to PayPal to get access token
      getAccessToken().then(accessToken => {
+       
          //pass the access token to the partner referrals api
       partnerReferral(accessToken).then(responseBody => {
           const createPartnerReferralSuccessResponse = new BaseResponse(200, serverSuccess, responseBody);
-          res.json(createPartnerReferralResponse.toObject());
+          res.json(createPartnerReferralSuccessResponse.toObject());
           //save order to database
           }) 
      })
@@ -402,7 +403,6 @@ router.post('/onboard', async(req, res) => {
 
 router.post('/onboarding/complete', async(req, res) => {
   console.log(req.body);
-
   //write the function to call paypal to exchange the paypal provided seller id in order to
   //get client ID and rest of seller details.
   res.json('success');
