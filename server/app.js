@@ -103,6 +103,10 @@ app.use('/v1/api/payments/paypal-commerce', PayPalCommerceApi)
 /**
  * Create and start server
  */
-http.createServer(app).listen(port, function() {
+
+/**
+ * Create and start server
+ */
+http.createServer(app).listen(process.env.PORT || port, function() {
   console.log(`Application started and listening on port: ${port}`)
-}); // end http create server function
+}); // end http create server function test
