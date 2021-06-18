@@ -11,6 +11,7 @@
 
 const express = require('express');
 const PaymentService = require('../../models/payments');
+const MarketplaceService = require('../../models/marketplace/marketplaceUser');
 const router = express.Router();
 
 //bring in our base and error response classes
@@ -101,6 +102,7 @@ router.patch('/update/:id', function(req, res) {
                 if (err) {
                     const ErrorMessage = new ErrorReponse('500', 'Internal Server Error', err)
                     res.json(ErrorMessage.toObject())
+
                 } else {
                     const SuccessMessage = new BaseResponse('200', 'PATCH Request Success', updatedPaymentService)
                     res.status(200).json(SuccessMessage.toObject())
@@ -114,5 +116,93 @@ router.patch('/update/:id', function(req, res) {
     }
  })
 
+
+
+ /**
+ * 
+ * 
+ * Save account configuration for Marketplace
+ * 
+ * 
+ */
+
+
+
+
+ /**
+ * 
+ * 
+ * Save account configuration for seller
+ * 
+ * 
+ */
+router.put('/:marketplaceUsername/:sellerUsername/save', async(req, res) => {
+    try { 
+        // Finds the payment service by id
+        MarketplaceService.findOne({ "username": req.params.marketplaceUsername }, function(err, marketplace) {
+             if (err){
+                 const ErrorMessage = new ErrorResponse('500', 'Internal Server Error', err)
+                 res.json(ErrorMessage.toObject())
+             }
+             let sellersArr = marketplace.sellers;
+             let sellerSessionUser = sellersArr.find(o => o.username === req.params.sellerUsername);
+        //    console.log(sellerSessionUser.paymentsConfig);
+            
+                let newPaymentConfig = 
+                {
+                    configName: req.body.configName,
+                    environment: req.body.environment,
+                    sandboxClientId: req.body.sandboxClientId,
+                    sandboxSecret: req.body.sandboxSecret,
+                    productionClientId: req.body.productionClientId,
+                    productionSecret: req.body.productionSecret
+                }
+    
+                //push the new config into
+               // sellerSessionUser.paymentsConfig.set(newPaymentConfig);
+                sellerSessionUser.set({
+                    paymentsConfig: newPaymentConfig
+                })
+                
+                marketplace.save(function(err, updatedMarketplace) {
+                       if (err) {
+                           console.log(err)
+                       } else {
+                           const SuccessMessage = new BaseResponse('200', 'PATCH Request Success', sellerSessionUser.paymentsConfig)
+                           res.status(200).json(SuccessMessage.toObject())
+                       }
+                   })
+         })
+        } catch(e) {
+            const ErrorMessage = new ErrorResponse('500', 'Internal Server Error', err)
+            res.json(ErrorMessage.toObject())
+        }
+});
+
+
+/**
+ * 
+ * Get all payment configs for seller
+ * 
+ */
+router.get('/:marketplaceUsername/:sellerUsername/configured', async(req, res) => {
+    try { 
+        // Finds the payment service by id
+        MarketplaceService.findOne({ "username": req.params.marketplaceUsername }, function(err, marketplace) {
+             if (err){
+                 const ErrorMessage = new ErrorResponse('500', 'Internal Server Error', err)
+                 res.json(ErrorMessage.toObject())
+             } else {
+                let sellersArr = marketplace.sellers;
+                let sellerSessionUser = sellersArr.find(o => o.username === req.params.sellerUsername);
+           res.status(200).json(sellerSessionUser.paymentsConfig.toObject());
+             }
+            
+         })
+        } catch(e) {
+            const ErrorMessage = new ErrorResponse('500', 'Internal Server Error', err)
+            res.json(ErrorMessage.toObject())
+        }
+});
 
  module.exports = router; 

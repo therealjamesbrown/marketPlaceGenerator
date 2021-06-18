@@ -41,8 +41,8 @@ let orderId;
 
 //store config settings in the db (hard coding for now)
 environment = 'sandbox' //options are sandbox or production
-sandboxClientId = 'ATJLre1zGOE4EaB854PnEKBOvbz6il8NiXAa5b1-p4QCYvWoghdokl2LgzsravutwfhQXU8Wj8x48w3s';
-sandboxSecret = 'EH87TZR94IEiE_2kcCm5S6f4jw_mIa8-4a7lcDWxX0ofhLsnYg4VU0DWeK3v8NHrZwSwqgmYYfW-LBfy'
+sandboxClientId = 'AWWarvYmG1fqjxQEsJPjOZoaH6s9-UHj_6yjcmvjZm8VL6YG1606X45O9QtlfIz8EMe-6ftLGyDC09ot';
+sandboxSecret = 'EFmxZ__ixoMDGcP5CvwaekwyOinHxQw81IIxwpM89Xw4Bt8CrVVqiOln4Kp-D2JYckm_GQbAg_8bq5Li'
 
 paypalRestPaths = {
     oAuth: '/v1/oauth2/token',
@@ -74,6 +74,7 @@ if(environment === 'sandbox'){
  * 
  * 
  */
+
 
 
 
@@ -254,7 +255,7 @@ function partnerReferral(accessToken){
       });
     });
      
-    let postData = JSON.stringify({"tracking_id":"id1","operations":[{"operation":"API_INTEGRATION","api_integration_preference":{"rest_api_integration":{"integration_method":"PAYPAL","integration_type":"THIRD_PARTY","third_party_details":{"features":["PAYMENT","REFUND"]}}}}],"products":["EXPRESS_CHECKOUT"],"legal_consents":[{"type":"SHARE_DATA_CONSENT","granted":true}]});
+let postData = JSON.stringify({"tracking_id":"id1","partner_config_override":{"return_url":"https://www.example.com/success"},"operations":[{"operation":"API_INTEGRATION","api_integration_preference":{"rest_api_integration":{"integration_method":"PAYPAL","integration_type":"THIRD_PARTY","third_party_details":{"features":["PAYMENT"]}}}}],"products":["EXPRESS_CHECKOUT"],"legal_consents":[{"type":"SHARE_DATA_CONSENT","granted":true}]});
     req.write(postData);
     req.end();
 
@@ -280,6 +281,12 @@ function partnerReferral(accessToken){
  */
 
 
+
+
+
+
+
+
 /**
  * 
  * OAuthAccess Token Request call
@@ -300,6 +307,9 @@ router.post('/access-token', async(req, res) => {
     }
 })
  
+
+
+
 
 
 

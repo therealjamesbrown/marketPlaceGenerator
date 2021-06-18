@@ -59,7 +59,7 @@ export class SigninComponent implements OnInit {
     const password = this.form.controls.password.value;
     const sellerUsername = this.form.controls.sellerUsername.value;
     const role = this.form.controls.role.value;
-
+    this.cookieService.set('marketplaceUsername', username, 1);
     //console.log(username);
     //console.log(password);
     
