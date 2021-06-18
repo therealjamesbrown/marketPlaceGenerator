@@ -96,6 +96,7 @@ import { SellerHomeComponent } from './pages/seller/seller-home/seller-home.comp
 import { ConfigurationComponent } from './pages/seller/config/configuration/configuration.component';
 import { PaypalCommerceComponent } from './pages/seller/config/payments/paypal-commerce/paypal-commerce.component';
 import { BaseComponent } from './pages/seller/config/payments/base/base.component';
+import { PponboardingCompleteComponent } from './pages/seller/config/payments/pponboarding-complete/pponboarding-complete.component';
 
 
 
@@ -155,7 +156,8 @@ import { BaseComponent } from './pages/seller/config/payments/base/base.componen
     SellerHomeComponent,
     ConfigurationComponent,
     PaypalCommerceComponent,
-    BaseComponent
+    BaseComponent,
+    PponboardingCompleteComponent
     ],
   imports: [
     BrowserModule,

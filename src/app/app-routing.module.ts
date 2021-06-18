@@ -30,6 +30,7 @@ import { PurchasegraphComponent } from './pages/administration/purchasegraph/pur
 import { RoleGuard } from './shared/role.guard';
 import { SellerHomeComponent } from './pages/seller/seller-home/seller-home.component';
 import { ConfigurationComponent } from './pages/seller/config/configuration/configuration.component';
+import { PponboardingCompleteComponent } from './pages/seller/config/payments/pponboarding-complete/pponboarding-complete.component';
 
 
 
@@ -104,6 +105,10 @@ const routes: Routes = [
       {
         path: 'admin',
         component: ConfigurationComponent
+      },
+      {
+        path: 'onboarding-complete',
+        component: PponboardingCompleteComponent
       }
     ],
     canActivate: [AuthGuard]
