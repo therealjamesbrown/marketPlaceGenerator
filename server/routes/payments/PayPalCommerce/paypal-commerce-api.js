@@ -13,7 +13,7 @@ const express = require('express');
 const paypalFunctions = require('./paypal-commerce-functions');
 const PaymentService = require('../../../models/payments');
 const router = express.Router();
-let https = require('follow-redirects').https;
+let https = require('https');
 let fs = require('fs');
 let qs = require('querystring');
 

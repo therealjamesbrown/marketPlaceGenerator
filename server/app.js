@@ -16,7 +16,7 @@
  */
 const express = require('express');
 const http = require('http');
-let https = require('follow-redirects').https;
+let https = require('https');
 let fs = require('fs');
 let qs = require('querystring');
 const morgan = require('morgan');
