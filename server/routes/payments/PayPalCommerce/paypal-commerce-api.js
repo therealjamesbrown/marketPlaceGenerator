@@ -505,13 +505,13 @@ router.post('/onboard', async(req, res) => {
  * 
  */
 router.post('/onboard/complete', async(req, res) => {
-  console.log(req.body);
-  let merchantIdInPayPal = req.body.merchantIdInPayPal;
+  console.log(req.body.queryData.merchantIdInPayPal);
+  let merchantIdInPayPal = req.body.queryData.merchantIdInPayPal;
   try{
     //make call to PayPal to get access token
    getAccessToken().then(accessToken => {
        //pass the access token and seller id from the client session to the partner referrals api
-    trackSellerOnboardingStatus(accessToken, partnerAccountId, req.body.queryData.merchantIdInPayPal).then(responseBody => {
+    trackSellerOnboardingStatus(accessToken, partnerAccountId, merchantIdInPayPal).then(responseBody => {
       //send response back to internal client. 
        // const trackSellerOnboardingSuccessResponse = new BaseResponse(200, serverSuccess, responseBody);
        // res.json(trackSellerOnboardingSuccessResponse.toObject());

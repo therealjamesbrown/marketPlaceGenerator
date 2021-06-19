@@ -23,6 +23,7 @@ export class PponboardingCompleteComponent implements OnInit {
   ) {
     //grab the query strings.
     this.queryData = this.activatedRoute.snapshot.queryParams;
+    
     this.marketplaceUserId = this.cookieService.get('marketplaceUsername');
     this.sellerUserId = this.cookieService.get('sessionuser');
   
