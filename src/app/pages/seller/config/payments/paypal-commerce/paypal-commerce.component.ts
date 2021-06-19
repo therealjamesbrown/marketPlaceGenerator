@@ -50,6 +50,7 @@ export class PaypalCommerceComponent implements OnInit {
         })
    
 
+        //get all the configured options.
     this.SellerService.getConfiguredOptions(this.marketplaceUsername, this.sellerUsername).subscribe( res => {
      console.log(this.initPayPalData);
       this.initPayPalData = res[0];
@@ -69,13 +70,27 @@ export class PaypalCommerceComponent implements OnInit {
         })
     })
 
+ /**
+  * 
+  * 	
+  * 
+  -check onboarding status  when loading the paypal commerce component.  
+
+	-if paypal is onboarded, then display revoke option within the configure dialog/along with current data. 
+
+	-if PayPal is not onboarded, display connect, which will launch the on boarding flow.
+  * 
+  * 
+  */
+
+
 
 
    }
 
 
 
-  //get the current values of the config and pass them into the form
+
   ngOnInit(): void {
 
 

@@ -31,6 +31,17 @@ export class SellerServiceService {
    }
 
 
+     /**
+   * 
+   * get paypal onboarding details
+   * 
+   */
+
+  getPayPalOnboardingDetails(marketplaceUsername, sellerUsername): Observable<any>{
+    return this.http.get(`/v1/api/payments/${marketplaceUsername}/${sellerUsername}/configured`);
+  }
+
+
    /**
    * 
    * update payment settings
