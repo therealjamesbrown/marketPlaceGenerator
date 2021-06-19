@@ -13,12 +13,10 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class PaypalCommerceComponent implements OnInit {
 
-  environment: any; 
   sandboxClientId: any;
   sandboxSecret: any;
   productionClientId: any;
   productionSecret: any;
-  paypalCommerceConfigForm: FormGroup;
   capabilities: any;
   actionURL: string;
   miniBrowserURL: string;
@@ -26,7 +24,14 @@ export class PaypalCommerceComponent implements OnInit {
   marketplaceUsername: string;
   sellerUsername: string;
   initPayPalData: any;
+  configData;
   configName;
+  environment: any;
+  merchantIdInPayPal;
+  merchant_client_id;
+  scopes;
+  status;
+  payPalConfigIsSetup = false;
 
 
   constructor(
@@ -39,36 +44,24 @@ export class PaypalCommerceComponent implements OnInit {
     
     this.sellerUsername = this.cookieService.get('sessionuser');
     this.marketplaceUsername = this.cookieService.get('marketplaceUsername');
-    console.log(this.marketplaceUsername)
 
-    this.paypalCommerceConfigForm = this.fb.group({
-      environment: [this.environment],
-      sandboxClientId: [this.sandboxClientId],
-      sandboxSecret: [this.sandboxSecret],
-      productionClientId: [this.productionClientId],
-      productionSecret: [this.productionSecret]
-        })
-   
 
         //get all the configured options.
     this.SellerService.getConfiguredOptions(this.marketplaceUsername, this.sellerUsername).subscribe( res => {
-     console.log(this.initPayPalData);
-      this.initPayPalData = res[0];
-     this.environment = this.initPayPalData.environment.toString();
-     this.sandboxClientId = this.initPayPalData.sandboxClientId.toString();
-     this.sandboxSecret = this.initPayPalData.sandboxSecret.toString();
-     this.productionClientId = this.initPayPalData.productionClientId.toString();
-     this.productionSecret = this.initPayPalData.productionSecret.toString();
-     this.configName = this.initPayPalData.configName.toString();
-
-    this.paypalCommerceConfigForm = this.fb.group({
-      environment: [this.environment],
-      sandboxClientId: [this.sandboxClientId],
-      sandboxSecret: [this.sandboxSecret],
-      productionClientId: [this.productionClientId],
-      productionSecret: [this.productionSecret]
-        })
+      //if paypal config exists, then 
+      if(res[0].environment !== null ) {
+        this.payPalConfigIsSetup = true;
+      };
+     console.log(res[0]);
+     this.configData = res[0];
+     this.configName = this.configData.configName;
+     this.environment = this.configData.environment;
+     this.merchantIdInPayPal = this.configData.merchantIdInPayPal;
+     this.merchant_client_id = this.configData.merchant_client_id;
+     this.scopes = this.configData.scopes;
+     this.status = this.configData.status;
     })
+
 
  /**
   * 
@@ -96,21 +89,16 @@ export class PaypalCommerceComponent implements OnInit {
 
   }
 
-updateConfig(){
+  
+removePayPal(){
 
   //grab our form values
   const config = {
-    configName: this.configName,
-    environment: this.paypalCommerceConfigForm.controls.environment.value,
-    sandboxClientId: this.paypalCommerceConfigForm.controls.sandboxClientId.value,
-    sandboxSecret: this.paypalCommerceConfigForm.controls.sandboxSecret.value,
-    productionClientId: this.paypalCommerceConfigForm.controls.productionClientId.value,
-    productionSecret: this.paypalCommerceConfigForm.controls.productionSecret.value
   }
-
 
   //need to write our apis to call our server to save the information in the db. 
  this.SellerService.setConfiguredOptions(this.marketplaceUsername, this.sellerUsername, config).subscribe(res => {
+   console.log(res);
  })
 }
 

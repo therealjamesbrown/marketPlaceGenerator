@@ -10,15 +10,6 @@ export class SellerServiceService {
   constructor(private http: HttpClient) { }
 
 
-  /**
-   * 
-   * initiates onboarding with paypal
-   * 
-   */
-  onboardingCall(): Observable<any>{
-    return this.http.post(`/v1/api/payments/paypal-commerce/onboard`,{
-    });
-  }
 
   /**
    * 
@@ -29,17 +20,6 @@ export class SellerServiceService {
    getConfiguredOptions(marketplaceUsername, sellerUsername): Observable<any>{
      return this.http.get(`/v1/api/payments/${marketplaceUsername}/${sellerUsername}/configured`);
    }
-
-
-     /**
-   * 
-   * get paypal onboarding details
-   * 
-   */
-
-  getPayPalOnboardingDetails(marketplaceUsername, sellerUsername): Observable<any>{
-    return this.http.get(`/v1/api/payments/${marketplaceUsername}/${sellerUsername}/configured`);
-  }
 
 
    /**
@@ -60,6 +40,24 @@ export class SellerServiceService {
 
 
   /**
+   * PayPal ONBOARING RELATED STUFF
+   * PayPal ONBOARING RELATED STUFF
+   * PayPal ONBOARING RELATED STUFF
+   * PayPal ONBOARING RELATED STUFF
+   */
+
+   
+   /**
+   * 
+   * initiates onboarding with paypal
+   * 
+   */
+  onboardingCall(): Observable<any>{
+    return this.http.post(`/v1/api/payments/paypal-commerce/onboard`,{
+    });
+  }
+
+  /**
    * 
    * paypalOnboardingComplete
    * 
@@ -72,4 +70,15 @@ export class SellerServiceService {
        queryData
      })
    }
+
+
+
+  /**
+   * 
+   * get paypal onboarding details
+   * 
+   */
+  getPayPalOnboardingDetails(marketplaceUsername, sellerUsername): Observable<any>{
+    return this.http.get(`/v1/api/payments/${marketplaceUsername}/${sellerUsername}/configured`);
+  }
 }
