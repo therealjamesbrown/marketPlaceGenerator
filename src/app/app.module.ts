@@ -97,6 +97,7 @@ import { ConfigurationComponent } from './pages/seller/config/configuration/conf
 import { PaypalCommerceComponent } from './pages/seller/config/payments/paypal-commerce/paypal-commerce.component';
 import { BaseComponent } from './pages/seller/config/payments/base/base.component';
 import { PponboardingCompleteComponent } from './pages/seller/config/payments/pponboarding-complete/pponboarding-complete.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -188,7 +189,8 @@ import { PponboardingCompleteComponent } from './pages/seller/config/payments/pp
     ScrollingModule,
     MatCheckboxModule,
     ChartModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatProgressSpinnerModule
   ],
   providers: [ {
     provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true
