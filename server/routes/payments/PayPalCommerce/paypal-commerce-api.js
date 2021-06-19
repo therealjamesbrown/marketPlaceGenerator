@@ -505,8 +505,9 @@ router.post('/onboard', async(req, res) => {
  * 
  */
 router.post('/onboard/complete', async(req, res) => {
-  console.log(req.body.queryData.merchantIdInPayPal);
+ console.log(req.body);
   let merchantIdInPayPal = req.body.queryData.merchantIdInPayPal;
+
   try{
     //make call to PayPal to get access token
    getAccessToken().then(accessToken => {
@@ -538,6 +539,9 @@ router.post('/onboard/complete', async(req, res) => {
           merchantIdInPayPal: merchantIdInPayPal,
           scopes: responseBody.oauth_integrations[0].oauth_third_party[0].scopes
       }
+console.log(newPaymentConfig)
+console.log('new liune');
+console.log(sellerSessionUser)
 
       sellerSessionUser.set({
         paymentsConfig: newPaymentConfig

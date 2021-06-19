@@ -12,7 +12,7 @@ import { SellerServiceService } from '../../../seller-service.service';
 export class PponboardingCompleteComponent implements OnInit {
 
   queryData;
-  marketplaceUserId;
+  marketplaceUsername;
   sellerUserId;
 
   constructor(
@@ -23,14 +23,14 @@ export class PponboardingCompleteComponent implements OnInit {
   ) {
     //grab the query strings.
     this.queryData = this.activatedRoute.snapshot.queryParams;
-    
-    this.marketplaceUserId = this.cookieService.get('marketplaceUsername');
+
+    this.marketplaceUsername = this.cookieService.get('marketplaceUsername');
     this.sellerUserId = this.cookieService.get('sessionuser');
   
     //make a post to update the seller paymentconfig with the payment configuration.
   //make sure to send a call from the server side to PayPal to get the status back.
   
-this.sellerService.finalizePayPalOnboarding(this.marketplaceUserId, this.sellerUserId, this.queryData).subscribe(res => {
+this.sellerService.finalizePayPalOnboarding(this.marketplaceUsername, this.sellerUserId, this.queryData).subscribe(res => {
   console.log(res);
   //redirect back home
   //this.router.navigate(['/seller/admin']);
