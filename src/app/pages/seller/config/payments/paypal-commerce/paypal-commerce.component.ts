@@ -49,7 +49,7 @@ export class PaypalCommerceComponent implements OnInit {
         //get all the configured options.
     this.SellerService.getConfiguredOptions(this.marketplaceUsername, this.sellerUsername).subscribe( res => {
       //if paypal config exists, then 
-      if(res[0].environment !== null ) {
+      if(res[0].environment !== null) {
         this.payPalConfigIsSetup = true;
       };
      console.log(res[0]);
@@ -107,7 +107,6 @@ onboardPayPal(){
 this.SellerService.onboardingCall().subscribe(res => {
   // console.log(res.data); 
   window.open(res.data);
-  this.router.navigate(['/seller/admin']);
  })
 }
 }
