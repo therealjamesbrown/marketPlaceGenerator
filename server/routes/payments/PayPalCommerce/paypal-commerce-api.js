@@ -217,7 +217,7 @@ function captureOrderV2(accessToken, orderId){
 }
 
 
-function partnerReferral(accessToken){
+function partnerReferral(accessToken, sellerId){
   return new Promise( resolve => {
     let options = {
       'method': 'POST',
@@ -255,7 +255,7 @@ function partnerReferral(accessToken){
       });
     });
      
-let postData = JSON.stringify({"tracking_id":"id1","partner_config_override":{"return_url":"https://mrktgen.herokuapp.com/#/seller/onboarding-complete"},"operations":[{"operation":"API_INTEGRATION","api_integration_preference":{"rest_api_integration":{"integration_method":"PAYPAL","integration_type":"THIRD_PARTY","third_party_details":{"features":["PAYMENT"]}}}}],"products":["EXPRESS_CHECKOUT"],"legal_consents":[{"type":"SHARE_DATA_CONSENT","granted":true}]});
+let postData = JSON.stringify({"tracking_id":sellerId,"partner_config_override":{"return_url":"https://mrktgen.herokuapp.com/#/seller/onboarding-complete"},"operations":[{"operation":"API_INTEGRATION","api_integration_preference":{"rest_api_integration":{"integration_method":"PAYPAL","integration_type":"THIRD_PARTY","third_party_details":{"features":["PAYMENT"]}}}}],"products":["EXPRESS_CHECKOUT"],"legal_consents":[{"type":"SHARE_DATA_CONSENT","granted":true}]});
     req.write(postData);
     req.end();
 
@@ -335,6 +335,7 @@ router.post('/create-order', async(req, res) => {
     }
 })
 
+
 /***
  * 
  * 
@@ -369,6 +370,7 @@ router.post('/capture-order', async(req, res) => {
  * 
  * 
  * onBoarding - partnerReferrals
+ * step 1 of the onboarding process. this call goes to paypal to retrieve the onboarding redirect url
  * 
  * 
  */
@@ -378,12 +380,10 @@ router.post('/onboard', async(req, res) => {
   try{
       //make call to PayPal to get access token
      getAccessToken().then(accessToken => {
-       
-         //pass the access token to the partner referrals api
-      partnerReferral(accessToken).then(responseBody => {
+         //pass the access token and seller id from the client session to the partner referrals api
+      partnerReferral(accessToken, req.body.sellerId).then(responseBody => {
           const createPartnerReferralSuccessResponse = new BaseResponse(200, serverSuccess, responseBody);
           res.json(createPartnerReferralSuccessResponse.toObject());
-          //save order to database
           }) 
      })
   } catch(e){
@@ -397,16 +397,24 @@ router.post('/onboard', async(req, res) => {
  * 
  * 
  * onBoarding - route for callback once buyer approves permissions and is routed to client side.
- * 
+ * this step calls paypal to get the seller client ID/fullonboarding details since the GET redirect only has a few details.
+ * step 2 on the server. 
  * 
  */
-
 router.post('/onboarding/complete', async(req, res) => {
   console.log(req.body);
   //write the function to call paypal to exchange the paypal provided seller id in order to
   //get client ID and rest of seller details.
   res.json('success');
 })
+
+
+/**
+ * 
+ * onBoardingStatus - route for obtaining the status of paypal onboarding. used when displaying configuration options in 
+ * the seller account. 
+ * 
+ */
  
 
  module.exports = router; 
