@@ -32,7 +32,7 @@ export class PponboardingCompleteComponent implements OnInit {
 this.sellerService.finalizePayPalOnboarding(this.marketplaceUserId, this.sellerUserId, this.queryData).subscribe(res => {
   console.log(res);
   //redirect back home
-  this.router.navigate(['/seller/admin']);
+  //this.router.navigate(['/seller/admin']);
 })
 
    }
