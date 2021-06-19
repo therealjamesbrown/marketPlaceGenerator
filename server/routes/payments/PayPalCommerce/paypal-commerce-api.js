@@ -505,17 +505,17 @@ router.post('/onboard', async(req, res) => {
  * 
  */
 router.post('/onboard/complete', async(req, res) => {
-  //console.log(req.body);
+  console.log(req.body);
   let merchantIdInPayPal = req.body.merchantIdInPayPal;
   try{
     //make call to PayPal to get access token
    getAccessToken().then(accessToken => {
        //pass the access token and seller id from the client session to the partner referrals api
-    trackSellerOnboardingStatus(accessToken, partnerAccountId, req.body.merchantIdInPayPal).then(responseBody => {
+    trackSellerOnboardingStatus(accessToken, partnerAccountId, req.body.queryData.merchantIdInPayPal).then(responseBody => {
       //send response back to internal client. 
        // const trackSellerOnboardingSuccessResponse = new BaseResponse(200, serverSuccess, responseBody);
        // res.json(trackSellerOnboardingSuccessResponse.toObject());
-        
+         
         //write merchant details and onboarding status to the db. 
       MarketplaceUser.findOne({ 'username': req.body.marketplaceUsername }, function(err, marketplaceUser){
         if (err) {
