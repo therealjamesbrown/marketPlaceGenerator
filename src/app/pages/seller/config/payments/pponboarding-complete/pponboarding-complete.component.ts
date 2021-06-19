@@ -29,11 +29,10 @@ export class PponboardingCompleteComponent implements OnInit {
   
     //make a post to update the seller paymentconfig with the payment configuration.
   //make sure to send a call from the server side to PayPal to get the status back.
-  
+  console.log(this.queryData)
 this.sellerService.finalizePayPalOnboarding(this.marketplaceUsername, this.sellerUserId, this.queryData).subscribe(res => {
-  console.log(res);
   //redirect back home
-  //this.router.navigate(['/seller/admin']);
+  this.router.navigate(['/seller/admin']);
 })
 
    }

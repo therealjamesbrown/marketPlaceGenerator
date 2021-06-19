@@ -63,10 +63,10 @@ export class SellerServiceService {
    * 
    */
 
-   finalizePayPalOnboarding(marketplaceUsername, sellerUsername, queryData): Observable<any>{
+   finalizePayPalOnboarding(marketplaceUsername, merchantId, queryData): Observable<any>{
      return this.http.post(`/v1/api/payments/paypal-commerce/onboard/complete`, {
        marketplaceUsername,
-       sellerUsername,
+       merchantId,
        queryData
      })
    }
