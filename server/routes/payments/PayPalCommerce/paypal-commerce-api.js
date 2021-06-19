@@ -543,7 +543,7 @@ router.post('/onboard/complete', async(req, res) => {
         paymentsConfig: newPaymentConfig
     })
 
-    console.log(sellerSessionUser.paymentsConfig)
+    //console.log(sellerSessionUser.paymentsConfig)
     
     marketplaceUser.save(function(err) {
            if (err) {
