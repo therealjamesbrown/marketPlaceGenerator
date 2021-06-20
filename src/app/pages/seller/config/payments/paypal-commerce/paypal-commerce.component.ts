@@ -33,7 +33,6 @@ export class PaypalCommerceComponent implements OnInit {
   status;
   payPalConfigIsSetup = false;
 
-
   constructor(
     private fb: FormBuilder,
     private SellerService: SellerServiceService,
@@ -62,43 +61,23 @@ export class PaypalCommerceComponent implements OnInit {
      this.status = this.configData.status;
     })
 
-
- /**
-  * 
-  * 	
-  * 
-  -check onboarding status  when loading the paypal commerce component.  
-
-	-if paypal is onboarded, then display revoke option within the configure dialog/along with current data. 
-
-	-if PayPal is not onboarded, display connect, which will launch the on boarding flow.
-  * 
-  * 
-  */
-
-
-
-
    }
 
 
 
 
-  ngOnInit(): void {
 
-
-  }
+ngOnInit(): void {}
 
   
 removePayPal(){
-
-  //grab our form values
+  //send an empty post request to overwrite current config
   const config = {
   }
 
   //need to write our apis to call our server to save the information in the db. 
  this.SellerService.setConfiguredOptions(this.marketplaceUsername, this.sellerUsername, config).subscribe(res => {
-   console.log(res);
+  // console.log(res);
  })
 }
 

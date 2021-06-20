@@ -56,7 +56,6 @@ paypalRestPaths = {
     ordersV2Create: '/v2/checkout/orders',
 }
 
-
 if(environment === 'sandbox'){
     endpoint = 'api.sandbox.paypal.com';
     credentials = Buffer.from(`${sandboxClientId}:${sandboxSecret}`).toString('base64');

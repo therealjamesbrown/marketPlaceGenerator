@@ -2,23 +2,36 @@
 
 
     <mat-card-content>
-
         <div fxLayout="column" fxLayoutGap="10px">
 <div fxFlex [hidden]="payPalConfigIsSetup">
-    <span>PayPal isn't currently connected! Click the below button to configure it!</span><br />
+    <span>PayPal isn't currently connected! Click the below button to configure it!</span><br /><br />
 <button mat-raised-button (click)="onboardPayPal()" color="accent">Connect PayPal</button>
 </div>
 
 <div fxFlex [hidden]="!payPalConfigIsSetup">
-    <p>Environment: {{environment}}</p>
-    <p>PayPal Merchant ID: {{merchantIdInPayPal}}</p>
-    <p>PayPal Client ID:  {{merchant_client_id}}</p>
-    <p>Scopes: </p>
-    <ul> 
-        <li *ngFor="let scope of scopes">
-            {{scope}}
-        </li>
-    </ul>         
+    <mat-divider></mat-divider>
+    <mat-list>
+        <mat-list-item>
+            <p class="headings">Environment: </p>{{environment}}
+          </mat-list-item>
+        <mat-list-item>
+           <p class="headings"> PayPal Merchant ID:</p> {{merchantIdInPayPal}}
+          </mat-list-item>
+          <mat-list-item>
+            <p class="headings">PayPal Client ID:</p>  {{merchant_client_id}} <br />
+          </mat-list-item>
+          <mat-list-item>
+             <p class="headings">Scopes:</p>
+          </mat-list-item>
+          <mat-list-item>
+            <ul style="margin-top: 10px;"> 
+                <li *ngFor="let scope of scopes">
+                    {{scope}}
+                </li>
+            </ul>  
+          </mat-list-item>
+    
+    </mat-list>       
 </div>
 
         </div>
