@@ -35,26 +35,13 @@ import { PponboardingCompleteComponent } from './pages/seller/config/payments/pp
 
 
 const routes: Routes = [
-  {//path for marketplace in users
+  {//path for unknown errors that might happen. Error intercept should do its job, but this is here just in case.
     path: '',
     component: BaseLayoutComponent,
     children: [
       {
         path: '',
-        component: HomeComponent
-      },
-      {
-        path: 'profile',
-        component: ProfileComponent
-      },
-      {
-        path: 'admin',
-        component: AdministrationComponent,
-        canActivate: [RoleGuard]
-      },
-      {
-        path: 'not-found',
-        component: NotfoundComponent
+        component: ErrorComponent
       }
     ],
         canActivate: [AuthGuard]
