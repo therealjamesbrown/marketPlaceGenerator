@@ -41,10 +41,22 @@ historyDataPresent: string;
     } else if (this.historyDataNull){
       this.oderHistoryVisibility = false;
     }
+
+    this.loadPayPalSDKscript();
+  }
+
+  loadPayPalSDKscript(){
+    const node = document.createElement('script');
+    node.src = `https://www.paypal.com/sdk/js?client-id=ATJLre1zGOE4EaB854PnEKBOvbz6il8NiXAa5b1-p4QCYvWoghdokl2LgzsravutwfhQXU8Wj8x48w3s&components=buttons&enable-funding=venmo&intent=capture`;
+    node.type = 'text/javascript';
+    node.async = false;
+    document.getElementsByTagName('head')[0].appendChild(node);
+    console.log(node)
   }
 
   ngOnInit(): void {
   }
+  
   hideAd(){
     this.ad = false; //hide the add 
     //set a cookie so the ad doesn't come back until next session

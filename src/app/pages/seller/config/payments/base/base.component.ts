@@ -131,7 +131,6 @@ export class BaseComponent implements OnInit {
 
 
 
-
   configurePaymentSource(element){
     //configure paypal commerce platform
     if(element === 'PayPal Commerce Platform'){
