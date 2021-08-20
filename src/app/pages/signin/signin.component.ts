@@ -73,7 +73,7 @@ export class SigninComponent implements OnInit {
       sellerUsername
 
     }).subscribe(res => {
-      //console.log(res['data']);
+      console.log(res['data']);
       if (res['data'].username){
         //user authenticated
         //set the username and ID cookies, we'll use these all over the application
@@ -81,6 +81,7 @@ export class SigninComponent implements OnInit {
         this.cookieService.set('sessionuser', res['data'].username, 1);
         this.cookieService.set('userId', res['data']._id, 1);
         this.cookieService.set('role', res['data'].role, 1);
+        this.cookieService.set('merchantIdinPayPal', res['data'].paymentsConfig[0].merchantIdInPayPal, 1);
         
         
         //route based on the role

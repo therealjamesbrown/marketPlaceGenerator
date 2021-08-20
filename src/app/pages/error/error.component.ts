@@ -11,6 +11,7 @@
  */
 
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-error',
@@ -19,7 +20,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ErrorComponent implements OnInit {
 
-  constructor() { }
+  role: any = this.cookieService.get('role');
+  constructor(private cookieService: CookieService) {
+    this.role
+   }
 
   ngOnInit(): void {
   }
