@@ -1,23 +1,112 @@
 <div fxLayout="column" class="outerContainer">
     <div fxFlex>
       <mat-card style="background-color: rgb(32, 32, 32);">
-        <mat-card-content style="background-color: white;">
-          <div fxLayout="column">
-            <div fxFlex class="childColumnContainers">
-                <h2>Cart Page</h2>
-                <mat-card class="example-card">
-                    <img mat-card-image src="./assets/cartItem.png" alt="Photo of a Shiba Inu">
-                    <mat-card-header>
-                        <div mat-card-avatar class="example-header-image"></div>
-                        <mat-card-title>Example Item | $10</mat-card-title>
-                        <mat-card-subtitle>Example Item Description</mat-card-subtitle>
-                      </mat-card-header>
-                    <mat-card-content>
-                      <div #paypalRef></div>
-                    </mat-card-content>
-                  </mat-card>
+        <mat-card-content>
+            <h1>Checkout</h1>
+       <mat-card class="mat-elevation-z0">
+           <mat-card-content>
+            <div fxLayout="row wrap"fxLayoutGap="10px">
+                <div fxFlex>
+                        <div fxLayout="column">
+                            <mat-card>
+                                <mat-card-title>Products</mat-card-title>
+                                <mat-card-content>
+                                    <div fxFlex>
+                                        <table mat-table [dataSource]="products">
+                                            <!--- Note that these columns can be defined in any order.
+                                                  The actual rendered columns are set as a property on the row definition" -->
+                                        
+                                            <!-- Position Column -->
+                                            <ng-container matColumnDef="product">
+                                              <th mat-header-cell *matHeaderCellDef> Product </th>
+                                              <td mat-cell *matCellDef="let element">
+                                               {{element.name}}<br /><div class="productDescription">Desc:{{element.description}}</div></td>
+                                            </ng-container>
+                                        
+                                            <!-- Status Column-->
+                                            <ng-container matColumnDef="quantity">
+                                                <th mat-header-cell *matHeaderCellDef> Quantity </th>
+                                                <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+                                              </ng-container>
+        
+                                              <ng-container matColumnDef="price">
+                                                <th mat-header-cell *matHeaderCellDef> Price </th>
+                                                <td mat-cell *matCellDef="let element"> {{element.amount | currency}} </td>
+                                              </ng-container>
+                                          
+                                          
+                                          
+                                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                          </table>
+
+                                          <mat-divider></mat-divider>
+                                          <p align="end" style="padding-right: 20%; padding-top: 10px; font-weight: bold;">Total:$17.00</p>
+                                    </div>
+                                </mat-card-content>
+                                
+                            </mat-card>
+                        </div>
+                 
+                </div>
+                <div fxFlex>
+                    <div fxLayout="column">
+                        <mat-card>
+                            <mat-card-title>Payment</mat-card-title>
+                            <mat-card-content>
+                                <div fxFlex>
+                                   <div #paypalRef></div>
+                                </div>
+                            </mat-card-content>
+                            
+                        </mat-card>
+                    </div>
+                </div>
             </div>
-          </div>
+           </mat-card-content>
+       </mat-card>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+
+
+
+
+
+
+<!--Payment completion portion if paypal transaction was done.-->
+
+
+
+
+
+    <div fxFlex *ngIf="paypalTransactionCompleted">
+       <mat-card style="background-color: rgb(32, 32, 32);">
+        <mat-card-content>
+            <h1>Completed Payment Details</h1>
+       <mat-card class="mat-elevation-z0">
+           <mat-card-content>
+            <div fxLayout="row wrap"fxLayoutGap="10px">
+                <div fxFlex>
+                        <div fxLayout="column">
+                            <mat-card>
+                                <mat-card-title>Payment is Complete!</mat-card-title>
+                                <mat-card-content>
+                                    <div fxFlex>
+                                     <mat-list role="list">
+                                        <mat-list-item role="listitem">Transaction ID: {{transactionID}}</mat-list-item>
+                                        <mat-list-item role="listitem">Amount: {{transactionAmount | currency}}</mat-list-item>
+                                        <mat-list-item role="listitem">Date: {{transactionDate | date}}</mat-list-item>
+                                      </mat-list>
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                </div>
+            </div>
+           </mat-card-content>
+       </mat-card>
         </mat-card-content>
       </mat-card>
     </div>

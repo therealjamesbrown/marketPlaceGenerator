@@ -51,3 +51,14 @@ h3{
   max-width: 350px;
 }
 
+table {
+  width: 100%;
+}
+
+.productTitle{
+  font-weight: 500;
+}
+
+.productDescription{
+  font-style: italic;
+}
