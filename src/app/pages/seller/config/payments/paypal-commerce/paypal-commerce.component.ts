@@ -20,7 +20,7 @@ export class PaypalCommerceComponent implements OnInit {
   capabilities: any;
   actionURL: string;
   miniBrowserURL: string;
-  trustedUrl: SafeResourceUrl;
+  trustedUrl: SafeUrl;
   marketplaceUsername: string;
   sellerUsername: string;
   initPayPalData: any;
@@ -32,6 +32,7 @@ export class PaypalCommerceComponent implements OnInit {
   scopes;
   status;
   payPalConfigIsSetup = false;
+  href;
 
   constructor(
     private fb: FormBuilder,
@@ -45,8 +46,8 @@ export class PaypalCommerceComponent implements OnInit {
 
     //get the action url to redirect
 this.SellerService.onboardingCall().subscribe(res => {
-  this.actionURL = res.data;
- this.sanitizer.bypassSecurityTrustUrl(this.actionURL)
+  this.actionURL = res.data+"&displayMode=minibrowser";
+ this.trustedUrl = this.sanitizer.bypassSecurityTrustUrl(this.actionURL);
   })
 
     this.sellerUsername = this.cookieService.get('sessionuser');
