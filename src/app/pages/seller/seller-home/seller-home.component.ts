@@ -24,9 +24,9 @@ export class SellerHomeComponent implements OnInit {
     this.loadPayPalSDKScript()
   }
 
-  user: any = this.cookieService.get('sessionuser');
-  partnerClientId: any = 'ATJLre1zGOE4EaB854PnEKBOvbz6il8NiXAa5b1-p4QCYvWoghdokl2LgzsravutwfhQXU8Wj8x48w3s';
-  merchantIdInPayPal: any = this.cookieService.get('merchantIdinPayPal')
+  user: string = this.cookieService.get('sessionuser');
+  partnerClientId: string = 'ATJLre1zGOE4EaB854PnEKBOvbz6il8NiXAa5b1-p4QCYvWoghdokl2LgzsravutwfhQXU8Wj8x48w3s';
+  merchantIdInPayPal: string = this.cookieService.get('merchantIdinPayPal')
   ad: Boolean = true; //show the add to begin with
   adCookie: any = this.cookieService.get('adCookie')
   oderHistoryVisibility: Boolean = true; //init graph visibility, constructor will take care of the rest
@@ -34,11 +34,9 @@ export class SellerHomeComponent implements OnInit {
   historyDataPresent: string;
 
 
-  /**Load the sdk when the home page component loads (that way we have the buttons when we nee them) */
+  /**Load the sdk when the home page component loads (that way we have the buttons when we need them) */
     loadPayPalSDKScript(){
       //todo make call to server to get the merchant id cuz loading it at login just isn't a good approach.
-      //also fix the damn redirect error bullshit that crashes the app every time something messes up.
-      //should never redirect to http://localhost:3000/#/ - prob check the error interceptor and 404/500s pages
       //also make sure we are grabbing the client of the actual marketplace and not hard coding it. can prob 
       //grab merchant id and marketplace in one fail swoop...
 

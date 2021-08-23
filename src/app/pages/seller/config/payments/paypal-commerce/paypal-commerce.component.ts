@@ -4,7 +4,7 @@ import { SellerServiceService } from '../../../seller-service.service';
 import { Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { CookieService } from 'ngx-cookie-service';
-
+ 
 
 @Component({
   selector: 'app-paypal-commerce',
@@ -40,7 +40,15 @@ export class PaypalCommerceComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private cookieService: CookieService
   ) {
-    
+    //load the import script for the in-context window when the component runs.
+    this.loadPayPalUIWindow();
+
+    //get the action url to redirect
+this.SellerService.onboardingCall().subscribe(res => {
+  this.actionURL = res.data;
+ this.sanitizer.bypassSecurityTrustUrl(this.actionURL)
+  })
+
     this.sellerUsername = this.cookieService.get('sessionuser');
     this.marketplaceUsername = this.cookieService.get('marketplaceUsername');
 
@@ -81,11 +89,12 @@ removePayPal(){
  })
 }
 
-onboardPayPal(){
-//get the action url to redirect
-this.SellerService.onboardingCall().subscribe(res => {
-  // console.log(res.data); 
-  window.open(res.data);
- })
+loadPayPalUIWindow(){
+  const node = document.createElement('script');
+      node.src = `https://www.paypal.com/webapps/merchantboarding/js/lib/lightbox/partner.js`;
+      node.type = 'text/javascript';
+      node.async = true;
+      document.getElementsByTagName('head')[0].appendChild(node);
 }
+
 }

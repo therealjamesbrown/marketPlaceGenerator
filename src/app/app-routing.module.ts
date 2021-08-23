@@ -138,6 +138,7 @@ const routes: Routes = [
       }
     ]
   },
+  //path for wildcard navigations
   {
     path: '**',
     redirectTo: 'session/404'

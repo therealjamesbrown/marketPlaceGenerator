@@ -5,9 +5,9 @@
         <div fxLayout="column" fxLayoutGap="10px">
 <div fxFlex [hidden]="payPalConfigIsSetup">
     <span>PayPal isn't currently connected! Click the below button to configure it!</span><br /><br />
-<button mat-raised-button (click)="onboardPayPal()" color="accent">Connect PayPal</button>
+<a data-paypal-button="true" href="{{actionURL}}&displayMode=minibrowser" target="PPFrame">Connect PayPal</a>
 </div>
-
+<p>{{actionURL}}&displayMode=minibrowser</p>
 <div fxFlex [hidden]="!payPalConfigIsSetup">
     <mat-divider></mat-divider>
     <mat-list>

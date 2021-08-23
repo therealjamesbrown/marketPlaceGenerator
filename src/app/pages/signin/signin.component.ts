@@ -75,19 +75,21 @@ export class SigninComponent implements OnInit {
     }).subscribe(res => {
       console.log(res['data']);
       if (res['data'].username){
+        console.log('i work')
         //user authenticated
         //set the username and ID cookies, we'll use these all over the application
         //console.log(res['data']);
         this.cookieService.set('sessionuser', res['data'].username, 1);
         this.cookieService.set('userId', res['data']._id, 1);
         this.cookieService.set('role', res['data'].role, 1);
-        this.cookieService.set('merchantIdinPayPal', res['data'].paymentsConfig[0].merchantIdInPayPal, 1);
         
         
         //route based on the role
         if(res['data'].role === 'marketplace'){
           this.router.navigate(['/marketplace']);
         } else if (res['data'].role === 'seller'){
+          //setting this for the payments config of paypal for now. will likely be deleting it later. 
+          this.cookieService.set('merchantIdinPayPal', res['data'].paymentsConfig[0].merchantIdInPayPal, 1);
           this.router.navigate(['/seller']);
         } else if (res['data'].role === 'buyer'){
           this.router.navigate(['/buyer']);
