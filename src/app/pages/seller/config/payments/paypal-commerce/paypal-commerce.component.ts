@@ -65,6 +65,8 @@ this.SellerService.onboardingCall().subscribe(res => {
      this.configName = this.configData.configName;
      this.environment = this.configData.environment;
      this.merchantIdInPayPal = this.configData.merchantIdInPayPal;
+     //set the cookie so the merchant id gets set after onboarding.
+     this.cookieService.set('merchantIdinPayPal', this.configData.merchantIdInPayPal, 1);
      this.merchant_client_id = this.configData.merchant_client_id;
      this.scopes = this.configData.scopes;
      this.status = this.configData.status;

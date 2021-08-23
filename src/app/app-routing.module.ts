@@ -31,6 +31,7 @@ import { RoleGuard } from './shared/role.guard';
 import { SellerHomeComponent } from './pages/seller/seller-home/seller-home.component';
 import { ConfigurationComponent } from './pages/seller/config/configuration/configuration.component';
 import { PponboardingCompleteComponent } from './pages/seller/config/payments/pponboarding-complete/pponboarding-complete.component';
+import { CartComponent } from './pages/cart/cart.component';
 
 
 
@@ -96,6 +97,10 @@ const routes: Routes = [
       {
         path: 'onboarding-complete',
         component: PponboardingCompleteComponent
+      },
+      {
+        path: 'cart',
+        component: CartComponent
       }
     ],
     canActivate: [AuthGuard]

@@ -98,6 +98,7 @@ import { PaypalCommerceComponent } from './pages/seller/config/payments/paypal-c
 import { BaseComponent } from './pages/seller/config/payments/base/base.component';
 import { PponboardingCompleteComponent } from './pages/seller/config/payments/pponboarding-complete/pponboarding-complete.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CartComponent } from './pages/cart/cart.component';
 
 
 
@@ -158,7 +159,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     ConfigurationComponent,
     PaypalCommerceComponent,
     BaseComponent,
-    PponboardingCompleteComponent
+    PponboardingCompleteComponent,
+    CartComponent
     ],
   imports: [
     BrowserModule,
