@@ -18,18 +18,16 @@ export class CartComponent implements OnInit {
   historyDataNull: string;
   historyDataPresent: string;
 
-  constructor(private cookieService: CookieService) { }
+  constructor(private cookieService: CookieService) {  }
 
  
   @ViewChild('paypalRef', {static: true}) private paypalRef: ElementRef;
   ngOnInit(): void {
-    console.log(window.paypal)
     window.paypal
     .Buttons({
       style: {
-        layout: 'horizontal'
+        layout: 'vertical'
       },
-
       createOrder: (data, actions) => {
         return actions.order.create({
           intent: "CAPTURE",
@@ -37,52 +35,8 @@ export class CartComponent implements OnInit {
             {
               amount: {
                 currency_code:"USD",
-                            value:17.00,
-                            breakdown:{
-                                item_total:{
-                                    value: 17.00,
-                                    currency_code: "USD"
-                                }
-                            }
-              },
-            shipping: {
-                address: {
-                  address_line_1: "2211 N First Street",
-                  address_line_2: "Building 17",
-                  admin_area_2: "San Jose",
-                  admin_area_1: "CA",
-                  postal_code: "95131",
-                  country_code: "US"
-                }
-              },
-          items:[{
-                name:"Hamburger",
-            description:"No cheese, add mayo, mustard, pickles",
-                quantity:1,
-                unit_amount:{
-              value:"9.00",
-              currency_code:"USD"
+                            value:17.00
               }
-                },
-            {
-                name:"Hot Dog",
-            description:"Add relish, onion, ketchup, peppers",
-                quantity:1,
-                unit_amount:{
-              value:"6.00",
-              currency_code:"USD"
-              }
-                },
-            {
-            name:"20 Oz Soda",
-            description:"Dr Pepper",
-                quantity:1,
-                unit_amount:{
-              value:"2.00",
-              currency_code:"USD"
-              }
-                }
-            ]
             }
             ],
             application_context: {
@@ -107,20 +61,5 @@ export class CartComponent implements OnInit {
       }
     }).render(this.paypalRef.nativeElement)
     }
-
-
-
-  /**Load the sdk when the home page component loads (that way we have the buttons when we need them) */
-  loadPayPalSDKScript(){
-    //todo make call to server to get the merchant id cuz loading it at login just isn't a good approach.
-    //also make sure we are grabbing the client of the actual marketplace and not hard coding it. can prob 
-    //grab merchant id and marketplace in one fail swoop...
-
-    const node = document.createElement('script');
-    node.src = `https://www.paypal.com/sdk/js?client-id=${this.partnerClientId}&components=buttons&enable-funding=venmo&intent=capture&merchant-id=${this.merchantIdInPayPal}`;
-    node.type = 'text/javascript';
-    node.async = false;
-    document.getElementsByTagName('head')[0].appendChild(node);
-  }
 
 }

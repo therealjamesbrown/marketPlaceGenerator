@@ -25,7 +25,7 @@ export class SellerHomeComponent implements OnInit {
   }
 
   user: string = this.cookieService.get('sessionuser');
-  partnerClientId: string = 'ATJLre1zGOE4EaB854PnEKBOvbz6il8NiXAa5b1-p4QCYvWoghdokl2LgzsravutwfhQXU8Wj8x48w3s';
+  partnerClientId: string = 'AWWarvYmG1fqjxQEsJPjOZoaH6s9-UHj_6yjcmvjZm8VL6YG1606X45O9QtlfIz8EMe-6ftLGyDC09ot';
   merchantIdInPayPal: string = this.cookieService.get('merchantIdinPayPal')
   ad: Boolean = true; //show the add to begin with
   adCookie: any = this.cookieService.get('adCookie')

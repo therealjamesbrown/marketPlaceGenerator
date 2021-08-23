@@ -1,27 +1,53 @@
-table {
-    width: 100%;
-  }
-
-th{
-  background-color: #14a10d;
-  color: white;
-  border-radius: 1px;
+.outerContainer {
+  width: 90%;
+  margin: 0 auto;
 }
 
-.crudButton{
-  float: right;
+.childColumnContainers{
+  margin-top: 10px;
   margin-bottom: 5px;
 }
 
-p{
-  font-weight: 500;
-  font-size: 15px;
-  padding-bottom: 15px;
-} #add {
-  background: white;
-  float: right;
+.ad{
+  text-align: center;
+  background-color: #ede1b98c;
 }
+
+.adButton{
+  float: right;
+  width: 1px;
+  background-color: white;
+  color: black;
+}
+
+.questions{
+  text-align: center;
+}
+
+.purchaseGraph{
+  text-align: center;
+}
+
+
+h1{
+  font-weight: 200;
+  font-size: 28px;
+  color: white;
+}
+
+
+.contactContainer{
+  background-color: black;
+  color: white;
+}
+
+h3{
+  margin-top: -5px;
+  margin-bottom: -5px;
+}
+
 
 .example-card {
   max-width: 350px;
 }
+
