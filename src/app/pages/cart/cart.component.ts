@@ -9,10 +9,11 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class CartComponent implements OnInit {
 
-result;
-partnerClientId: string = 'AWWarvYmG1fqjxQEsJPjOZoaH6s9-UHj_6yjcmvjZm8VL6YG1606X45O9QtlfIz8EMe-6ftLGyDC09ot';
-merchantIdInPayPal: string = this.cookieService.get('merchantIdinPayPal')
+  result;
+  partnerClientId: string = 'AWWarvYmG1fqjxQEsJPjOZoaH6s9-UHj_6yjcmvjZm8VL6YG1606X45O9QtlfIz8EMe-6ftLGyDC09ot';
+  merchantIdInPayPal: string = this.cookieService.get('merchantIdinPayPal')
   transactionID: string;
+  platformFee: string;
   transactionAmount: string;
   transactionDate: string;
   displayedColumns: string[] = ['product', 'quantity', 'price'];
@@ -39,9 +40,7 @@ merchantIdInPayPal: string = this.cookieService.get('merchantIdinPayPal')
   ];
 
   constructor(private cookieService: CookieService) {
-
     this.products
-
     }
 
  
@@ -102,7 +101,16 @@ merchantIdInPayPal: string = this.cookieService.get('merchantIdinPayPal')
                 currency_code:"USD"
               }
                 }
-            ]
+            ],
+            payment_instruction: {
+              disbursement_mode: "INSTANT",
+              platform_fees: [{
+                amount: {
+                  currency_code: "USD",
+                  value: "1.00"
+                }
+              }]
+            }
             }
   ],
         });
@@ -126,10 +134,15 @@ merchantIdInPayPal: string = this.cookieService.get('merchantIdinPayPal')
      */
     showTransactionResult(details){
       //show the container for the completed payment
+      console.log(details)
+
       this.paypalTransactionCompleted = true
       this.result = details
       this.transactionAmount = details.purchase_units[0].amount.value;
       this.transactionID = details.id
       this.transactionDate = details.create_time;
+      this.platformFee = details.purchase_units[0].payment_instruction.platform_fees[0].amount.value;
+
+      //TODO - send server call to record transaction in DB.
     }
 }
