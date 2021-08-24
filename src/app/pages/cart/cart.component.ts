@@ -10,6 +10,8 @@ import { CookieService } from 'ngx-cookie-service';
 export class CartComponent implements OnInit {
 
 result;
+partnerClientId: string = 'AWWarvYmG1fqjxQEsJPjOZoaH6s9-UHj_6yjcmvjZm8VL6YG1606X45O9QtlfIz8EMe-6ftLGyDC09ot';
+merchantIdInPayPal: string = this.cookieService.get('merchantIdinPayPal')
   transactionID: string;
   transactionAmount: string;
   transactionDate: string;
@@ -75,29 +77,29 @@ result;
               },
           items:[{
                 name:"Hamburger",
-            description:"No cheese, add mayo, mustard, pickles",
+                description:"No cheese, add mayo, mustard, pickles",
                 quantity:1,
                 unit_amount:{
-              value:"9.00",
-              currency_code:"USD"
+                value:"9.00",
+                currency_code:"USD"
               }
                 },
-            {
+              { 
                 name:"Hot Dog",
-            description:"Add relish, onion, ketchup, peppers",
+                description:"Add relish, onion, ketchup, peppers",
                 quantity:1,
                 unit_amount:{
-              value:"6.00",
-              currency_code:"USD"
+                value:"6.00",
+                currency_code:"USD"
               }
                 },
             {
-            name:"20 Oz Soda",
-            description:"Dr Pepper",
+                name:"20 Oz Soda",
+                description:"Dr Pepper",
                 quantity:1,
                 unit_amount:{
-              value:"2.00",
-              currency_code:"USD"
+                value:"2.00",
+                currency_code:"USD"
               }
                 }
             ]
@@ -117,12 +119,17 @@ result;
     }).render(this.paypalRef.nativeElement)
     }
 
+    /**
+     * 
+     * @param details 
+     * function that takes the details object returned from the sdk and maps it to the UI
+     */
     showTransactionResult(details){
+      //show the container for the completed payment
       this.paypalTransactionCompleted = true
       this.result = details
       this.transactionAmount = details.purchase_units[0].amount.value;
       this.transactionID = details.id
       this.transactionDate = details.create_time;
     }
-
 }

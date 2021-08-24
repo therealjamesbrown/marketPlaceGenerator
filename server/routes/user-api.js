@@ -114,7 +114,7 @@ router.get('/username/:username', async(req, res) => {
           res.status(500).send(mongoDbErrorResponse.toObject());
         } else {
   
-       //   console.log(user);
+        // console.log(user);
           const mongoDBFindUserByIDSuccess = new BaseResponse('200', 'Success!', user);
           res.json(mongoDBFindUserByIDSuccess.toObject());
         }

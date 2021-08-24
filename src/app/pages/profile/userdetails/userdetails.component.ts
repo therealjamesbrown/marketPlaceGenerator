@@ -46,15 +46,18 @@ export class UserdetailsComponent implements OnInit {
      */
 
      this.userProfileService.getUserDetails(this.username).subscribe(res => {
+      /*
+      console.log(res)
       this.userDetailsDataSource = res['data'];
-      this.firstName = this.userDetailsDataSource.firstName;
-      this.lastName = this.userDetailsDataSource.lastName;
+      console.log(this.userDetailsDataSource)
+      this.firstName = this.userDetailsDataSource.contactFirstName;
+      this.lastName = this.userDetailsDataSource.contactLastName;
       this.phone = this.userDetailsDataSource.phoneNumber;
       this.address = this.userDetailsDataSource.address;
       this.email = this.userDetailsDataSource.email;
       this.role = this.userDetailsDataSource.role;
       this.dateCreated = this.userDetailsDataSource.date_created;
-
+*/
       //console.log(this.userDetailsDataSource);
      })
    }

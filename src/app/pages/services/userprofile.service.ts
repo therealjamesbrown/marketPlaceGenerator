@@ -22,7 +22,7 @@ import { Observable } from 'rxjs';
 export class UserprofileService {
 
   constructor(private http: HttpClient) { }
-
+ 
   /**
    * 
    * GET USER DETAILS

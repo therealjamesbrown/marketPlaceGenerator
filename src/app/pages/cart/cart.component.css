@@ -62,3 +62,15 @@ table {
 .productDescription{
   font-style: italic;
 }
+
+.paypalButton{
+ width: 75%;
+ margin: auto;
+ align-content: center;
+}
+
+th{
+  background-color: #14a10d;
+  color: white;
+  border-radius: 1px;
+}
