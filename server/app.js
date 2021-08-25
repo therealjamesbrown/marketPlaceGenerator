@@ -82,6 +82,7 @@ app.use('/api/securityQuestions', SecurityQuestionsApi);
 app.use('/api/users', UserApi);
 app.use('/api/session', SessionApi);
 
+
 //used to crud payments services such as PayPal/Stripe/Etc
 app.use('/v1/api/payments', PaymentsApi);
 

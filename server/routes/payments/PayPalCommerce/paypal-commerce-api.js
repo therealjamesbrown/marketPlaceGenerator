@@ -136,7 +136,7 @@ function getAccessToken(){
  * function for creating V2 order
  * @param accessToken - bearer token used for authorization
  */
-function createOrderV2(accessToken){
+function createOrderV2(accessToken, merchantIdInPayPal){
     return new Promise((resolve, reject) => {
         let options = {
           'method': 'POST',
@@ -169,7 +169,74 @@ function createOrderV2(accessToken){
           });
         });
         
-        let postData = JSON.stringify({"intent":"CAPTURE","application_context":{"return_url":"https://example.com/return","cancel_url":"https://example.com/cancel"},"purchase_units":[{"amount":{"currency_code":"USD","value":"36.00"}}]});
+        let postData = JSON.stringify({
+          "intent": "CAPTURE",
+          "purchase_units": [
+            {
+              "amount": {
+                "currency_code":"USD",
+                            "value":17.00,
+                            "breakdown":{
+                                "item_total":{
+                                    "value": 17.00,
+                                    "currency_code": "USD"
+                                }
+                            }
+              },
+            "shipping": {
+                "address": {
+                  "address_line_1": "2211 N First Street",
+                  "address_line_2": "Building 17",
+                  "admin_area_2": "San Jose",
+                  "admin_area_1": "CA",
+                  "postal_code": "95131",
+                  "country_code": "US"
+                }
+              },
+          "items":[{
+                 "name":"Hamburger",
+             "description":"No cheese, add mayo, mustard, pickles",
+                 "quantity":1,
+                 "unit_amount":{
+              "value":"9.00",
+              "currency_code":"USD"
+              }
+                },
+            {
+                 "name":"Hot Dog",
+             "description":"Add relish, onion, ketchup, peppers",
+                 "quantity":1,
+                 "unit_amount":{
+              "value":"6.00",
+              "currency_code":"USD"
+              }
+                },
+            {
+             "name":"20 Oz Soda",
+             "description":"Dr Pepper",
+                 "quantity":1,
+                 "unit_amount":{
+              "value":"2.00",
+              "currency_code":"USD"
+              }
+                }
+            ],
+            "payee": {
+              "merchant_id": merchantIdInPayPal
+          },
+          "payment_instruction": {
+            "platform_fees": [
+              {
+                "amount": {
+                  "currency_code": "USD",
+                  "value": "5.00"
+                }
+              }
+            ]
+          }
+            }
+          ],
+        });
         req.write(postData);
         req.end();
     })
@@ -397,7 +464,7 @@ router.post('/create-order', async(req, res) => {
         //make call to PayPal to get access token
        getAccessToken().then(accessToken => {
            //pass the access token to paypal
-        createOrderV2(accessToken).then(responseBody => {
+        createOrderV2(accessToken, req.body.merchantIdInPayPal).then(responseBody => {
             const createOrderSuccessResponse = new BaseResponse(200, serverSuccess, responseBody);
             res.json(createOrderSuccessResponse.toObject());
             }) 
@@ -416,14 +483,12 @@ router.post('/create-order', async(req, res) => {
  * 
  * 
  */
-
 router.post('/capture-order', async(req, res) => {
     try{
         //make call to PayPal to get access token
        getAccessToken().then(accessToken => {
            //pass the access token to paypal
         captureOrderV2(accessToken, req.body.orderId).then(captureResponseBody => {
-            //console.log(captureResponseBody);
             const createOrderSuccessResponse = new BaseResponse(200, serverSuccess, captureResponseBody);
             res.json(createOrderSuccessResponse.toObject());
             //save order to database
