@@ -94,10 +94,8 @@ export class CartComponent implements OnInit {
     showTransactionResult(details){
       //show the container for the completed payment
       console.log(details.data)
-      
       this.paypalTransactionCompleted = true
       this.result = details
-      
       this.transactionAmount = details.data.purchase_units[0].payments.captures[0].amount.value;
       this.transactionID = details.data.purchase_units[0].payments.captures[0].id
       this.transactionDate = details.timestamp;

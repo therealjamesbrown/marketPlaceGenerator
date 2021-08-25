@@ -131,6 +131,20 @@ function getAccessToken(){
     })
 }
 
+
+/**
+ * 
+ * function for generating PayPal Auth Assertion Header
+ * 
+ */
+function generateAuthAssertionHeader(merchantIdInPayPal){
+  var auth_1 = btoa("{\"alg\":\"none\"}");
+var auth_2 = btoa(`{\"payer_id\":${merchantIdInPayPal},\"iss\":${sandboxClientId}}`);
+var auth_assertion_header = auth_1 + "." + auth_2 + ".";
+console.log(auth_assertion_header);
+return auth_assertion_header;
+}
+
 /**
  * 
  * function for creating V2 order
@@ -502,8 +516,30 @@ router.post('/capture-order', async(req, res) => {
 
 
 
+/***
+ * 
+ * 
+ * Issue a refund
+ * 
+ * 
+ */
 
+router.post('/refund', async(req, res) => {
+  try{
+     //make call to PayPal to get access token
+     getAccessToken().then(accessToken => {
+      //generate auth assertion header
+      generateAuthAssertionHeader()
+      //send the refund call
 
+      //return response to the client
+     })
+
+  } catch(e){
+    const refundPaymentCatchErrorResponse = new ErrorResponse(500, internalServerError, e.message);
+    res.status(500).send(refundPaymentCatchErrorResponse.toObject());
+  }
+})
 
 
   /**

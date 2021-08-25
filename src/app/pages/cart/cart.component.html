@@ -74,11 +74,6 @@
 
 
 <!--Payment completion portion if paypal transaction was done.-->
-
-
-
-
-
     <div fxFlex *ngIf="paypalTransactionCompleted">
        <mat-card style="background-color: rgb(32, 32, 32);">
         <mat-card-content>
@@ -90,6 +85,7 @@
                         <div fxLayout="column">
                             <mat-card>
                                 <mat-card-title>Payment is Complete!</mat-card-title>
+                                <mat-divider></mat-divider>
                                 <mat-card-content>
                                     <div fxFlex>
                                      <mat-list role="list">
@@ -102,6 +98,13 @@
                                 </mat-card-content>
                             </mat-card>
                         </div>
+                </div>
+                <div fxFlex fxLayoutAlign="center center">
+                    <div fxLayout="column" >
+                        <div fxFlex >
+                            <button mat-raised-button color="accent" >Issue Refund</button>
+                        </div>
+                    </div>
                 </div>
             </div>
            </mat-card-content>
