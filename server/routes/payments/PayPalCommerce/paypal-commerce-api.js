@@ -138,6 +138,7 @@ function getAccessToken(){
  * 
  */
 function generateAuthAssertionHeader(merchantIdInPayPal){
+  return new Promise((resolve, reject) => {
  let header = `{"alg":"none"}`
  let headerEncoded = Buffer.from(header).toString('base64')
   let claims =
@@ -145,7 +146,8 @@ function generateAuthAssertionHeader(merchantIdInPayPal){
   let claimsEncoded = Buffer.from(claims).toString('base64')
   var auth_assertion_header = `${headerEncoded}.${claimsEncoded}.`   
   //console.log(auth_assertion_header);
-  return auth_assertion_header;
+  resolve(auth_assertion_header);
+})
 }
 
 /**
@@ -574,20 +576,25 @@ router.post('/capture-order', async(req, res) => {
 
 router.post('/refund', async(req, res) => {
   try{
+    console.log(req.body.orderID)
+
      //make call to PayPal to get access token
      getAccessToken().then(accessToken => {
       //generate auth assertion header
-      generateAuthAssertionHeader(merchantIdInPayPal)
+      generateAuthAssertionHeader(req.body.merchantIdInPayPal)
       .then(
         paypalAuthAssertion => {
-          issueRefund(accessToken, req.body.orderId, paypalAuthAssertion).then(result => {
-            console.log(result)
+           //send the refund call to paypal
+          issueRefund(accessToken, req.body.orderID, paypalAuthAssertion).then(result => {
+            //console.log(result)
+            if(result.status === "COMPLETED"){
+              const refundOrderSuccessResponse = new BaseResponse(200, serverSuccess, result)
+              res.json(refundOrderSuccessResponse.toObject())
+            }
+            //return response to the client
           })
         }
       )
-      //send the refund call
-
-      //return response to the client
      })
 
   } catch(e){
