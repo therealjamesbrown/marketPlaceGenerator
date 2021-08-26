@@ -5,44 +5,25 @@
           <div fxLayout="column">
             <div fxFlex class="childColumnContainers">
               <h1> Welcome, {{user}}!</h1>
-            </div>
-  
-  
-             <!--Graph-->
-  
+            </div>  
              <div fxFlex class="childColumnContainers" *ngIf="oderHistoryVisibility != false">
-              <mat-card class="purchaseGraph" style="background-color: black; color: white;">
+               
+              <mat-card style="background-color: black; color: white;">
                 <mat-card-content>
-                 
-                </mat-card-content>
-              </mat-card>
-            </div>
-  
-  
-            <!--Creation History-->
-            <div fxFlex class="childColumnContainers" *ngIf="oderHistoryVisibility != false">
-              <div fxLayout="row wrap" fxLayoutGap="10px">
-                <div fxFlex>
-                  <mat-card>
-                    <mat-card-content>
-                    
-                    </mat-card-content>
-                  </mat-card>
+                 <mat-card>
+                   <mat-card-content>
                 
-                </div>
-              </div>
-            </div>
-  
-            <!--Contact -->
-            <div fxFlex class="childColumnContainers">
-              <mat-card class="contactContainer">
-                <mat-card-content class="questions">
-                  <h3>Questions?</h3>
-                  <p routerLink="/contact" class="contact">Contact</p>
+                     <!--TODOS-->
+                     TODOS for this page<br/>
+                   1.) search transaction input top right - transaction search api<br/>
+                   2.) pie chart with recent payment data - big and bad <br/>
+                   3.) list of recent transactions - typical data boring table<br/>
+
+                   </mat-card-content>
+                 </mat-card>
                 </mat-card-content>
               </mat-card>
-            </div>
-           
+            </div>           
           </div>
         </mat-card-content>
       </mat-card>

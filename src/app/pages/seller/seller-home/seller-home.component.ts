@@ -6,9 +6,13 @@ import { CookieService } from 'ngx-cookie-service';
   templateUrl: './seller-home.component.html',
   styleUrls: ['./seller-home.component.css']
 })
+
 export class SellerHomeComponent implements OnInit {
 
+  value;
   constructor(private cookieService: CookieService) { 
+
+    this.value = '';
     //hide the graph if there's no data.
     this.historyDataNull = this.cookieService.get('hidegraph');
 
