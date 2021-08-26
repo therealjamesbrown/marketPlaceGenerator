@@ -138,11 +138,14 @@ function getAccessToken(){
  * 
  */
 function generateAuthAssertionHeader(merchantIdInPayPal){
-  var auth_1 = btoa("{\"alg\":\"none\"}");
-var auth_2 = btoa(`{\"payer_id\":${merchantIdInPayPal},\"iss\":${sandboxClientId}}`);
-var auth_assertion_header = auth_1 + "." + auth_2 + ".";
-console.log(auth_assertion_header);
-return auth_assertion_header;
+ let header = `{"alg":"none"}`
+ let headerEncoded = Buffer.from(header).toString('base64')
+  let claims =
+    `{"iss":"${sandboxClientId}","payer_id":"${merchantIdInPayPal}"}`
+  let claimsEncoded = Buffer.from(claims).toString('base64')
+  var auth_assertion_header = `${headerEncoded}.${claimsEncoded}.`   
+  //console.log(auth_assertion_header);
+  return auth_assertion_header;
 }
 
 /**
@@ -302,6 +305,51 @@ function captureOrderV2(accessToken, orderId){
     })
 }
 
+/**
+ * 
+ * 
+ * function to send a refund request to paypal
+ * 
+ */
+function issueRefund(access_token, orderId, paypalAuthAssertion){
+  return new Promise( resolve => {
+    let options = {
+      'method': 'POST',
+      'hostname': endpoint,
+      'path': `/v2/payments/captures/${orderId}/refund`,
+      'headers': {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${access_token}`,
+        'PayPal-Auth-Assertion': `${paypalAuthAssertion}`
+      },
+      'maxRedirects': 20
+    };
+    
+    let req = https.request(options, function (res) {
+      let chunks = [];
+    
+      res.on("data", function (chunk) {
+        chunks.push(chunk);
+      }); 
+    
+      res.on("end", function (chunk) {
+          //buffer the response
+        let bufferedData = Buffer.concat(chunks);
+        //convert it to json
+        let captureResponseBody = JSON.parse(bufferedData);
+       resolve(captureResponseBody);
+      });
+    
+      res.on("error", function (error) {
+        console.error(error);
+      });
+    });
+     
+    let postData = "";
+    req.write(postData);
+    req.end();
+})
+}
 
 /**
  * 
@@ -529,7 +577,14 @@ router.post('/refund', async(req, res) => {
      //make call to PayPal to get access token
      getAccessToken().then(accessToken => {
       //generate auth assertion header
-      generateAuthAssertionHeader()
+      generateAuthAssertionHeader(merchantIdInPayPal)
+      .then(
+        paypalAuthAssertion => {
+          issueRefund(accessToken, req.body.orderId, paypalAuthAssertion).then(result => {
+            console.log(result)
+          })
+        }
+      )
       //send the refund call
 
       //return response to the client
