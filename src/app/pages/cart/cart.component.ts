@@ -17,6 +17,7 @@ export class CartComponent implements OnInit {
   transactionID: string;
   platformFee: string;
   transactionAmount: string;
+  refundTransactionID: string;
   transactionDate: string;
   displayedColumns: string[] = ['product', 'quantity', 'price'];
   paypalTransactionCompleted: boolean = false;
@@ -140,7 +141,7 @@ issueRefund(){
       showRefundResult(details){
         console.log(details)
         this.paypalRefundCompleted = true;
-        this.transactionID = details.data.id;
+        this.refundTransactionID = details.data.id;
         this.transactionDate = details.timestamp;
       }
 }
