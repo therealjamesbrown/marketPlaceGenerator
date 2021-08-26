@@ -77,7 +77,7 @@
     <div fxFlex *ngIf="paypalTransactionCompleted">
        <mat-card style="background-color: rgb(32, 32, 32);">
         <mat-card-content>
-            <h1>Completed Payment Details</h1>
+            <h1>Payment Details</h1>
        <mat-card class="mat-elevation-z0">
            <mat-card-content>
             <div fxLayout="row wrap"fxLayoutGap="10px">
@@ -102,7 +102,7 @@
                 <div fxFlex fxLayoutAlign="center center">
                     <div fxLayout="column" >
                         <div fxFlex >
-                            <button mat-raised-button color="accent" >Issue Refund</button>
+                            <button mat-raised-button (click)="issueRefund()" color="accent">Issue Full Refund</button>
                         </div>
                     </div>
                 </div>
@@ -112,5 +112,48 @@
         </mat-card-content>
       </mat-card>
     </div>
+
+
+
+
+
+    
+
+
+    <!--Refund portion if paypal transaction was done.-->
+    <div fxFlex *ngIf="paypalTransactionCompleted && paypalRefundInitiated">
+        <mat-card style="background-color: rgb(32, 32, 32);">
+         <mat-card-content>
+             <h1>Refund Details</h1>
+        <mat-card class="mat-elevation-z0">
+            <mat-card-content>
+             <div fxLayout="row wrap"fxLayoutGap="10px">
+                 <div fxFlex>
+                         <div fxLayout="column">
+                             <mat-card>
+                                <mat-spinner *ngIf="!paypalRefundCompleted" style="margin:0 auto;" >
+                                </mat-spinner>
+
+                                <div *ngIf="paypalRefundCompleted">
+                                 <mat-card-title>Refund is Complete!</mat-card-title>
+                                 <mat-divider></mat-divider>
+                                 <mat-card-content>
+                                     <div fxFlex>
+                                      <mat-list role="list">
+                                         <mat-list-item role="listitem">Transaction ID: {{transactionID}}</mat-list-item>
+                                         <mat-list-item role="listitem">Date:{{transactionDate | date}}</mat-list-item>
+                                       </mat-list>
+                                     </div>
+                                 </mat-card-content>
+                                 </div>
+                             </mat-card>
+                         </div>
+                 </div>
+             </div>
+            </mat-card-content>
+        </mat-card>
+         </mat-card-content>
+       </mat-card>
+     </div>
   </div>
   

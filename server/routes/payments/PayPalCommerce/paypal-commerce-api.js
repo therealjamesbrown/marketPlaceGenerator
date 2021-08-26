@@ -577,7 +577,6 @@ router.post('/capture-order', async(req, res) => {
 router.post('/refund', async(req, res) => {
   try{
     console.log(req.body.orderID)
-
      //make call to PayPal to get access token
      getAccessToken().then(accessToken => {
       //generate auth assertion header
@@ -596,7 +595,6 @@ router.post('/refund', async(req, res) => {
         }
       )
      })
-
   } catch(e){
     const refundPaymentCatchErrorResponse = new ErrorResponse(500, internalServerError, e.message);
     res.status(500).send(refundPaymentCatchErrorResponse.toObject());

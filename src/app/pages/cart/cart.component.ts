@@ -20,6 +20,10 @@ export class CartComponent implements OnInit {
   transactionDate: string;
   displayedColumns: string[] = ['product', 'quantity', 'price'];
   paypalTransactionCompleted: boolean = false;
+  paypalRefundCompleted: boolean = false;
+  paypalRefundInitiated: boolean = false;
+
+
   products: any = [
     {
       name:"Hamburger",
@@ -103,4 +107,43 @@ export class CartComponent implements OnInit {
 
       //TODO - send server call to record transaction in DB.
     }
+
+
+    /**
+     * 
+     * function for issuing refund
+     * 
+     */
+issueRefund(){
+  this.paypalRefundInitiated = true;
+  let reqBody = {
+    orderID: this.transactionID,
+    merchantIdInPayPal: this.merchantIdInPayPal
+  }
+
+  return fetch('/v1/api/payments/paypal-commerce/refund', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(reqBody)
+  }).then(function(res) {
+    return res.json();
+  }).then(data => this.showRefundResult(data));        
+      }
+
+    /**
+     * 
+     * function for showing the completed refund tile.
+     * 
+     */
+      showRefundResult(details){
+        console.log(details)
+        this.paypalRefundCompleted = true;
+        this.transactionID = details.data.id;
+        this.transactionDate = details.timestamp;
+      }
 }
+  
+
+

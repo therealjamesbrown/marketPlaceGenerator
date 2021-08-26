@@ -99,6 +99,7 @@ import { BaseComponent } from './pages/seller/config/payments/base/base.componen
 import { PponboardingCompleteComponent } from './pages/seller/config/payments/pponboarding-complete/pponboarding-complete.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CartComponent } from './pages/cart/cart.component';
+import { RefundDialogComponent } from './pages/cart/refund-dialog/refund-dialog.component';
 
 
 
@@ -160,7 +161,8 @@ import { CartComponent } from './pages/cart/cart.component';
     PaypalCommerceComponent,
     BaseComponent,
     PponboardingCompleteComponent,
-    CartComponent
+    CartComponent,
+    RefundDialogComponent
     ],
   imports: [
     BrowserModule,
