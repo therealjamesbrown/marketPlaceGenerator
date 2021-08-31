@@ -69,8 +69,129 @@ table {
  align-content: center;
 }
 
+.cardButton{
+  width: 100%;
+  margin: auto;
+  align-content: center;
+}
+
 th{
   background-color: #14a10d;
   color: white;
   border-radius: 1px;
+}
+
+
+.paypal-button-container {
+  border-radius: 5px;
+  background-color: #FFFFFF;
+  padding: 20px;
+  max-width: 760px;
+  width: 100%;
+  margin: 0 auto;
+}
+.card_container {
+  border-radius: 5px;
+  background-color: #FFFFFF;
+  padding: 20px;
+  max-width: 760px;
+  width: 100%;
+  margin: 0 auto;
+}
+.card_field{
+  width: 100%;
+  padding: 7px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 2px;
+  margin-bottom: 7px;
+  resize: vertical;
+  height:40px;
+  background:white;
+  font-size:17px;
+  color:#3a3a3a;
+  font-family:helvetica, tahoma, calibri, sans-serif;
+}
+.card_field_50{
+  width: 50%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+  height:40px;
+  background:white;
+  font-size:17px;
+  color:#3a3a3a;
+  font-family:helvetica, tahoma, calibri, sans-serif;
+}
+.card_field_75{
+  width: 75%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+  height:40px;
+  background:white;
+  font-size:17px;
+  color:#3a3a3a;
+  font-family:helvetica, tahoma, calibri, sans-serif;
+}
+.row {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+  margin: 0 -16px;
+}
+.col-25 {
+  -ms-flex: 25%; /* IE10 */
+  flex: 25%;
+}
+.col-50 {
+  -ms-flex: 50%; /* IE10 */
+  flex: 50%;
+}
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+  height:40px;
+  background:white;
+  font-size:17px;
+  color:#3a3a3a;
+  font-family:helvetica, tahoma, calibri, sans-serif;
+}
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.message_container {
+  border-radius: 5px;
+  background:#FFFFFF;
+  font-size:13px;
+  font-family:monospace;
+  padding: 20px;
+}
+
+
+
+.button_container {
+  display: flex;
+  justify-content: center;
 }

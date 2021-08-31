@@ -31,6 +31,7 @@ export class SellerHomeComponent implements OnInit {
   user: string = this.cookieService.get('sessionuser');
   partnerClientId: string = 'AWWarvYmG1fqjxQEsJPjOZoaH6s9-UHj_6yjcmvjZm8VL6YG1606X45O9QtlfIz8EMe-6ftLGyDC09ot';
   merchantIdInPayPal: string = this.cookieService.get('merchantIdinPayPal')
+  clientToken: string;
   ad: Boolean = true; //show the add to begin with
   adCookie: any = this.cookieService.get('adCookie')
   oderHistoryVisibility: Boolean = true; //init graph visibility, constructor will take care of the rest
@@ -43,12 +44,27 @@ export class SellerHomeComponent implements OnInit {
       //todo make call to server to get the merchant id cuz loading it at login just isn't a good approach.
       //also make sure we are grabbing the client of the actual marketplace and not hard coding it. can prob 
       //grab merchant id and marketplace in one fail swoop...
+      fetch('/v1/api/payments/paypal-commerce/client-token', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: ''
+      }).then(function(res) {
+        return res.json();
+      }).then(data => {
 
-      const node = document.createElement('script');
-      node.src = `https://www.paypal.com/sdk/js?client-id=${this.partnerClientId}&components=buttons&enable-funding=venmo&intent=capture&merchant-id=${this.merchantIdInPayPal}`;
-      node.type = 'text/javascript';
-      node.async = false;
-      document.getElementsByTagName('head')[0].appendChild(node);
+        //store the client token we got from the server
+        this.clientToken = data.data
+        
+        //construct the paypal url.
+        const node = document.createElement('script');
+        node.src = `https://www.paypal.com/sdk/js?client-id=${this.partnerClientId}&components=buttons,hosted-fields&enable-funding=venmo&intent=capture&merchant-id=${this.merchantIdInPayPal}`;
+        node.setAttribute('data-client-token', this.clientToken)
+        node.type = 'text/javascript';
+        node.async = false;
+        document.getElementsByTagName('head')[0].appendChild(node);
+      });
     }
 
 

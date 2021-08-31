@@ -54,6 +54,7 @@ paypalRestPaths = {
     partnerReferralsV2: '/v2/customer/partner-referrals',
     trackSellerOnboardingStatus: '/v1/customer/partners',
     ordersV2Create: '/v2/checkout/orders',
+    generateClientToken: '/v1/identity/generate-token'
 }
 
 if(environment === 'sandbox'){
@@ -373,7 +374,57 @@ function findLastSevenDaysTransactions(accessToken, paypalAuthAssertion){
   //make call to paypal.
 }
 
-findLastSevenDaysTransactions();
+/**
+ * 
+ * 
+ * Generate Client Token - used in ACDC card fields integration
+ * 
+ * 
+ */
+
+
+ function generateClientToken(accessToken){
+  return new Promise( resolve => {
+    let options = {
+      'method': 'POST',
+      'hostname': endpoint,
+      'path': paypalRestPaths.generateClientToken,
+      'headers': {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`,
+      },
+      'maxRedirects': 20
+    };
+    
+    let req = https.request(options, function (res) {
+      let chunks = [];
+    
+      res.on("data", function (chunk) {
+        chunks.push(chunk);
+      }); 
+    
+      res.on("end", function (chunk) {
+          //buffer the response
+        let bufferedData = Buffer.concat(chunks);
+        //convert it to json
+        let responseBody = JSON.parse(bufferedData);
+        //find the action url from the hateos links returned
+       let clientToken = responseBody.client_token;
+
+       //pass that action url back in the response
+       resolve(clientToken);
+      });
+    
+      res.on("error", function (error) {
+        console.error(error);
+      });
+    });
+     
+let postData = JSON.stringify({});
+    req.write(postData);
+    req.end();
+})
+ }
 
 /**
  * 
@@ -420,7 +471,7 @@ function partnerReferral(accessToken, sellerId){
       });
     });
      
-let postData = JSON.stringify({"tracking_id":sellerId,"partner_config_override":{"return_url":"https://mrktgen.herokuapp.com/#/seller/onboarding-complete"},"operations":[{"operation":"API_INTEGRATION","api_integration_preference":{"rest_api_integration":{"integration_method":"PAYPAL","integration_type":"THIRD_PARTY","third_party_details":{"features":["PAYMENT"]}}}}],"products":["EXPRESS_CHECKOUT"],"legal_consents":[{"type":"SHARE_DATA_CONSENT","granted":true}]});
+let postData = JSON.stringify({"tracking_id":sellerId,"partner_config_override":{"return_url":"https://mrktgen.herokuapp.com/#/seller/onboarding-complete"},"operations":[{"operation":"API_INTEGRATION","api_integration_preference":{"rest_api_integration":{"integration_method":"PAYPAL","integration_type":"THIRD_PARTY","third_party_details":{"features":["PAYMENT"]}}}}],"products":["PPCP"],"legal_consents":[{"type":"SHARE_DATA_CONSENT","granted":true}]});
     req.write(postData);
     req.end();
 
@@ -498,8 +549,28 @@ function trackSellerOnboardingStatus(accessToken, partnerAccountId, merchantIdIn
 
 
 
+/***
+ * 
+ * 
+ * Generate Client Token Route
+ * 
+ * 
+ */
 
+ router.post('/client-token', async(req, res) => {
+   try{
+     getAccessToken().then(accessToken => {
+       generateClientToken(accessToken).then(clientToken => {
+         const generateClientTokenSuccessResponse = new BaseResponse(200, serverSuccess, clientToken);
+         res.json(generateClientTokenSuccessResponse.toObject());
+       })
+     })
 
+   } catch(e){
+    const generateClientTokenErrorResponse = new ErrorResponse(500, internalServerError, e.message);
+    res.status(500).send(generateClientTokenErrorResponse.toObject());
+   }
+ })
 
 /**
  * 

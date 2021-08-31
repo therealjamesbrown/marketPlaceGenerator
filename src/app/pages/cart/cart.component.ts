@@ -23,6 +23,11 @@ export class CartComponent implements OnInit {
   paypalTransactionCompleted: boolean = false;
   paypalRefundCompleted: boolean = false;
   paypalRefundInitiated: boolean = false;
+  cardSpinner: boolean = false;
+  paymentComplete: boolean = false;
+  paymentSource;
+  lastFour;
+  fundedByCard: boolean = false;
 
 
   products: any = [
@@ -51,8 +56,11 @@ export class CartComponent implements OnInit {
     }
 
  
-  @ViewChild('paypalRef', {static: true}) private paypalRef: ElementRef;
-  ngOnInit(): void {
+    @ViewChild('paypalRef', {static: true}) private paypalRef: ElementRef;
+  ngAfterViewInit(): void{
+
+    //if sdk isn't loaded, hold up on rendering
+
     let paypalData = {
       merchantIdInPayPal: this.merchantIdInPayPal
     };
@@ -88,7 +96,95 @@ export class CartComponent implements OnInit {
           return captureOrderResponse.json();
         }).then(finalResult => this.showTransactionResult(finalResult))        
       }
-    }).render(this.paypalRef.nativeElement)
+    }).render(this.paypalRef.nativeElement);
+
+    // If this returns false or the card fields aren't visible, see Step #1.
+    if (paypal.HostedFields.isEligible()) {
+
+      // Renders card fields
+      paypal.HostedFields.render({
+        // Call your server to set up the transaction
+        createOrder: (data, actions) => {
+          return fetch('/v1/api/payments/paypal-commerce/create-order', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(paypalData)
+          }).then(function(res) {
+            return res.json();
+          }).then(function(data) {
+            console.log(data.data.id)
+            return data.data.id;
+         
+          });
+        },
+
+        styles: {
+          '.valid': {
+           'color': 'green'
+          },
+          '.invalid': {
+           'color': 'red'
+          },
+          ':focus': {
+            'color': '#333333'
+          },
+        },
+
+        fields: {
+          number: {
+            selector: "#card-number",
+            placeholder: "4111 1111 1111 1111"
+          },
+          cvv: {
+            selector: "#cvv",
+            placeholder: "123"
+          },
+          expirationDate: {
+            selector: "#expiration-date",
+            placeholder: "MM/YY"
+          }
+        }
+      }).then((cardFields) => {
+        document.querySelector("#card-form").addEventListener('submit', (event) => {
+          document.getElementById("paypalButton").style.display = "none";
+          event.preventDefault();
+          document.getElementById("card-form").style.display = "none";
+          this.cardSpinner= true;
+          cardFields.submit({
+            // Billing Address
+            billingAddress: {
+              // Country Code
+              countryCodeAlpha2: 'US'
+            }
+          }).then((data) => {
+            let paypalOrderId = {
+              orderId: data.orderId
+            }
+            fetch('/v1/api/payments/paypal-commerce/capture-order', {
+              method: 'post',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(paypalOrderId)
+            }).then((res) => {
+               return res.json();
+            }).then(finalResult => this.showTransactionResult(finalResult))   
+         }).catch(function (err) {
+           alert('Payment could not be captured! ' + JSON.stringify(err))
+         });
+        });
+      });
+    } else {
+      // Hides card fields if the merchant isn't eligible
+      //document.querySelector("#card-form").style = 'display: none';
+    }
+
+  }
+  
+  ngOnInit(): void {
+
     }
 
     /**
@@ -97,6 +193,10 @@ export class CartComponent implements OnInit {
      * function that takes the details object returned from the sdk and maps it to the UI
      */
     showTransactionResult(details){
+      //hide the card fields loading icon & card fields
+      this.paymentComplete = true;
+      document.getElementById("payment").style.display = "none";
+      this.cardSpinner = false;
       //show the container for the completed payment
       console.log(details.data)
       this.paypalTransactionCompleted = true
@@ -105,7 +205,12 @@ export class CartComponent implements OnInit {
       this.transactionID = details.data.purchase_units[0].payments.captures[0].id
       this.transactionDate = details.timestamp;
       this.platformFee = details.data.purchase_units[0].payment_instruction.platform_fees[0].amount.value;
-
+      if(details.data.payment_source){
+        this.paymentSource = details.data.payment_source.card.brand;
+        this.lastFour = details.data.payment_source.card.last_digits;
+        this.fundedByCard = true;
+      }
+      this.paymentSource = "PayPal";
       //TODO - send server call to record transaction in DB.
     }
 
