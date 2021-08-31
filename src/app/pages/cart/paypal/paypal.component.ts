@@ -207,8 +207,10 @@ export class PaypalComponent implements OnInit {
         this.paymentSource = details.data.payment_source.card.brand;
         this.lastFour = details.data.payment_source.card.last_digits;
         this.fundedByCard = true;
+      } else {
+        this.paymentSource = "PayPal";
       }
-      this.paymentSource = "PayPal";
+   
       //TODO - send server call to record transaction in DB.
     }
 
