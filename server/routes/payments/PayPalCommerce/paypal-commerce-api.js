@@ -139,13 +139,12 @@ function getAccessToken(){
  */
 function generateAuthAssertionHeader(merchantIdInPayPal){
   return new Promise((resolve, reject) => {
- let header = `{"alg":"none"}`
- let headerEncoded = Buffer.from(header).toString('base64')
+  let header = `{"alg":"none"}`
+  let headerEncoded = Buffer.from(header).toString('base64')
   let claims =
     `{"iss":"${sandboxClientId}","payer_id":"${merchantIdInPayPal}"}`
   let claimsEncoded = Buffer.from(claims).toString('base64')
   var auth_assertion_header = `${headerEncoded}.${claimsEncoded}.`   
-  //console.log(auth_assertion_header);
   resolve(auth_assertion_header);
 })
 }
@@ -352,6 +351,29 @@ function issueRefund(access_token, orderId, paypalAuthAssertion){
     req.end();
 })
 }
+
+
+/**
+ * 
+ * 
+ * function to pull last 10 transactions using transaction search api
+ * 
+ * 
+ */
+function findLastSevenDaysTransactions(accessToken, paypalAuthAssertion){
+  //set a variable for time.
+  let now = new Date()
+  let isoToday = now.toISOString();
+
+  //set variable for last 7 day date range. 
+  let lastWeekOfTransactions = new Date();
+  lastWeekOfTransactions.setDate(lastWeekOfTransactions.getDate() - 7);
+  let isoLastWeekOfTransactions = lastWeekOfTransactions.toISOString();
+
+  //make call to paypal.
+}
+
+findLastSevenDaysTransactions();
 
 /**
  * 
