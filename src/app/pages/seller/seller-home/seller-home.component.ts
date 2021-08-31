@@ -25,7 +25,6 @@ export class SellerHomeComponent implements OnInit {
       this.oderHistoryVisibility = false;
     }
 
-    this.loadPayPalSDKScript()
   }
 
   user: string = this.cookieService.get('sessionuser');
@@ -39,33 +38,7 @@ export class SellerHomeComponent implements OnInit {
   historyDataPresent: string;
 
 
-  /**Load the sdk when the home page component loads (that way we have the buttons when we need them) */
-    loadPayPalSDKScript(){
-      //todo make call to server to get the merchant id cuz loading it at login just isn't a good approach.
-      //also make sure we are grabbing the client of the actual marketplace and not hard coding it. can prob 
-      //grab merchant id and marketplace in one fail swoop...
-      fetch('/v1/api/payments/paypal-commerce/client-token', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: ''
-      }).then(function(res) {
-        return res.json();
-      }).then(data => {
-
-        //store the client token we got from the server
-        this.clientToken = data.data
-        
-        //construct the paypal url.
-        const node = document.createElement('script');
-        node.src = `https://www.paypal.com/sdk/js?client-id=${this.partnerClientId}&components=buttons,hosted-fields&enable-funding=venmo&intent=capture&merchant-id=${this.merchantIdInPayPal}`;
-        node.setAttribute('data-client-token', this.clientToken)
-        node.type = 'text/javascript';
-        node.async = false;
-        document.getElementsByTagName('head')[0].appendChild(node);
-      });
-    }
+  
 
 
   ngOnInit(): void {

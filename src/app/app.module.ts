@@ -100,7 +100,7 @@ import { PponboardingCompleteComponent } from './pages/seller/config/payments/pp
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CartComponent } from './pages/cart/cart.component';
 import { RefundDialogComponent } from './pages/cart/refund-dialog/refund-dialog.component';
-
+import { PaypalComponent } from './pages/cart/paypal/paypal.component'
 
 
 @NgModule({
@@ -162,7 +162,8 @@ import { RefundDialogComponent } from './pages/cart/refund-dialog/refund-dialog.
     BaseComponent,
     PponboardingCompleteComponent,
     CartComponent,
-    RefundDialogComponent
+    RefundDialogComponent,
+    PaypalComponent
     ],
   imports: [
     BrowserModule,
