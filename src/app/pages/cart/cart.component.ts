@@ -40,6 +40,7 @@ export class CartComponent implements OnInit {
   displayConnectMessage: boolean = false;
   sellerUsername;
   marketplaceUsername;
+  sellerConfigInPayPal;
  
   products: any = [
     {
@@ -73,6 +74,9 @@ export class CartComponent implements OnInit {
 
     //need to check to see if PP commerce is configured, if not dispaly a message to connect it.
     this.SellerService.getConfiguredOptions(this.marketplaceUsername, this.sellerUsername).subscribe( res => {
+      
+      this.sellerConfigInPayPal = res[0];
+      console.log(this.sellerConfigInPayPal)
       if(res[0].configName === null || res === null){
         this.isCommerceConfigure = false;
         this.displayConnectMessage = true;
@@ -89,9 +93,6 @@ export class CartComponent implements OnInit {
 
     /**Load the sdk when the home page component loads (that way we have the buttons when we need them) */
     loadPayPalSDKScript(){
-      //todo make call to server to get the merchant id cuz loading it at login just isn't a good approach.
-      //also make sure we are grabbing the client of the actual marketplace and not hard coding it. can prob 
-      //grab merchant id and marketplace in one fail swoop...
       fetch('/v1/api/payments/paypal-commerce/client-token', {
         method: 'POST',
         headers: {
@@ -116,14 +117,11 @@ export class CartComponent implements OnInit {
     }
 
  
-  ngAfterViewInit(): void{
- 
-  
-  }
+  ngAfterViewInit(): void{  }
   
   ngOnInit(): void {
     //set a timeout to give paypal time to laod on the page.
-    setTimeout(() => { this.paypalHasLoaded = true }, 2000);
+    setTimeout(() => { this.paypalHasLoaded = true }, 3000);
     this.isCommerceConfigure = false;
     }
   }

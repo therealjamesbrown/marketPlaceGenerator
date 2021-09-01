@@ -192,6 +192,7 @@ function createOrderV2(accessToken, merchantIdInPayPal){
           "intent": "CAPTURE",
           "purchase_units": [
             {
+              "reference_id": "pu1",
               "amount": {
                 "currency_code":"USD",
                             "value":17.00,
@@ -789,7 +790,8 @@ router.post('/onboard/complete', async(req, res) => {
           status: 'active',
           merchant_client_id: responseBody.oauth_integrations[0].oauth_third_party[0].merchant_client_id,
           merchantIdInPayPal: merchantIdInPayPal,
-          scopes: responseBody.oauth_integrations[0].oauth_third_party[0].scopes
+          scopes: responseBody.oauth_integrations[0].oauth_third_party[0].scopes,
+          disabledMethods: []
       }
 
       sellerSessionUser.set({
