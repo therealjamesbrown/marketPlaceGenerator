@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {MatAccordion} from '@angular/material/expansion';
 
 @Component({
   selector: 'app-paypal',
@@ -27,6 +28,7 @@ export class PaypalComponent implements OnInit {
   lastFour;
   fundedByCard: boolean = false;
   paypalHasLoaded: boolean = false;
+
  
   products: any = [
     {
@@ -53,7 +55,7 @@ export class PaypalComponent implements OnInit {
     this.products
     }
 
- 
+    @ViewChild(MatAccordion) accordion: MatAccordion;
     @ViewChild('paypalRef', {static: true}) private paypalRef: ElementRef;
   ngAfterViewInit(): void{
 

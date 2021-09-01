@@ -3,6 +3,10 @@
   margin: 0 auto;
 }
 
+.spinner{
+  margin: auto;
+}
+
 .childColumnContainers{
   margin-top: 10px;
   margin-bottom: 5px;
@@ -195,3 +199,4 @@ input[type=submit] {
   display: flex;
   justify-content: center;
 }
+

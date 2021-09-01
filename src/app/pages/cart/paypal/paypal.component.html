@@ -12,6 +12,10 @@
                                 <mat-card-title>Products in Cart</mat-card-title>
                                 <mat-divider></mat-divider><br />
                                 <mat-card-content>
+
+
+                                
+
                                     <div fxFlex>
                                         <table mat-table [dataSource]="products">
                                             <!--- Note that these columns can be defined in any order.
@@ -54,13 +58,39 @@
                             <mat-divider></mat-divider>
                             <mat-card-content>
                                 <div fxLayout="column">
-                                     <div fxFlex><br />
-                                         <h2>Pay with PayPal</h2><br />
-                                         <!--PayPal button container-->
-                                        <div #paypalRef class="paypalButton" id="paypalButton" ></div><br />
- <mat-divider></mat-divider><br />
- <h2>Credit/Debit Card</h2>
-  <!-- Advanced credit and debit card payments form -->
+
+
+<br />
+                                    <div fxFLex>
+                                        <mat-accordion class="example-headers-align" multi>
+                                            <mat-expansion-panel expanded>
+                                              <mat-expansion-panel-header>
+                                                <mat-panel-title>
+                                                    <mat-icon>paypal</mat-icon>
+                                                  </mat-panel-title>
+                                                <mat-panel-description>
+                                                 Pay with PayPal
+                                                </mat-panel-description>
+                                              </mat-expansion-panel-header>
+                                <br />
+                                              <div #paypalRef class="paypalButton" id="paypalButton" ></div><br />
+                                              <!--paypal goes here-->
+                                            </mat-expansion-panel>
+            
+                                          
+                                            <mat-expansion-panel>
+                                              <mat-expansion-panel-header>
+                                                <mat-panel-title>
+                                                    <mat-icon>payment</mat-icon>
+                                                  </mat-panel-title>
+                                                <mat-panel-description>
+                                                    Pay with card
+                                                </mat-panel-description>
+                                              </mat-expansion-panel-header>
+                                    
+                                            <!--Card goes here-->
+
+                                              <!-- Advanced credit and debit card payments form -->
   <div class="card_container" *ngIf="!paymentComplete">
     <mat-spinner *ngIf="cardSpinner" style="margin:0 auto;" >
     </mat-spinner>
@@ -75,10 +105,13 @@
         <label for="cvv">CVV</label><div id="cvv" class="card_field"></div>
       </div>
       <br><br>
-      <button mat-raised-button color="primary" value="submit" id="submit" class="cardButton">Pay</button>
+      <button mat-raised-button color="primary" value="submit" id="submit" class="cardButton">Pay Now</button>
     </form>
   </div>
-                                     </div>
+                                              
+                                            </mat-expansion-panel>
+                                          </mat-accordion>
+                                    </div>
                                 </div>
                             </mat-card-content>
                         </mat-card>
