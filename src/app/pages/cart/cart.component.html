@@ -1,11 +1,24 @@
 
 
 <div>
-    <mat-spinner *ngIf="paypalHasLoaded === false" class="spinner"></mat-spinner>
-
-
+<div *ngIf="isCommerceConfigure === true">
   <div *ngIf="paypalHasLoaded === true">
     <app-paypal></app-paypal>
+</div>
+</div>
+
+
+<div>
+  <div fxLayout="column" class="outerContainer"  *ngIf="paypalHasLoaded === false">
+    <div fxFlex>
+      <mat-card>
+          <mat-spinner *ngIf="paypalHasLoaded === false" class="spinner"></mat-spinner>
+        <mat-card-content>
+          <h1 *ngIf="displayConnectMessage === true" style="color:black">PayPal isn't connected. Please connect it.</h1>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
 </div>
 
 </div>

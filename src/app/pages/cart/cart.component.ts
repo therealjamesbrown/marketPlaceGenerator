@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { SellerServiceService } from '../seller/seller-service.service';
 
 @Component({
   selector: 'app-cart',
@@ -12,7 +12,15 @@ import { Observable } from 'rxjs';
 export class CartComponent implements OnInit {
 
   result;
-
+  user: string = this.cookieService.get('sessionuser');
+  partnerClientId: string = 'AWWarvYmG1fqjxQEsJPjOZoaH6s9-UHj_6yjcmvjZm8VL6YG1606X45O9QtlfIz8EMe-6ftLGyDC09ot';
+  merchantIdInPayPal: string = this.cookieService.get('merchantIdinPayPal')
+  clientToken: string;
+  ad: Boolean = true; //show the add to begin with
+  adCookie: any = this.cookieService.get('adCookie')
+  oderHistoryVisibility: Boolean = true; //init graph visibility, constructor will take care of the rest
+  historyDataNull: string;
+  historyDataPresent: string;
   transactionID: string;
   platformFee: string;
   transactionAmount: string;
@@ -28,6 +36,10 @@ export class CartComponent implements OnInit {
   lastFour;
   fundedByCard: boolean = false;
   paypalHasLoaded: boolean = false;
+  isCommerceConfigure: boolean;
+  displayConnectMessage: boolean = false;
+  sellerUsername;
+  marketplaceUsername;
  
   products: any = [
     {
@@ -50,21 +62,29 @@ export class CartComponent implements OnInit {
     }
   ];
 
-  constructor(private cookieService: CookieService, private http: HttpClient) {
+  constructor(private cookieService: CookieService, 
+                      private http: HttpClient,
+                      private SellerService: SellerServiceService) 
+    {
+    
     this.products
+    this.sellerUsername = this.cookieService.get('sessionuser');
+    this.marketplaceUsername = this.cookieService.get('marketplaceUsername');
 
-    this.loadPayPalSDKScript()
+    //need to check to see if PP commerce is configured, if not dispaly a message to connect it.
+    this.SellerService.getConfiguredOptions(this.marketplaceUsername, this.sellerUsername).subscribe( res => {
+      if(res[0].configName === null || res === null){
+        this.isCommerceConfigure = false;
+        this.displayConnectMessage = true;
+      } else {
+        this.isCommerceConfigure = true;
+        this.displayConnectMessage = false;
+        //load the sdk if ppcp is configured
+        this.loadPayPalSDKScript()
+      }
+    })
     }
 
-    user: string = this.cookieService.get('sessionuser');
-    partnerClientId: string = 'AWWarvYmG1fqjxQEsJPjOZoaH6s9-UHj_6yjcmvjZm8VL6YG1606X45O9QtlfIz8EMe-6ftLGyDC09ot';
-    merchantIdInPayPal: string = this.cookieService.get('merchantIdinPayPal')
-    clientToken: string;
-    ad: Boolean = true; //show the add to begin with
-    adCookie: any = this.cookieService.get('adCookie')
-    oderHistoryVisibility: Boolean = true; //init graph visibility, constructor will take care of the rest
-    historyDataNull: string;
-    historyDataPresent: string;
 
 
     /**Load the sdk when the home page component loads (that way we have the buttons when we need them) */
@@ -97,14 +117,14 @@ export class CartComponent implements OnInit {
 
  
   ngAfterViewInit(): void{
-
+ 
   
   }
   
   ngOnInit(): void {
-    setTimeout(() => { this.paypalHasLoaded = true 
-    console.log(window.paypal)}, 2000);
-
+    //set a timeout to give paypal time to laod on the page.
+    setTimeout(() => { this.paypalHasLoaded = true }, 2000);
+    this.isCommerceConfigure = false;
     }
   }
   

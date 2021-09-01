@@ -33,6 +33,7 @@ export class PaypalCommerceComponent implements OnInit {
   status;
   payPalConfigIsSetup = false;
   href;
+  onboardButton: boolean = true;
 
   constructor(
     private fb: FormBuilder,
@@ -48,6 +49,7 @@ export class PaypalCommerceComponent implements OnInit {
 this.SellerService.onboardingCall().subscribe(res => {
   this.actionURL = res.data+"&displayMode=minibrowser";
  this.trustedUrl = this.sanitizer.bypassSecurityTrustUrl(this.actionURL);
+ this.onboardButton = false;
   })
 
     this.sellerUsername = this.cookieService.get('sessionuser');
