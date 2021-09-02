@@ -8,29 +8,77 @@
 <a mat-raised-button data-paypal-button="true" [href]="trustedUrl" target="PPFrame" color="accent" style="color:white" [disabled]="onboardButton">Connect PayPal</a>
 </div>
 <div fxFlex [hidden]="!payPalConfigIsSetup">
-    <mat-divider></mat-divider>
-    <mat-list>
-        <mat-list-item>
-            <p class="headings">Environment: </p>{{environment}}
-          </mat-list-item>
-        <mat-list-item>
-           <p class="headings"> PayPal Merchant ID:</p> {{merchantIdInPayPal}}
-          </mat-list-item>
-          <mat-list-item>
-            <p class="headings">PayPal Client ID:</p>  {{merchant_client_id}} <br />
-          </mat-list-item>
-          <mat-list-item>
-             <p class="headings">Scopes:</p>
-          </mat-list-item>
-          <mat-list-item>
-            <ul style="margin-top: 10px;"> 
-                <li *ngFor="let scope of scopes">
-                    {{scope}}
-                </li>
-            </ul>  
-          </mat-list-item>
+ 
     
-    </mat-list>       
+
+    <form [formGroup]="updateConfigForm" (ngSubmit)="processConfigForm()">
+        <mat-card-content>
+            <div fxLayout="column">
+      <mat-form-field>
+          <mat-label>configName</mat-label>
+          <input matInput 
+                  formControlName="configName"
+                 [formControl]="updateConfigForm.controls['configName']" 
+                 placeholder="config name" >
+        </mat-form-field>
+        
+        <mat-form-field>
+          <mat-label>environment</mat-label>
+          <input matInput 
+          formControlName="environment"
+                 [formControl]="updateConfigForm.controls['environment']" 
+                 placeholder="environment" >
+        </mat-form-field>
+
+      <mat-form-field>
+          <mat-label>merchantIdInPayPal</mat-label>
+          <input matInput 
+          formControlName="merchantIdInPayPal"
+                 [formControl]="updateConfigForm.controls['merchantIdInPayPal']" 
+                 placeholder="merchantIdInPayPal" >
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>merchant_client_id</mat-label>
+          <input matInput 
+          formControlName="merchant_client_id"
+                 [formControl]="updateConfigForm.controls['merchant_client_id']" 
+                 placeholder="merchant_client_id" >
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>status</mat-label>
+          <input matInput 
+          formControlName="status"
+                 [formControl]="updateConfigForm.controls['status']" 
+                 placeholder="status" >
+        </mat-form-field>
+
+        <p>Enable/Disable Funding Methods</p>
+        <div class="example-section">
+            <mat-checkbox [formControl]="updateConfigForm.controls['card']">Card</mat-checkbox>
+            <mat-checkbox [formControl]="updateConfigForm.controls['payLater']">PayLater</mat-checkbox>
+            <mat-checkbox [formControl]="updateConfigForm.controls['venmo']">Venmo</mat-checkbox>
+        </div>
+      </div>
+      </mat-card-content>
+        <mat-card-actions align="end">
+            <button  
+            [hidden]="!payPalConfigIsSetup"
+            (click)="removePayPal()"
+            mat-raised-button 
+            matDialogClose="create"
+            style="color: white; background-color: red;">Remove Account</button>
+    
+          <button type="submit" 
+                  mat-raised-button 
+                  matDialogClose="update"
+                  color="primary"
+                  [disabled]="!updateConfigForm.valid">Save Changes</button>
+        </mat-card-actions>
+</form>
+
+
 </div>
 
         </div>
@@ -38,13 +86,3 @@
             
         </div>
 
-    </mat-card-content>
-    <mat-card-actions align="end">
-        <button mat-raised-button matDialogClose="cancel" color="primary">Close</button>
-        <button  
-        [hidden]="!payPalConfigIsSetup"
-        (click)="removePayPal()"
-        mat-raised-button 
-        matDialogClose="create"
-        style="color: white; background-color: red;">Remove</button>
-    </mat-card-actions>

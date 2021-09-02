@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { SellerServiceService } from '../../../seller-service.service';
 import { Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
@@ -34,6 +34,9 @@ export class PaypalCommerceComponent implements OnInit {
   payPalConfigIsSetup = false;
   href;
   onboardButton: boolean = true;
+  updateConfigForm;
+  disabledMethods: Array<any>;
+  eligibleMethods: Array<any> = ['credit', 'card', 'venmo']
 
   constructor(
     private fb: FormBuilder,
@@ -72,7 +75,39 @@ this.SellerService.onboardingCall().subscribe(res => {
      this.merchant_client_id = this.configData.merchant_client_id;
      this.scopes = this.configData.scopes;
      this.status = this.configData.status;
+     this.disabledMethods = this.configData.disabledMethods;
+
+
+     //form for handling updates on the accpeted payment methods.
+    this.updateConfigForm = this.fb.group({
+      configName: [{value: this.configName, disabled: true}, Validators.required],
+      environment: [{value: this.environment, disabled: true}, Validators.required],
+      merchantIdInPayPal: [{value: this.merchantIdInPayPal, disabled: true}, Validators.required],
+      merchant_client_id: [{value: this.merchant_client_id, disabled: true}, Validators.required],
+      scopes: [{value: this.scopes, disabled: true}, Validators.required],
+      status: [{value: this.status, disabled: true}, Validators.required],
+      disabledMethods: [{value: '', disabled: true}, Validators.required],
+      card: [{value: true}],
+      venmo:[{value: true}],
+      payLater:[{value: true}]
+    });
     })
+
+
+
+    //form for handling updates on the accpeted payment methods.
+    this.updateConfigForm = this.fb.group({
+      configName: [{value: '', disabled: true}, Validators.required],
+      environment: [{value: '', disabled: true}, Validators.required],
+      merchantIdInPayPal: [{value: '', disabled: true}, Validators.required],
+      merchant_client_id: [{value: '', disabled: true}, Validators.required],
+      scopes: [{value: '', disabled: true}, Validators.required],
+      status: [{value: '', disabled: true}, Validators.required],
+      disabledMethods: [{value: '', disabled: true}, Validators.required],
+      card: [{value: true}, Validators.required],
+      venmo:[{value: true}],
+      payLater:[{value: true}]
+    });
 
    }
 
@@ -81,6 +116,14 @@ this.SellerService.onboardingCall().subscribe(res => {
 
 
 ngOnInit(): void {}
+
+processConfigForm(){
+  const card =  this.updateConfigForm.controls.card.value;
+  const venmo = this.updateConfigForm.controls.venmo.value;
+  const payLater = this.updateConfigForm.controls.payLater.value;
+  const paymentMethodConfig = [{card:card},{venmo:venmo},{payLater:payLater}]
+  console.log(paymentMethodConfig)
+}
 
   
 removePayPal(){

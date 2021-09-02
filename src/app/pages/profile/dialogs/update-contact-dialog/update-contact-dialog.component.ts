@@ -7,7 +7,7 @@
  * ; Date: 10/14/2020
  * ; Description: component responsible for changin the user password in the profile page
  * ================================
- * 
+ *  
  */
 
 
@@ -91,7 +91,7 @@ console.log(res);
 
 
   ngOnInit(): void {}
-
+ 
 
   changeUserContactDetails(){
     const userId = this.cookieService.get('userId');

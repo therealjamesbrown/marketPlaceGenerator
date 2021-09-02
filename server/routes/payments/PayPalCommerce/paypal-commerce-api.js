@@ -791,7 +791,24 @@ router.post('/onboard/complete', async(req, res) => {
           merchant_client_id: responseBody.oauth_integrations[0].oauth_third_party[0].merchant_client_id,
           merchantIdInPayPal: merchantIdInPayPal,
           scopes: responseBody.oauth_integrations[0].oauth_third_party[0].scopes,
-          disabledMethods: []
+          paymentMethods: [
+            {
+              method: "card",
+              disabled: false
+            },
+            {
+              method: "credit",
+              disabled: false
+            },
+            {
+              method: "paylater",
+              disabled: false
+            },
+            {
+              method: "venmo",
+              disabled: false
+            }
+          ]
       }
 
       sellerSessionUser.set({

@@ -28,4 +28,13 @@ li{
 
 
 
+.example-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 20px;
+}
 
+.mat-checkbox{
+  margin-right: 25px;
+}
