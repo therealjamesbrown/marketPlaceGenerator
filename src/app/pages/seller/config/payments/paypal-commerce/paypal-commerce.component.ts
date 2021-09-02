@@ -36,7 +36,11 @@ export class PaypalCommerceComponent implements OnInit {
   href;
   onboardButton: boolean = true;
   updateConfigForm;
-  eligiblePaymentMethods: Array<any>
+  eligiblePaymentMethods: Array<any>;
+  cardValueInDB;
+  venmoValueInDB;
+  paylaterValueInDB;
+  creditValueInDB;
 
 
   constructor(
@@ -69,7 +73,36 @@ this.SellerService.onboardingCall().subscribe(res => {
       if(res[0].environment !== null) {
         this.payPalConfigIsSetup = true;
       };
-     console.log(res[0]);
+     console.log(res[0].paymentMethods);
+     this.eligiblePaymentMethods = res[0].paymentMethods;
+
+      //loop selected payment methods in the db and set the values so we can set checkboxes
+     for(let paymentMethod of this.eligiblePaymentMethods){
+
+      //get card value
+       if(paymentMethod.method === 'card'){
+         this.cardValueInDB = paymentMethod.isChecked;
+       }
+
+       //get venmo valud
+       if(paymentMethod.method === 'venmo'){
+        this.venmoValueInDB = paymentMethod.isChecked;
+      }
+
+
+       //get paylater value
+       if(paymentMethod.method === 'paylater'){
+        this.paylaterValueInDB = paymentMethod.isChecked;
+      }
+
+
+       //get credit value
+       if(paymentMethod.method === 'credit'){
+        this.paylaterValueInDB = paymentMethod.isChecked;
+      }
+
+     }
+
      this.configData = res[0];
      this.configName = this.configData.configName;
      this.environment = this.configData.environment;
@@ -79,7 +112,7 @@ this.SellerService.onboardingCall().subscribe(res => {
      this.merchant_client_id = this.configData.merchant_client_id;
      this.scopes = this.configData.scopes;
      this.status = this.configData.status;
-
+     console.log(this.paylaterValueInDB)
 
      //form for handling updates on the accpeted payment methods.
     this.updateConfigForm = this.fb.group({
@@ -90,9 +123,10 @@ this.SellerService.onboardingCall().subscribe(res => {
       scopes: [{value: this.scopes, disabled: true}, Validators.required],
       status: [{value: this.status, disabled: true}, Validators.required],
       disabledMethods: [{value: '', disabled: true}, Validators.required],
-      card: [{value: true}],
-      venmo:[{value: true}],
-      payLater:[{value: true}]
+      card: this.cardValueInDB,
+      credit: this.creditValueInDB,
+      venmo:this.venmoValueInDB,
+      payLater:this.paylaterValueInDB
     });
     })
 
@@ -110,9 +144,10 @@ this.SellerService.onboardingCall().subscribe(res => {
       scopes: [{value: '', disabled: true}, Validators.required],
       status: [{value: '', disabled: true}, Validators.required],
       disabledMethods: [{value: '', disabled: true}, Validators.required],
-      card: [{value: true}],
-      venmo:[{value: true}],
-      payLater:[{value: true}]
+      card: false,
+      venmo:false,
+      payLater:false,
+      credit: false
     });
 
    }

@@ -795,22 +795,22 @@ router.post('/onboard/complete', async(req, res) => {
             {
               id: '1',
               method: "card",
-              isChecked: false
+              isChecked: true
             },
             {
               id: '2',
               method: "credit",
-              isChecked: false
+              isChecked: true
             },
             {
               id: '3',
               method: "paylater",
-              isChecked: false
+              isChecked: true
             },
             {
               id: '4',
               method: "venmo",
-              isChecked: false
+              isChecked: true
             }
           ]
       }
