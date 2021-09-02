@@ -4,6 +4,7 @@ import { SellerServiceService } from '../../../seller-service.service';
 import { Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { CookieService } from 'ngx-cookie-service';
+import { element } from 'protractor';
  
 
 @Component({
@@ -35,8 +36,8 @@ export class PaypalCommerceComponent implements OnInit {
   href;
   onboardButton: boolean = true;
   updateConfigForm;
-  disabledMethods: Array<any>;
-  eligibleMethods: Array<any> = ['credit', 'card', 'venmo']
+  eligiblePaymentMethods: Array<any>
+
 
   constructor(
     private fb: FormBuilder,
@@ -45,9 +46,12 @@ export class PaypalCommerceComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private cookieService: CookieService
   ) {
+
+
+   
     //load the import script for the in-context window when the component runs.
     this.loadPayPalUIWindow();
-
+  
     //get the action url to redirect
 this.SellerService.onboardingCall().subscribe(res => {
   this.actionURL = res.data+"&displayMode=minibrowser";
@@ -75,7 +79,6 @@ this.SellerService.onboardingCall().subscribe(res => {
      this.merchant_client_id = this.configData.merchant_client_id;
      this.scopes = this.configData.scopes;
      this.status = this.configData.status;
-     this.disabledMethods = this.configData.disabledMethods;
 
 
      //form for handling updates on the accpeted payment methods.
@@ -95,7 +98,10 @@ this.SellerService.onboardingCall().subscribe(res => {
 
 
 
-    //form for handling updates on the accpeted payment methods.
+    
+
+
+    //initialize the form.
     this.updateConfigForm = this.fb.group({
       configName: [{value: '', disabled: true}, Validators.required],
       environment: [{value: '', disabled: true}, Validators.required],
@@ -104,13 +110,12 @@ this.SellerService.onboardingCall().subscribe(res => {
       scopes: [{value: '', disabled: true}, Validators.required],
       status: [{value: '', disabled: true}, Validators.required],
       disabledMethods: [{value: '', disabled: true}, Validators.required],
-      card: [{value: true}, Validators.required],
+      card: [{value: true}],
       venmo:[{value: true}],
       payLater:[{value: true}]
     });
 
    }
-
 
 
 
@@ -145,4 +150,7 @@ loadPayPalUIWindow(){
       document.getElementsByTagName('head')[0].appendChild(node);
 }
 
+
 }
+
+

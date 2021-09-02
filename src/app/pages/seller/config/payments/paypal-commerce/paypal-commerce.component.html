@@ -56,9 +56,25 @@
 
         <p>Enable/Disable Funding Methods</p>
         <div class="example-section">
+
             <mat-checkbox [formControl]="updateConfigForm.controls['card']">Card</mat-checkbox>
             <mat-checkbox [formControl]="updateConfigForm.controls['payLater']">PayLater</mat-checkbox>
             <mat-checkbox [formControl]="updateConfigForm.controls['venmo']">Venmo</mat-checkbox>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
       </div>
       </mat-card-content>
@@ -77,7 +93,6 @@
                   [disabled]="!updateConfigForm.valid">Save Changes</button>
         </mat-card-actions>
 </form>
-
 
 </div>
 

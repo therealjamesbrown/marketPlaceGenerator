@@ -793,20 +793,24 @@ router.post('/onboard/complete', async(req, res) => {
           scopes: responseBody.oauth_integrations[0].oauth_third_party[0].scopes,
           paymentMethods: [
             {
+              id: '1',
               method: "card",
-              disabled: false
+              isChecked: false
             },
             {
+              id: '2',
               method: "credit",
-              disabled: false
+              isChecked: false
             },
             {
+              id: '3',
               method: "paylater",
-              disabled: false
+              isChecked: false
             },
             {
+              id: '4',
               method: "venmo",
-              disabled: false
+              isChecked: false
             }
           ]
       }
