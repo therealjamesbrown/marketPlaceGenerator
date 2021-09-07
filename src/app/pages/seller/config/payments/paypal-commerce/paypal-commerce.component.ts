@@ -91,7 +91,7 @@ this.SellerService.onboardingCall().subscribe(res => {
 
 
        //get paylater value
-       if(paymentMethod.method === 'payLater'){
+       if(paymentMethod.method === 'paylater'){
         this.paylaterValueInDB = paymentMethod.isChecked;
       }
 
@@ -126,7 +126,7 @@ this.SellerService.onboardingCall().subscribe(res => {
       card: this.cardValueInDB,
       credit: this.creditValueInDB,
       venmo:this.venmoValueInDB,
-      payLater:this.paylaterValueInDB
+      paylater:this.paylaterValueInDB
     });
     })
 
@@ -146,7 +146,7 @@ this.SellerService.onboardingCall().subscribe(res => {
       disabledMethods: [{value: '', disabled: true}, Validators.required],
       card: false,
       venmo:false,
-      payLater:false,
+      paylater:false,
       credit: false
     });
 
@@ -173,8 +173,8 @@ processConfigForm(){
     },
     {
       id: "3",
-      isChecked: this.updateConfigForm.controls.payLater.value,
-      method: "payLater"
+      isChecked: this.updateConfigForm.controls.paylater.value,
+      method: "paylater"
     },
     {
       id: "4",

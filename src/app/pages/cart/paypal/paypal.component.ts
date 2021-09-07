@@ -28,6 +28,7 @@ export class PaypalComponent implements OnInit {
   lastFour;
   fundedByCard: boolean = false;
   paypalHasLoaded: boolean = false;
+  hideCardOption: boolean = false;
 
  
   products: any = [
@@ -97,7 +98,10 @@ export class PaypalComponent implements OnInit {
         }).then(finalResult => this.showTransactionResult(finalResult))        
       }
     }).render(this.paypalRef.nativeElement);
+    if(paypal.HostedFields.isEligible() === false){
+      document.getElementById("UCC").style.display = "none";
 
+    }
     // If this returns false or the card fields aren't visible, see Step #1.
     if (paypal.HostedFields.isEligible()) {
 

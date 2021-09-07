@@ -41,6 +41,9 @@ export class CartComponent implements OnInit {
   sellerUsername;
   marketplaceUsername;
   sellerConfigInPayPal;
+  disabledArray = [];
+  enabledArray = [];
+  paypalSDKString;
  
   products: any = [
     {
@@ -76,7 +79,14 @@ export class CartComponent implements OnInit {
     this.SellerService.getConfiguredOptions(this.marketplaceUsername, this.sellerUsername).subscribe( res => {
       
       this.sellerConfigInPayPal = res[0];
-      console.log(this.sellerConfigInPayPal)
+      for(let paymentMethod of this.sellerConfigInPayPal.paymentMethods){
+        if(paymentMethod.isChecked){
+          this.enabledArray.push(paymentMethod)
+        } else {
+         this.disabledArray.push(paymentMethod);
+        }
+      }
+
       if(res[0].configName === null || res === null){
         this.isCommerceConfigure = false;
         this.displayConnectMessage = true;
@@ -105,10 +115,59 @@ export class CartComponent implements OnInit {
 
         //store the client token we got from the server
         this.clientToken = data.data
+
+        //setup enabled payment options
+        let enabledString = ''
+        for(let method of this.enabledArray){
+          //currently only venmo and pay later are supported as "enable options"
+          if(method.method === 'venmo' || method.method === 'paylater' || method.method === 'card' || method.method === 'credit'){
+            enabledString += method.method + ','
+          }
+        }
+              //cut the last comma off so it doesn't break the sdk.
+        enabledString = enabledString.substring(0, enabledString.length - 1);
+
+        //set up disabled payment options
+        let disabledString = ''
+        for(let method of this.disabledArray){
+          if(method.method === 'card' || method.method === 'credit' || method.method === 'venmo'){
+            disabledString += method.method + ','
+        }
+      }
+      //cut the last comma off so it doesn't break the sdk.
+      disabledString = disabledString.substring(0, disabledString.length - 1);
+        
+        console.log(`Disabled: ${disabledString}`);
+        console.log(`enabled: ${enabledString}`);
+
+        if(disabledString === ""){
+          console.log('1')
+          this.paypalSDKString = `https://www.paypal.com/sdk/js?client-id=${this.partnerClientId}&components=buttons,hosted-fields&enable-funding=${enabledString}&intent=capture&merchant-id=${this.merchantIdInPayPal}`
+          console.log(this.paypalSDKString)
+        }
+
+        if(disabledString !== "" && enabledString !== ""){
+          console.log('2');
+          this.paypalSDKString = `https://www.paypal.com/sdk/js?client-id=${this.partnerClientId}&components=buttons,hosted-fields&enable-funding=${enabledString}&disable-funding=${disabledString}&intent=capture&merchant-id=${this.merchantIdInPayPal}`
+          console.log(this.paypalSDKString)
+        }
+
+        if(enabledString === "" && disabledString !== ""){
+          console.log('3')
+          this.paypalSDKString = `https://www.paypal.com/sdk/js?client-id=${this.partnerClientId}&components=buttons,hosted-fields&disable-funding=${disabledString}&intent=capture&merchant-id=${this.merchantIdInPayPal}`
+        console.log(this.paypalSDKString)
+        }
+        
+
+        if(enabledString === "" && disabledString === ""){
+          console.log('4')
+          this.paypalSDKString = `https://www.paypal.com/sdk/js?client-id=${this.partnerClientId}&components=buttons,hosted-fields&intent=capture&merchant-id=${this.merchantIdInPayPal}`
+        }
+
         
         //construct the paypal url.
         const node = document.createElement('script');
-        node.src = `https://www.paypal.com/sdk/js?client-id=${this.partnerClientId}&components=buttons,hosted-fields&enable-funding=venmo&intent=capture&merchant-id=${this.merchantIdInPayPal}`;
+        node.src = this.paypalSDKString;
         node.setAttribute('data-client-token', this.clientToken)
         node.type = 'text/javascript';
         node.async = false;
