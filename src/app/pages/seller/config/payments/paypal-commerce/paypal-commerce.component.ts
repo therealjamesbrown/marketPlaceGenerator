@@ -73,7 +73,7 @@ this.SellerService.onboardingCall().subscribe(res => {
       if(res[0].environment !== null) {
         this.payPalConfigIsSetup = true;
       };
-     console.log(res[0].paymentMethods);
+    
      this.eligiblePaymentMethods = res[0].paymentMethods;
 
       //loop selected payment methods in the db and set the values so we can set checkboxes
@@ -91,14 +91,14 @@ this.SellerService.onboardingCall().subscribe(res => {
 
 
        //get paylater value
-       if(paymentMethod.method === 'paylater'){
+       if(paymentMethod.method === 'payLater'){
         this.paylaterValueInDB = paymentMethod.isChecked;
       }
 
 
        //get credit value
        if(paymentMethod.method === 'credit'){
-        this.paylaterValueInDB = paymentMethod.isChecked;
+        this.creditValueInDB = paymentMethod.isChecked;
       }
 
      }
@@ -158,11 +158,36 @@ this.SellerService.onboardingCall().subscribe(res => {
 ngOnInit(): void {}
 
 processConfigForm(){
-  const card =  this.updateConfigForm.controls.card.value;
-  const venmo = this.updateConfigForm.controls.venmo.value;
-  const payLater = this.updateConfigForm.controls.payLater.value;
-  const paymentMethodConfig = [{card:card},{venmo:venmo},{payLater:payLater}]
-  console.log(paymentMethodConfig)
+  //create the array of objects for the selected values
+  //did it this way to send the data back the way we got it, but with updated values...
+  const paymentMethodConfig = [
+    {
+      id: "1",
+      isChecked: this.updateConfigForm.controls.card.value,
+      method: "card"
+    },
+    {
+      id: "2",
+      isChecked: this.updateConfigForm.controls.credit.value,
+      method: "credit"
+    },
+    {
+      id: "3",
+      isChecked: this.updateConfigForm.controls.payLater.value,
+      method: "payLater"
+    },
+    {
+      id: "4",
+      isChecked: this.updateConfigForm.controls.venmo.value,
+      method: "venmo"
+    },
+  ]
+  
+
+  //send a call to the server to update the config
+  this.SellerService.updatePaymentConfig(this.marketplaceUsername, this.sellerUsername, paymentMethodConfig).subscribe(res => {
+    console.log(res)
+  })
 }
 
   

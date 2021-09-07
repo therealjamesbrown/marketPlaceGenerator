@@ -848,4 +848,55 @@ router.post('/onboard/complete', async(req, res) => {
  */
  
 
+/**
+ * 
+ * 
+ * UPDATE PAYMENT METHODS IN SELLER CONFIG (card, venmo, credit, etc...)
+ * 
+ */
+
+ router.post('/:marketplaceUsername/:sellerUsername/paymentMethod', async(req, res) => {
+console.log(req.body)
+  try{
+    const doc = MarketplaceUser.findOne({ 'username': req.params.marketplaceUsername }, function(err, marketplaceUser){
+      if (err) {
+        const singinMongoDbErrorMessage = new ErrorResponse('500', 'Internal Server Error', err) 
+        res.status(500).json(singinMongoDbErrorMessage.toObject());  
+    }else if(!marketplaceUser){
+      console.log('no user exists');
+      const invalidUserNameResponse = new BaseResponse('200', 'Could not find marketplace or seller when storing pp onboarding details in db.', null);
+      res.status(500).send(invalidUserNameResponse.toObject());
+  } else {
+    let sellersArr = marketplaceUser.sellers;
+    let sellerSessionUser = sellersArr.find(o => o.username === req.params.sellerUsername);
+
+sellerSessionUser.set({
+  paymentsConfig: {
+    configName: sellerSessionUser.paymentsConfig[0].configName,
+    environment: sellerSessionUser.paymentsConfig[0].environment,
+    status: sellerSessionUser.paymentsConfig[0].status,
+    merchant_client_id: sellerSessionUser.paymentsConfig[0].merchant_client_id,
+    merchantIdInPayPal:  sellerSessionUser.paymentsConfig[0].merchantIdInPayPal,
+    scopes: sellerSessionUser.paymentsConfig[0].scopes,
+    paymentMethods:  req.body.paymentMethodConfig
+  }
+})
+
+marketplaceUser.save(function(err) {
+  if (err) {
+      console.log(err)
+  } else {
+      const SuccessMessage = new BaseResponse('200', 'PATCH Request Success', sellerSessionUser.paymentsConfig)
+      res.status(200).json(SuccessMessage.toObject())
+  }
+})
+}
+}) //end mongodb request
+  } catch (e){
+    const updatePaymentConfigMongoDBErrorMessage = new ErrorMessage('500', internalServerError, err)
+    res.json(updatePaymentConfigMongoDBErrorMessage.toObject());
+  }
+
+ })
+
  module.exports = router; 

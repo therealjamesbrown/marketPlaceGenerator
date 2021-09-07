@@ -31,7 +31,7 @@
         </mat-form-field>
 
       <mat-form-field>
-          <mat-label>merchantIdInPayPal</mat-label>
+          <mat-label>PayPal Merchant ID</mat-label>
           <input matInput 
           formControlName="merchantIdInPayPal"
                  [formControl]="updateConfigForm.controls['merchantIdInPayPal']" 
@@ -39,7 +39,7 @@
         </mat-form-field>
 
         <mat-form-field>
-          <mat-label>merchant_client_id</mat-label>
+          <mat-label>Merchant Client ID</mat-label>
           <input matInput 
           formControlName="merchant_client_id"
                  [formControl]="updateConfigForm.controls['merchant_client_id']" 
@@ -54,7 +54,7 @@
                  placeholder="status" >
         </mat-form-field>
 
-        <p>Funding Methods</p>
+        <p>Payment Methods</p>
         <div class="example-section">
 
             <mat-checkbox [formControl]="updateConfigForm.controls['card']">Card</mat-checkbox>
