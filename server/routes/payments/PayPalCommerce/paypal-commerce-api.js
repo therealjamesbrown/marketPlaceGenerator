@@ -187,7 +187,6 @@ function createOrderV2(accessToken, merchantIdInPayPal){
             console.error(error);
           });
         });
-        
         let postData = JSON.stringify({
           "intent": "CAPTURE",
           "purchase_units": [
@@ -472,7 +471,10 @@ function partnerReferral(accessToken, sellerId){
       });
     });
      
-let postData = JSON.stringify({"tracking_id":sellerId,"partner_config_override":{"return_url":"https://mrktgen.herokuapp.com/#/seller/onboarding-complete"},"operations":[{"operation":"API_INTEGRATION","api_integration_preference":{"rest_api_integration":{"integration_method":"PAYPAL","integration_type":"THIRD_PARTY","third_party_details":{"features":["PAYMENT"]}}}}],"products":["PPCP"],"legal_consents":[{"type":"SHARE_DATA_CONSENT","granted":true}]});
+let postData = JSON.stringify({"tracking_id":sellerId,
+"partner_config_override":{"return_url":"https://mrktgen.herokuapp.com/#/seller/onboarding-complete"},
+"operations":[{"operation":"API_INTEGRATION","api_integration_preference":{"rest_api_integration":{"integration_method":"PAYPAL","integration_type":"THIRD_PARTY","third_party_details":{"features":["PAYMENT",
+"REFUND"]}}}}],"products":["PPCP"],"legal_consents":[{"type":"SHARE_DATA_CONSENT","granted":true}]});
     req.write(postData);
     req.end();
 
