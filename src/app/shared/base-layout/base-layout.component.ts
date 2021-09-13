@@ -72,6 +72,7 @@ export class BaseLayoutComponent implements OnInit {
 
 }
   ngOnInit(): void {
+    this.loadPayPalUIWindow()
   }
 
   /**
@@ -85,6 +86,13 @@ export class BaseLayoutComponent implements OnInit {
   }
 
 
+  loadPayPalUIWindow(){
+    const node = document.createElement('script');
+        node.src = `https://www.paypal.com/webapps/merchantboarding/js/lib/lightbox/partner.js`;
+        node.type = 'text/javascript';
+        node.async = true;
+        document.getElementsByTagName('head')[0].appendChild(node);
+  }
 /**
  * 
  * create parent dialog (opens flow to create marketplace or seller)

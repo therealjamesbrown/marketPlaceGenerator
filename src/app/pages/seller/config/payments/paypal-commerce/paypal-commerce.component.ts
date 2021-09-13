@@ -58,6 +58,7 @@ export class PaypalCommerceComponent implements OnInit {
   
     //get the action url to redirect
 this.SellerService.onboardingCall().subscribe(res => {
+  
   this.actionURL = res.data+"&displayMode=minibrowser";
  this.trustedUrl = this.sanitizer.bypassSecurityTrustUrl(this.actionURL);
  this.onboardButton = false;
@@ -155,7 +156,9 @@ this.SellerService.onboardingCall().subscribe(res => {
 
 
 
-ngOnInit(): void {}
+ngOnInit(): void {
+  
+}
 
 processConfigForm(){
   //create the array of objects for the selected values
@@ -186,7 +189,7 @@ processConfigForm(){
 
   //send a call to the server to update the config
   this.SellerService.updatePaymentConfig(this.marketplaceUsername, this.sellerUsername, paymentMethodConfig).subscribe(res => {
-    console.log(res)
+  //  console.log(res)
   })
 }
 
@@ -198,9 +201,10 @@ removePayPal(){
 
   //need to write our apis to call our server to save the information in the db. 
  this.SellerService.setConfiguredOptions(this.marketplaceUsername, this.sellerUsername, config).subscribe(res => {
-  // console.log(res);
  })
+ window.location.reload();
 }
+
 
 loadPayPalUIWindow(){
   const node = document.createElement('script');

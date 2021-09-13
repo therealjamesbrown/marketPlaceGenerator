@@ -180,7 +180,7 @@ export class CartComponent implements OnInit {
   
   ngOnInit(): void {
     //set a timeout to give paypal time to laod on the page.
-    setTimeout(() => { this.paypalHasLoaded = true }, 3000);
+    setTimeout(() => { this.paypalHasLoaded = true }, 4000);
     this.isCommerceConfigure = false;
     }
   }

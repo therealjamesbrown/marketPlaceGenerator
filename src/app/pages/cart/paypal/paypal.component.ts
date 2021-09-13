@@ -104,7 +104,6 @@ export class PaypalComponent implements OnInit {
     }
     // If this returns false or the card fields aren't visible, see Step #1.
     if (paypal.HostedFields.isEligible()) {
-
       // Renders card fields
       paypal.HostedFields.render({
         // Call your server to set up the transaction
