@@ -29,24 +29,25 @@ export class PaypalComponent implements OnInit {
   fundedByCard: boolean = false;
   paypalHasLoaded: boolean = false;
   hideCardOption: boolean = false;
+  zoovuTrackingSendStatus: any = "";
 
  
   products: any = [
     {
-      name:"Hamburger",
-      description: "No cheese, add mayo, mustard, pickles",
+      name:"Example item 1",
+      description: "Example item description",
       amount: "9.00",
       quantity: "1"
     },
     {
-      name:"Hot Dog",
-      description: "Add relish, onion, ketchup, peppers",
+      name:"Example item 2",
+      description: "Example item description 2",
       amount: "6.00",
       quantity: "1"
     },
     {
-      name:"Dr Pepper",
-      description: "20 Oz Soda",
+      name:"Example item 3",
+      description: "Example item description 3",
       amount: "2.00",
       quantity: "1"
     }
@@ -60,8 +61,17 @@ export class PaypalComponent implements OnInit {
     @ViewChild('paypalRef', {static: true}) private paypalRef: ElementRef;
   ngAfterViewInit(): void{
 
-    //if sdk isn't loaded, hold up on rendering
+  
+       /*add the zoovu tracking script to the page*/
+       const node = document.createElement('script');
+       node.src = "https://tiger-cdn.zoovu.com/advisor-fe-web/api/v1/integrations/zQgkBl/zoovu-tracking";
+       node.type = 'text/javascript';
+       node.async = false;
+       document.getElementsByTagName('head')[0].appendChild(node);
+       /*end zoovu tracking script*/
 
+
+    //if sdk isn't loaded, hold up on rendering
     let paypalData = {
       merchantIdInPayPal: this.merchantIdInPayPal
     };
@@ -201,13 +211,14 @@ export class PaypalComponent implements OnInit {
       document.getElementById("payment").style.display = "none";
       this.cardSpinner = false;
       //show the container for the completed payment
-      console.log(details.data)
+     // console.log(details.data)
       this.paypalTransactionCompleted = true
       this.result = details
       this.transactionAmount = details.data.purchase_units[0].payments.captures[0].amount.value;
       this.transactionID = details.data.purchase_units[0].payments.captures[0].id
       this.transactionDate = details.timestamp;
       this.platformFee = details.data.purchase_units[0].payment_instruction.platform_fees[0].amount.value;
+ 
       if(details.data.payment_source){
         this.paymentSource = details.data.payment_source.card.brand;
         this.lastFour = details.data.payment_source.card.last_digits;
@@ -215,8 +226,36 @@ export class PaypalComponent implements OnInit {
       } else {
         this.paymentSource = "PayPal";
       }
-   
-      //TODO - send server call to record transaction in DB.
+      //zoovu sales tracking stuff.
+      //check if cookie was set by zoovu, otherwise we'll get a client id not found error
+  
+      window.Zoovu.Tracking.trackPurchase({
+        // path to the place where transaction ID is stored (don't change if DataLayer is used)
+        transactionId: details.data.purchase_units[0].payments.captures[0].id,
+      
+        // currency used on your marketplace. Any format can be used but ISO-4217 code are recommended
+        currency: 'USD',
+      
+        // the function that contains main product details to be collected (enabled below)
+        products: [{ sku:"testSKu", name: 'testName', pricePerUnit: 23.00, quantity:2}],
+    
+      })
+      
+        // the following part will enable error messages in case if something goes wrong
+        .then(function onResolve(status) {
+          if (status.wasEventSent) {
+            alert('ZOOVU Success Tracking Event Was Sent');
+            //destroy the zoovu cookie for safe measures and to ensure proper tracking... 
+            document.cookie = "zoovu-cid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+          } else {
+            alert('ZOOVU Success Tracking Event Was NOT Sent. Please check to ensure you clicked through the assistant prior to completing checkout.');
+            console.log(status.whyEventWasNotSent);
+          }
+        })
+        .catch(function onReject(error) {
+          console.log(error);
+        });
+      //TODO - send server call to record transaction and zoovu results in DB.
     }
 
 
@@ -256,5 +295,32 @@ issueRefund(){
       }
 }
   
+
+
+
+
+
+
+
+/*
+request to post data to a listener from add to cart button
+
+return fetch('https://webhook.site/48b16c15-c2e8-42d8-9607-5d9ff4d60b09?', {
+  method: 'POST',
+  mode:"no-cors",
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(product)
+}).then(function(res) {
+  return res.json();
+}).then(function(){
+console.log(res);
+
+
+window.location.replace("http://localhost:4200/#/seller/cart");
+});*/
+
+
 
 

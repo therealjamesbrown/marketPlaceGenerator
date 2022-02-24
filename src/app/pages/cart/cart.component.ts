@@ -137,30 +137,30 @@ export class CartComponent implements OnInit {
       //cut the last comma off so it doesn't break the sdk.
       disabledString = disabledString.substring(0, disabledString.length - 1);
         
-        console.log(`Disabled: ${disabledString}`);
-        console.log(`enabled: ${enabledString}`);
+        //console.log(`Disabled: ${disabledString}`);
+        //console.log(`enabled: ${enabledString}`);
 
         if(disabledString === ""){
-          console.log('1')
+          //console.log('1')
           this.paypalSDKString = `https://www.paypal.com/sdk/js?client-id=${this.partnerClientId}&components=buttons,hosted-fields&enable-funding=${enabledString}&intent=capture&merchant-id=${this.merchantIdInPayPal}`
-          console.log(this.paypalSDKString)
+          //console.log(this.paypalSDKString)
         }
 
         if(disabledString !== "" && enabledString !== ""){
-          console.log('2');
+          //console.log('2');
           this.paypalSDKString = `https://www.paypal.com/sdk/js?client-id=${this.partnerClientId}&components=buttons,hosted-fields&enable-funding=${enabledString}&disable-funding=${disabledString}&intent=capture&merchant-id=${this.merchantIdInPayPal}`
-          console.log(this.paypalSDKString)
+          //console.log(this.paypalSDKString)
         }
 
         if(enabledString === "" && disabledString !== ""){
-          console.log('3')
+          //console.log('3')
           this.paypalSDKString = `https://www.paypal.com/sdk/js?client-id=${this.partnerClientId}&components=buttons,hosted-fields&disable-funding=${disabledString}&intent=capture&merchant-id=${this.merchantIdInPayPal}`
-        console.log(this.paypalSDKString)
+        //console.log(this.paypalSDKString)
         }
         
 
         if(enabledString === "" && disabledString === ""){
-          console.log('4')
+          //console.log('4')
           this.paypalSDKString = `https://www.paypal.com/sdk/js?client-id=${this.partnerClientId}&components=buttons,hosted-fields&intent=capture&merchant-id=${this.merchantIdInPayPal}`
         }
 

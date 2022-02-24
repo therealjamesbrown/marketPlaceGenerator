@@ -57,7 +57,7 @@ export class SigninComponent implements OnInit {
   signin(){
 
     const username = this.form.controls.userName.value;
-    console.log(username)
+  //  console.log(username)
     const password = this.form.controls.password.value;
     const sellerUsername = this.form.controls.sellerUsername.value;
     const role = this.form.controls.role.value;
@@ -75,7 +75,7 @@ export class SigninComponent implements OnInit {
     }).subscribe(res => {
       console.log(res['data']);
       if (res['data'].username){
-        console.log('i work')
+       // console.log('i work')
         //user authenticated
         //set the username and ID cookies, we'll use these all over the application
         //console.log(res['data']);

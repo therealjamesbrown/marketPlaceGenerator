@@ -12,6 +12,16 @@ export class SellerHomeComponent implements OnInit {
   value;
   constructor(private cookieService: CookieService) { 
 
+
+     
+       /*add the zoovu tracking script to the page*/
+       const node = document.createElement('script');
+       node.src = "https://tiger-cdn.zoovu.com/advisor-fe-web/api/v1/advisors/DLQNLT4S/js-loader?locale=en-US";
+       node.type = 'text/javascript';
+       node.async = false;
+       document.getElementsByTagName('head')[0].appendChild(node);
+       /*end zoovu tracking script*/
+
     this.value = '';
     //hide the graph if there's no data.
     this.historyDataNull = this.cookieService.get('hidegraph');
