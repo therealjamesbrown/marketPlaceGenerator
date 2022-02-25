@@ -52,6 +52,7 @@ export class SellerHomeComponent implements OnInit {
 
 
   ngOnInit(): void {
+
   }
 
 }
